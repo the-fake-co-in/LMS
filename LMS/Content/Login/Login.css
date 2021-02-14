@@ -1,0 +1,13 @@
+﻿.nav-button
+{
+    type="button";
+    data-toggle="collapse";
+    data-target="#NavbarMain";
+    aria-controls="NavbarMain";
+    aria-expanded="false";
+    aria-label="Toggle navigation";
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
