@@ -1,22 +1,63 @@
 ﻿$(document).ready(function () {
 
-    //Disable submit form by Enter Key Press
-    $(window).keydown(function (event) {
-        if (event.keyCode == 13) {
-            event.preventDefault();
-            return false;
-        }
+    //    //Disable submit form by Enter Key Press
+    //    $(window).keydown(function (event) {
+    //        if (event.keyCode == 13) {
+    //            event.preventDefault();
+    //            return false;
+    //        }
+    //    });
+
+    //    $(function () {
+    //        var $form = $("#login-form");
+    //        $.validator.unobtrusive.parse($form);
+
+    //        $form.on("submit", function (e) {
+    //            e.preventDefault();
+    //            if ($form.valid()) {
+    //                $.ajax({
+    //                    url: this.action,
+    //                    type: this.method,
+    //                    data: $(this).serialize(),
+    //                    success: function (data) {
+    //                        $("#expense-list-div").html(data);
+    //                        $("#expense-dialog").dialog("close");
+    //                    }
+    //                });
+    //            }
+    //        });
+    //    });
+
+    $('#hide-error').click(function () {
+        HideError();
     });
 
+    function ShowError(errMsg) {
+        debugger;
+        $("#error-span").css('display', 'block');
+        //$('#error-msg').text(errMsg);
+        //$('#error-msg').Text = errMsg;
+        $('#error-msg').html(errMsg);
+    };
+
+    function HideError() {
+        debugger;
+        $("#error-span").css('display', 'none');
+        //        $("#error-span").css('visibility', 'hidden');
+        $("#error-span").hide();
+        $('#error-msg').html('');
+    };
+
     $('#show-modal').click(function () {
-        $("#login-modal").modal('show')
-        $('#error-msg').html('')
+        $("#login-modal").modal('show');
+        $('#error-msg').html('');
         GoToLogin();
     });
 
     function CloseModal() {
-        $("#login-modal").modal('hide')
-        $('#error-msg').html('')
+        HideError();
+        $("#login-modal").modal('hide');
+        $('#error-msg').html('');
     }
 
     $('#close-modal').click(function () {
@@ -33,6 +74,7 @@
 
 
     $('#forgot-pwd').click(function () {
+        HideError();
         $('#div-login').hide('slow')
         $('#div-forgot-pwd').show('slow')
         $('#div-set-pwd').hide('slow')
@@ -47,6 +89,7 @@
     });
 
     function GoToLogin() {
+        HideError();
         $('#div-login').show('slow')
         $('#div-forgot-pwd').hide('slow')
         $('#div-set-pwd').hide('slow')
@@ -55,27 +98,36 @@
     // Validate form for Empty/invalid Fields before submit
     function validateForm() {
         var errorMsg = "";
+
         if ($(username).val().trim().length == 0) {
-            errorMsg = 'Please enter UserName...</br>';
-            $('#div-username').tooltip('show')
+            if ($(password).val().trim().length == 0) {
+                errorMsg = 'Enter UserName & Password...';
+            }
+            else {
+                errorMsg = 'Enter UserName...';
+            }
         }
-        if ($(password).val().trim().length == 0) {
-            errorMsg += 'Please enter Password...</br>';
-            $('#div-password').tooltip('show')
+        else if ($(password).val().trim().length == 0) {
+            errorMsg = 'Enter Password...';
         }
+
         return errorMsg;
     };
 
     $('#Login').click(function () {
+        HideError();
         var username = $('#username').val();
         var password = $('#password').val();
+        var headers = { __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() };
 
         debugger;
-        var errorMsg = validateForm();
+        var errorMsg = "";
+        errorMsg = validateForm()
         if (errorMsg == "") {
             $.ajax({
-                url: "Home/VerifyLogin",
+                url: "Login/VerifyLogin",
                 method: "Get",
+                headers: headers,
                 data: { username: username, password: password },
                 cache: false,
                 beforeSend: function () {
@@ -87,10 +139,10 @@
                     debugger;
                     if (data == "Success") {
                         // similar behavior as an HTTP redirect
-                        window.location.replace("Home/LMSDashboard");
+                        window.location.replace("Login/LMSDashboard");
 
                         // similar behavior as clicking on a link
-                        //window.location.href = "Home/LMSDashBoard";
+                        //window.location.href = "Login/LMSDashBoard";
                     }
                     else {
                         var options = {
@@ -99,14 +151,14 @@
                             times: '3'
                         }
                         debugger;
-                        $('#error-msg').html(data);
+                        ShowError(data);
                     }
                 }
             });
         }
         else {
             debugger;
-            //$('#error-msg').html(errorMsg);
+            ShowError(errorMsg);
         }
     });
 

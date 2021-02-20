@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
-
 namespace LMS
 {
     #region Contexts
@@ -98,6 +98,7 @@ namespace LMS
         private ObjectSet<UserMaster> _UserMasters;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -117,11 +118,11 @@ namespace LMS
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -162,6 +163,7 @@ namespace LMS
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -576,6 +578,7 @@ namespace LMS
         partial void OnSemesterChanged();
 
         #endregion
+
     
     }
     
@@ -611,6 +614,7 @@ namespace LMS
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -687,6 +691,30 @@ namespace LMS
         private global::System.String _Password;
         partial void OnPasswordChanging(global::System.String value);
         partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -903,35 +931,13 @@ namespace LMS
         private global::System.DateTime _ModifyOn;
         partial void OnModifyOnChanging(global::System.DateTime value);
         partial void OnModifyOnChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Email
-        {
-            get
-            {
-                return _Email;
-            }
-            set
-            {
-                OnEmailChanging(value);
-                ReportPropertyChanging("Email");
-                _Email = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Email");
-                OnEmailChanged();
-            }
-        }
-        private global::System.String _Email;
-        partial void OnEmailChanging(global::System.String value);
-        partial void OnEmailChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     
 }

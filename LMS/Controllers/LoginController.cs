@@ -13,36 +13,45 @@ namespace LMS.Controllers
             return View();
         }
 
-        //[HttpPost]
+        [HttpPost]
         //[ValidateAntiForgeryToken]
-        //public ActionResult Login(UserMaster objUser)
-        //{
-        //    if (true || ModelState.IsValid)
-        //    {
-        //        using (LMSEntities db = new LMSEntities())
-        //        {
-        //            var obj = db.UserMasters.Where(a => a.UserName.Equals(objUser.UserName) && a.Password.Equals(objUser.Password)).FirstOrDefault();
-        //            if (obj != null)
-        //            {
-        //                Session["UserID"] = obj.UserId.ToString();
-        //                Session["UserName"] = obj.UserName.ToString();
-        //                return RedirectToAction("LMSDashboard");
-        //            }
-        //            else
-        //            {
-        //                this.ModelState.AddModelError("AuthenticationFailed", "Enter valid UserName & password!");
-        //                return View("Login");
-        //            }
-        //        }
-        //    }
-        //    return View(objUser);
-        //}
+        public ActionResult Login(LMS.Models.UserMaster objUser)
+        {
+            if (ModelState.IsValid)
+            {
+                using (LMSEntities db = new LMSEntities())
+                {
+                    var obj = db.UserMasters.Where(a => a.UserName.Equals(objUser.UserName) && a.Password.Equals(objUser.Password)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        Session["UserID"] = obj.UserId.ToString();
+                        Session["UserName"] = obj.UserName.ToString();
+                        return RedirectToAction("Home");
+                    }
+                    else
+                    {
+                        this.ModelState.AddModelError("AuthenticationFailed", "Enter valid UserName & password!");
+                        return View("Login");
+                    }
+                }
+            }
+            return View(objUser);
+        }
 
         [HttpGet]
+        //[ValidateAntiForgeryToken]
         public string VerifyLogin(string username, string password)
         {
-            if (true || ModelState.IsValid)
+            if (ModelState.IsValid)
             {
+                if (string.IsNullOrWhiteSpace(username))
+                {
+                    return "Enter valid UserName!";
+                }
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    return "Enter valid password!";
+                }
                 using (LMSEntities db = new LMSEntities())
                 {
                     var obj = db.UserMasters.Where(a => a.UserName.Equals(username) && a.Password.Equals(password)).FirstOrDefault();
@@ -63,15 +72,16 @@ namespace LMS.Controllers
         }
 
         [HttpGet]
+        //[ValidateAntiForgeryToken]
         public ActionResult LMSDashBoard()
         {
             if (Session["UserID"] != null)
             {
-                return View();
+                return RedirectToAction("Home", "Home");
             }
             else
             {
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Login");
             }
         }
     }

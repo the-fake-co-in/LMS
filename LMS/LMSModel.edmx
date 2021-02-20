@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LMSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="LMSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="LMSModelStoreContainer">
           <EntitySet Name="UserInfo" EntityType="LMSModel.Store.UserInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserMaster" EntityType="LMSModel.Store.UserMaster" store:Type="Tables" Schema="dbo" />
@@ -49,7 +49,8 @@
           <Property Name="ModifyBy" Type="int" Nullable="false" />
           <Property Name="ModifyOn" Type="datetime" Nullable="false" />
         </EntityType>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LMSModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -86,6 +87,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Password" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="FailAttempt" Type="Byte" />
           <Property Name="IsBlocked" Type="Boolean" Nullable="false" />
           <Property Name="BlockReason" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
@@ -95,7 +97,6 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
           <Property Name="ModifyBy" Type="Int32" Nullable="false" />
           <Property Name="ModifyOn" Type="DateTime" Nullable="false" />
-          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -103,40 +104,48 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LMSModelStoreContainer" CdmEntityContainer="LMSEntities">
-          <EntitySetMapping Name="UserInfoes"><EntityTypeMapping TypeName="LMSModel.UserInfo"><MappingFragment StoreEntitySet="UserInfo">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="Userid" ColumnName="Userid" />
-            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-            <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-            <ScalarProperty Name="LastName" ColumnName="LastName" />
-            <ScalarProperty Name="Gender" ColumnName="Gender" />
-            <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-            <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-            <ScalarProperty Name="HomeContactNo" ColumnName="HomeContactNo" />
-            <ScalarProperty Name="Address1" ColumnName="Address1" />
-            <ScalarProperty Name="Address2" ColumnName="Address2" />
-            <ScalarProperty Name="City" ColumnName="City" />
-            <ScalarProperty Name="State" ColumnName="State" />
-            <ScalarProperty Name="Country" ColumnName="Country" />
-            <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-            <ScalarProperty Name="DateOfAdmission" ColumnName="DateOfAdmission" />
-            <ScalarProperty Name="Semester" ColumnName="Semester" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="UserMasters"><EntityTypeMapping TypeName="LMSModel.UserMaster"><MappingFragment StoreEntitySet="UserMaster">
-            <ScalarProperty Name="Email" ColumnName="Email" />
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="LMSModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="HomeContactNo" ColumnName="HomeContactNo" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="DateOfAdmission" ColumnName="DateOfAdmission" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="LMSModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-            <ScalarProperty Name="UserName" ColumnName="UserName" />
-            <ScalarProperty Name="Password" ColumnName="Password" />
-            <ScalarProperty Name="FailAttempt" ColumnName="FailAttempt" />
-            <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
-            <ScalarProperty Name="BlockReason" ColumnName="BlockReason" />
-            <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
-            <ScalarProperty Name="LastLogoutDate" ColumnName="LastLogoutDate" />
-            <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-            <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-            <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
-            <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FailAttempt" ColumnName="FailAttempt" />
+                <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
+                <ScalarProperty Name="BlockReason" ColumnName="BlockReason" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LastLogoutDate" ColumnName="LastLogoutDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -159,7 +168,7 @@
     <Diagrams>
       <Diagram Name="LMSModel">
         <EntityTypeShape EntityType="LMSModel.UserInfo" Width="1.5" PointX="0.75" PointY="0.75" Height="3.7288216145833326" IsExpanded="true" />
-        <EntityTypeShape EntityType="LMSModel.UserMaster" Width="1.5" PointX="2.75" PointY="0.75" Height="2.9070849609374996" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.UserMaster" Width="1.5" PointX="2.75" PointY="0.75" Height="3.0714322916666656" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>
