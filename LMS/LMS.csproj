@@ -164,6 +164,10 @@
     <Content Include="Content\Images\Header-4.jpg" />
     <Content Include="Content\Images\Header-5.jpg" />
     <Content Include="Content\Images\Login.png" />
+    <Content Include="Content\Images\Logo154-128.png" />
+    <Content Include="Content\Images\Logo38-32.png" />
+    <Content Include="Content\Images\Logo58-48.png" />
+    <Content Include="Content\Images\Logo77-64.png" />
     <Content Include="Content\Login\Login.css" />
     <Content Include="Content\Login\Login.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />

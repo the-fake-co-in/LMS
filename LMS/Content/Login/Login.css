@@ -1,4 +1,17 @@
-﻿.nav-button
+﻿#main-navbar, #main-navbar-2
+{
+    background-color: #6030A0;
+}
+
+#main-navbar .navbar-brand,
+#main-navbar .navbar-text, 
+#main-navbar-2 .navbar-brand,
+#main-navbar-2 .navbar-text { 
+    color: white;
+    margin-left: 10px;
+}
+    
+.nav-button
 {
     type: "button";
     data-toggle: "collapse";
@@ -15,8 +28,13 @@
 .carousel-item
 {
     text-align: center;
-    margin-top: 75px;
-    data-interval: 2000;
+    margin-top: 48px;
+    data-interval: 1000;
+}
+
+.carousel-item img
+{
+    width: 100%;
 }
 
 .carousel-quote
@@ -33,7 +51,6 @@
 
 #login-modal
 {
-    background-color: Black;
     margin-top: 50px;
     role: "dialog";
     data-backdrop: "static";
@@ -50,8 +67,13 @@
 .modal-dialog .modal-content
 {
     padding:5px;
-    background-color: Black;
-    box-shadow: 1px 1px 10px #fff;
+    background-color:#eee;
+    box-shadow: 1px 1px 10px #000;
+}
+
+.input-group-prepend span
+{
+    width:"150px";
 }
 
 .control-btn
