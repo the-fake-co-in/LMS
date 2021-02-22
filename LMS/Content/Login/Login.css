@@ -1,12 +1,12 @@
-﻿#main-navbar, #main-navbar-2
+﻿#header-navbar, #footer-navbar
 {
     background-color: #6030A0;
 }
 
-#main-navbar .navbar-brand,
-#main-navbar .navbar-text, 
-#main-navbar-2 .navbar-brand,
-#main-navbar-2 .navbar-text { 
+#header-navbar .navbar-brand,
+#header-navbar .navbar-text, 
+#footer-navbar .navbar-brand,
+#footer-navbar .navbar-text { 
     color: white;
     margin-left: 10px;
 }

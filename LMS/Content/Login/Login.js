@@ -35,15 +35,12 @@
     function ShowError(errMsg) {
         debugger;
         $("#error-span").css('display', 'block');
-        //$('#error-msg').text(errMsg);
-        //$('#error-msg').Text = errMsg;
         $('#error-msg').html(errMsg);
     };
 
     function HideError() {
         debugger;
         $("#error-span").css('display', 'none');
-        //        $("#error-span").css('visibility', 'hidden');
         $("#error-span").hide();
         $('#error-msg').html('');
     };

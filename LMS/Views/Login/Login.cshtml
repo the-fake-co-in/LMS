@@ -6,6 +6,7 @@
    <link href="../../Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
    <link href="../../Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
    <link href="../../Content/Login/Login.css" rel="stylesheet" type="text/css" />
+   <link href="../../Content/Custom/Custom.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
    @model LMS.Models.UserMaster
@@ -19,29 +20,33 @@
       // -------------- NAVIGATION BAR STARTS HERE ---------------
       <!-- HEADER -->
       <header>
-         <nav id="main-navbar" class="navbar navbar-expand-md navbar-dark fixed-top">
-            <img id="brand-img" src="../../Content/Images/Logo58-48.png" />
-            <a class="navbar-brand" href="#">Library Management System</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-               <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="#">About Us</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="#">Contact Us</a>
-               </li>
-            </ul>
-            <form class="form-inline mt-2 mt-md-0">
-		         <a id="show-modal" class="btn btn-primary btn-sm rounded-pill pl-100" style="width:100px;" data-toggle="modal" data-target="#login-modal">Login</a>
-	         </form>
-         </div>
-         </nav>
+	      <nav id="header-navbar" class="navbar navbar-expand-md navbar-dark fixed-top">
+		      <span class="navbar-brand">
+			      <img id="brand-img" class="mr-3" src="../../Content/Images/Logo58-48.png"/>
+			      Library Management System
+		      </span>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header-nav-div" aria-controls="header-nav-div" aria-expanded="false" aria-label="Toggle navigation">
+			      <span class="navbar-toggler-icon"/>
+		      </button>
+		      <div class="collapse navbar-collapse" id="header-nav-div">
+			      <ul class="navbar-nav mr-auto">
+				      <li class="nav-item active">
+					      <a class="nav-link" href="#">Home
+						      <span class="sr-only">(current)</span>
+					      </a>
+				      </li>
+				      <li class="nav-item">
+					      <a class="nav-link" href="#">About Us</a>
+				      </li>
+				      <li class="nav-item">
+					      <a class="nav-link" href="#">Contact Us</a>
+				      </li>
+			      </ul>
+			      <form class="form-inline mt-2 mt-md-0">
+				      <a id="show-modal" class="btn btn-primary btn-sm rounded-pill pl-100" style="width:100px;" data-toggle="modal" data-target="#login-modal">Login</a>
+			      </form>
+		      </div>
+	      </nav>
       </header>
       <!-- HEADER -->
 
@@ -127,7 +132,8 @@
                   <center>
                      <img id="user-image" src="../../Content/Images/Login.png" class="card-img-top mb-3" />
                   </center>
-                  @*-------------- HEADER IMAGE ---------------*@ @*-------------- VALIDATION MESSAGE ---------------*@
+                  @*-------------- HEADER IMAGE ---------------*@
+                  @*-------------- VALIDATION MESSAGE ---------------*@
                   <span id="error-span" style="display: none;"><span id="error-msg" class="badge badge-danger">
                   </span><a id="hide-error" href="#" class="badge badge-secondary">x</a> </span>@*-------------- VALIDATION MESSAGE ---------------*@
                   @*-------------- LOGIN SECTION ---------------*@
@@ -149,7 +155,7 @@
                      @Html.ValidationMessageFor(x => x.Password)
                      @*-------------- INPUT SECTION ---------------*@ @*-------------- CONTROL SECTION ---------------*@
                      <div class="btn-group">
-                        <input id="Login" type="submit" value="Log-In" class="btn btn-primary btn-sm control-btn" />
+                        <input id="Login" value="Login" class="btn btn-primary btn-sm control-btn" />
                         <input id="close-modal" type="reset" value="Close" class="btn btn-danger btn-sm control-btn" />
                      </div>
                      <div style="color: DarkGreen;">
@@ -222,17 +228,22 @@
       </div>
 
       <!-- FOOTER -->
-      <footer class="container">
-         <nav id="main-navbar-2" class="navbar navbar-expand-md navbar-dark fixed-bottom">
-            <img src="../../Content/Images/Logo38-32.png" />
-            <a class="navbar-brand" href="#">Library Management System</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-         </div>
-         </nav>
-     </footer>
+      <footer class="container-fluid">
+       <nav id="footer-navbar" class="navbar navbar-expand-md navbar-dark fixed-bottom border-top border-secondary">
+		      @*<span class="navbar-brand">
+			      <img class="mr-3" src="../../Content/Images/Logo38-32.png"/>
+			      Library Management System
+		      </span>*@
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footer-nav-div" aria-controls="footer-nav-div" aria-expanded="false" aria-label="Toggle navigation">
+			      <span class="navbar-toggler-icon"/>
+		      </button>
+		      <div class="collapse navbar-collapse" id="footer-nav-div">
+			      <a href="#" class="nav-link ml-3">Privacy Policy</a>
+			      <a href="#" class="nav-link ml-3">Term of use</a>
+			      <a href="#" class="nav-link ml-3">© Copyright 2021. All Rights Reserved by Parul University.</a>
+		      </div>
+	      </nav>
+      </footer>
    }
    @section Scripts {
       @Scripts.Render("~/bundles/jqueryval")

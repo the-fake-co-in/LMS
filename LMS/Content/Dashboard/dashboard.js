@@ -1,1 +1,12 @@
-(function($){"use strict";var fullHeight=function(){$('.js-fullheight').css('height',$(window).height());$(window).resize(function(){$('.js-fullheight').css('height',$(window).height());});};fullHeight();$('#sidebarCollapse').on('click',function(){$('#sidebar').toggleClass('active');});})(jQuery);
+$(document).ready(function () {
+
+    $('#collapse-menu-div').click(function () {
+        debugger;
+        if ($('#menu-div').is(":hidden")) {
+            $("#menu-div").css('display', 'block');
+        }
+        else {
+            $("#menu-div").css('display', 'none');
+        }
+    });
+});
