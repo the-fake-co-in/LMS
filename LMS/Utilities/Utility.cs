@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using LMS.Models;
 using LMS.Controllers;
 
 namespace LMS.Utilities
 {
     public class Utility
     {
+        public const string PROJECT_TITLE = "Library Management Software";
+
         public static LMSEntities dbEntities = new LMSEntities();
 
         public static IEnumerable<FormMaster> GetForms(int userId)

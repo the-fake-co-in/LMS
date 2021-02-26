@@ -1,0 +1,790 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LMSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="LMSModelStoreContainer">
+          <EntitySet Name="AuthorMaster" EntityType="LMSModel.Store.AuthorMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookCodeMaster" EntityType="LMSModel.Store.BookCodeMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookFineMaster" EntityType="LMSModel.Store.BookFineMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookIssue" EntityType="LMSModel.Store.BookIssue" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookMaster" EntityType="LMSModel.Store.BookMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookTypeMaster" EntityType="LMSModel.Store.BookTypeMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FinePayment" EntityType="LMSModel.Store.FinePayment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FineTypeMaster" EntityType="LMSModel.Store.FineTypeMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FormMaster" EntityType="LMSModel.Store.FormMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FormTypeMaster" EntityType="LMSModel.Store.FormTypeMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PasswordHistory" EntityType="LMSModel.Store.PasswordHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RoleMaster" EntityType="LMSModel.Store.RoleMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserInfo" EntityType="LMSModel.Store.UserInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserMaster" EntityType="LMSModel.Store.UserMaster" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="AuthorMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookCodeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="int" Nullable="false" />
+          <Property Name="BookCode" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsIssued" Type="bit" Nullable="false" />
+          <Property Name="IsLost" Type="bit" Nullable="false" />
+          <Property Name="IsDamaged" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookFineMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" Nullable="false" />
+          <Property Name="BookTypeId" Type="tinyint" Nullable="false" />
+          <Property Name="LateFeeBaseChargeAmount" Type="tinyint" Nullable="false" />
+          <Property Name="LateFeeBaseChargePercent" Type="tinyint" Nullable="false" />
+          <Property Name="LateFeeIncreaseAmount" Type="tinyint" Nullable="false" />
+          <Property Name="LateFeeIncreasePercentage" Type="tinyint" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookIssue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="int" Nullable="false" />
+          <Property Name="IssuedFor" Type="int" Nullable="false" />
+          <Property Name="IssuedBy" Type="int" Nullable="false" />
+          <Property Name="IssuedOn" Type="datetime" Nullable="false" />
+          <Property Name="ReceivedBy" Type="int" />
+          <Property Name="ReturnedOn" Type="date" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BookTypeId" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="Publisher" Type="varchar" MaxLength="50" />
+          <Property Name="PublishDate" Type="datetime" />
+          <Property Name="Edition" Type="varchar" MaxLength="50" />
+          <Property Name="ISBN" Type="varchar" MaxLength="25" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookTypeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="PriceDepreciationTime" Type="tinyint" />
+          <Property Name="PriceDepreciationRate" Type="tinyint" />
+          <Property Name="MaxDepreciationRate" Type="tinyint" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FinePayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TypeId" Type="tinyint" Nullable="false" />
+          <Property Name="BookId" Type="int" Nullable="false" />
+          <Property Name="PaidBy" Type="int" Nullable="false" />
+          <Property Name="BaseAmount" Type="smallint" Nullable="false" />
+          <Property Name="FinalAmount" Type="smallint" Nullable="false" />
+          <Property Name="PaidAmount" Type="smallint" Nullable="false" />
+          <Property Name="ExemptionAmount" Type="smallint" Nullable="false" />
+          <Property Name="PaymentReceiptNo" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="PaidOn" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FineTypeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FineType" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FormTypeId" Type="tinyint" Nullable="false" />
+          <Property Name="FormName" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="FormPath" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ReadAcces" Type="varchar" MaxLength="50" />
+          <Property Name="WriteAccess" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="SpecialReadAccess" Type="varchar" MaxLength="100" />
+          <Property Name="SpecialWriteAccess" Type="varchar" MaxLength="100" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormTypeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FormType" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DisplayOrder" Type="tinyint" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PasswordHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="OldPassword" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NewPassword" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ModifyingSource" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Userid" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Gender" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="20" />
+          <Property Name="HomeContactNo" Type="varchar" MaxLength="20" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address2" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pincode" Type="varchar" MaxLength="10" />
+          <Property Name="DateOfJoin" Type="date" Nullable="false" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="RoleId" Type="tinyint" Nullable="false" />
+          <Property Name="FailAttempt" Type="tinyint" Nullable="false" />
+          <Property Name="IsBlocked" Type="bit" Nullable="false" />
+          <Property Name="BlockReason" Type="varchar" MaxLength="200" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLogoutDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LMSModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="LMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AuthorMasters" EntityType="LMSModel.AuthorMaster" />
+          <EntitySet Name="BookCodeMasters" EntityType="LMSModel.BookCodeMaster" />
+          <EntitySet Name="BookFineMasters" EntityType="LMSModel.BookFineMaster" />
+          <EntitySet Name="BookIssues" EntityType="LMSModel.BookIssue" />
+          <EntitySet Name="BookMasters" EntityType="LMSModel.BookMaster" />
+          <EntitySet Name="BookTypeMasters" EntityType="LMSModel.BookTypeMaster" />
+          <EntitySet Name="FinePayments" EntityType="LMSModel.FinePayment" />
+          <EntitySet Name="FineTypeMasters" EntityType="LMSModel.FineTypeMaster" />
+          <EntitySet Name="FormMasters" EntityType="LMSModel.FormMaster" />
+          <EntitySet Name="FormTypeMasters" EntityType="LMSModel.FormTypeMaster" />
+          <EntitySet Name="PasswordHistories" EntityType="LMSModel.PasswordHistory" />
+          <EntitySet Name="RoleMasters" EntityType="LMSModel.RoleMaster" />
+          <EntitySet Name="UserInfoes" EntityType="LMSModel.UserInfo" />
+          <EntitySet Name="UserMasters" EntityType="LMSModel.UserMaster" />
+        </EntityContainer>
+        <EntityType Name="AuthorMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookCodeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="Int32" Nullable="false" />
+          <Property Name="BookCode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="IsIssued" Type="Boolean" Nullable="false" />
+          <Property Name="IsLost" Type="Boolean" Nullable="false" />
+          <Property Name="IsDamaged" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookFineMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" />
+          <Property Name="BookTypeId" Type="Byte" Nullable="false" />
+          <Property Name="LateFeeBaseChargeAmount" Type="Byte" Nullable="false" />
+          <Property Name="LateFeeBaseChargePercent" Type="Byte" Nullable="false" />
+          <Property Name="LateFeeIncreaseAmount" Type="Byte" Nullable="false" />
+          <Property Name="LateFeeIncreasePercentage" Type="Byte" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookIssue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="Int32" Nullable="false" />
+          <Property Name="IssuedFor" Type="Int32" Nullable="false" />
+          <Property Name="IssuedBy" Type="Int32" Nullable="false" />
+          <Property Name="IssuedOn" Type="DateTime" Nullable="false" />
+          <Property Name="ReceivedBy" Type="Int32" />
+          <Property Name="ReturnedOn" Type="DateTime" />
+          <Property Name="Remarks" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookTypeId" Type="Byte" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AuthorId" Type="Int32" Nullable="false" />
+          <Property Name="Publisher" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PublishDate" Type="DateTime" />
+          <Property Name="Edition" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ISBN" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookTypeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PriceDepreciationTime" Type="Byte" />
+          <Property Name="PriceDepreciationRate" Type="Byte" />
+          <Property Name="MaxDepreciationRate" Type="Byte" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FinePayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeId" Type="Byte" Nullable="false" />
+          <Property Name="BookId" Type="Int32" Nullable="false" />
+          <Property Name="PaidBy" Type="Int32" Nullable="false" />
+          <Property Name="BaseAmount" Type="Int16" Nullable="false" />
+          <Property Name="FinalAmount" Type="Int16" Nullable="false" />
+          <Property Name="PaidAmount" Type="Int16" Nullable="false" />
+          <Property Name="ExemptionAmount" Type="Int16" Nullable="false" />
+          <Property Name="PaymentReceiptNo" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PaidOn" Type="DateTime" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FineTypeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FineType" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormTypeId" Type="Byte" Nullable="false" />
+          <Property Name="FormName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FormPath" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ReadAcces" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="WriteAccess" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="SpecialReadAccess" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="SpecialWriteAccess" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormTypeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormType" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DisplayOrder" Type="Byte" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PasswordHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="OldPassword" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="NewPassword" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ModifyingSource" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Userid" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="HomeContactNo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Address1" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Address2" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Country" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Pincode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="DateOfJoin" Type="DateTime" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="RoleId" Type="Byte" Nullable="false" />
+          <Property Name="FailAttempt" Type="Byte" Nullable="false" />
+          <Property Name="IsBlocked" Type="Boolean" Nullable="false" />
+          <Property Name="BlockReason" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" />
+          <Property Name="LastLogoutDate" Type="DateTime" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LMSModelStoreContainer" CdmEntityContainer="LMSEntities">
+          <EntitySetMapping Name="AuthorMasters">
+            <EntityTypeMapping TypeName="LMSModel.AuthorMaster">
+              <MappingFragment StoreEntitySet="AuthorMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookCodeMasters">
+            <EntityTypeMapping TypeName="LMSModel.BookCodeMaster">
+              <MappingFragment StoreEntitySet="BookCodeMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+                <ScalarProperty Name="IsIssued" ColumnName="IsIssued" />
+                <ScalarProperty Name="IsLost" ColumnName="IsLost" />
+                <ScalarProperty Name="IsDamaged" ColumnName="IsDamaged" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookFineMasters">
+            <EntityTypeMapping TypeName="LMSModel.BookFineMaster">
+              <MappingFragment StoreEntitySet="BookFineMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookTypeId" ColumnName="BookTypeId" />
+                <ScalarProperty Name="LateFeeBaseChargeAmount" ColumnName="LateFeeBaseChargeAmount" />
+                <ScalarProperty Name="LateFeeBaseChargePercent" ColumnName="LateFeeBaseChargePercent" />
+                <ScalarProperty Name="LateFeeIncreaseAmount" ColumnName="LateFeeIncreaseAmount" />
+                <ScalarProperty Name="LateFeeIncreasePercentage" ColumnName="LateFeeIncreasePercentage" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookIssues">
+            <EntityTypeMapping TypeName="LMSModel.BookIssue">
+              <MappingFragment StoreEntitySet="BookIssue">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="IssuedFor" ColumnName="IssuedFor" />
+                <ScalarProperty Name="IssuedBy" ColumnName="IssuedBy" />
+                <ScalarProperty Name="IssuedOn" ColumnName="IssuedOn" />
+                <ScalarProperty Name="ReceivedBy" ColumnName="ReceivedBy" />
+                <ScalarProperty Name="ReturnedOn" ColumnName="ReturnedOn" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookMasters">
+            <EntityTypeMapping TypeName="LMSModel.BookMaster">
+              <MappingFragment StoreEntitySet="BookMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookTypeId" ColumnName="BookTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookTypeMasters">
+            <EntityTypeMapping TypeName="LMSModel.BookTypeMaster">
+              <MappingFragment StoreEntitySet="BookTypeMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="PriceDepreciationTime" ColumnName="PriceDepreciationTime" />
+                <ScalarProperty Name="PriceDepreciationRate" ColumnName="PriceDepreciationRate" />
+                <ScalarProperty Name="MaxDepreciationRate" ColumnName="MaxDepreciationRate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinePayments">
+            <EntityTypeMapping TypeName="LMSModel.FinePayment">
+              <MappingFragment StoreEntitySet="FinePayment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="PaidBy" ColumnName="PaidBy" />
+                <ScalarProperty Name="BaseAmount" ColumnName="BaseAmount" />
+                <ScalarProperty Name="FinalAmount" ColumnName="FinalAmount" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="ExemptionAmount" ColumnName="ExemptionAmount" />
+                <ScalarProperty Name="PaymentReceiptNo" ColumnName="PaymentReceiptNo" />
+                <ScalarProperty Name="PaidOn" ColumnName="PaidOn" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FineTypeMasters">
+            <EntityTypeMapping TypeName="LMSModel.FineTypeMaster">
+              <MappingFragment StoreEntitySet="FineTypeMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FineType" ColumnName="FineType" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormMasters">
+            <EntityTypeMapping TypeName="LMSModel.FormMaster">
+              <MappingFragment StoreEntitySet="FormMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormTypeId" ColumnName="FormTypeId" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="FormPath" ColumnName="FormPath" />
+                <ScalarProperty Name="ReadAcces" ColumnName="ReadAcces" />
+                <ScalarProperty Name="WriteAccess" ColumnName="WriteAccess" />
+                <ScalarProperty Name="SpecialReadAccess" ColumnName="SpecialReadAccess" />
+                <ScalarProperty Name="SpecialWriteAccess" ColumnName="SpecialWriteAccess" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormTypeMasters">
+            <EntityTypeMapping TypeName="LMSModel.FormTypeMaster">
+              <MappingFragment StoreEntitySet="FormTypeMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PasswordHistories">
+            <EntityTypeMapping TypeName="LMSModel.PasswordHistory">
+              <MappingFragment StoreEntitySet="PasswordHistory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OldPassword" ColumnName="OldPassword" />
+                <ScalarProperty Name="NewPassword" ColumnName="NewPassword" />
+                <ScalarProperty Name="ModifyingSource" ColumnName="ModifyingSource" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleMasters">
+            <EntityTypeMapping TypeName="LMSModel.RoleMaster">
+              <MappingFragment StoreEntitySet="RoleMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="LMSModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="HomeContactNo" ColumnName="HomeContactNo" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="LMSModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="FailAttempt" ColumnName="FailAttempt" />
+                <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
+                <ScalarProperty Name="BlockReason" ColumnName="BlockReason" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LastLogoutDate" ColumnName="LastLogoutDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="LMSModel">
+        <EntityTypeShape EntityType="LMSModel.AuthorMaster" Width="1.5" PointX="0.75" PointY="0.75" Height="2.085348307291667" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.BookCodeMaster" Width="1.5" PointX="2.75" PointY="0.75" Height="2.7427376302083326" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.BookFineMaster" Width="1.5" PointX="4.75" PointY="0.75" Height="2.7427376302083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.BookIssue" Width="1.5" PointX="0.75" PointY="4.75" Height="3.0714322916666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.BookMaster" Width="1.5" PointX="2.75" PointY="4.75" Height="3.2357796223958335" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.BookTypeMaster" Width="1.5" PointX="4.75" PointY="4.75" Height="2.5783902994791674" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.FinePayment" Width="1.5" PointX="6.75" PointY="0.75" Height="3.4001269531249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.FineTypeMaster" Width="1.5" PointX="6.75" PointY="5.75" Height="2.0853483072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.FormMaster" Width="1.5" PointX="8.75" PointY="0.75" Height="3.0714322916666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.FormTypeMaster" Width="1.5" PointX="0.75" PointY="8.75" Height="2.2496956380208317" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.PasswordHistory" Width="1.5" PointX="2.75" PointY="8.75" Height="1.9210009765625031" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.RoleMaster" Width="1.5" PointX="8.75" PointY="4.75" Height="2.0853483072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.UserInfo" Width="1.5" PointX="4.75" PointY="8.75" Height="4.5505582682291674" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.UserMaster" Width="1.5" PointX="6.75" PointY="8.75" Height="3.4001269531250031" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using LMS.Models;
+using LMS.Utilities;
 
 namespace LMS.Controllers
 {
     public class FormController : Controller
     {
-        private static LMS.LMSEntities dbEntities = LMS.Utilities.Utility.dbEntities;
+        private static LMSEntities dbEntities = Utility.dbEntities;
 
+        [HttpGet]
         public ActionResult Index()
         {
             return View();

@@ -1,16 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Drawing;
 using System.ComponentModel.DataAnnotations;
 
 namespace LMS.Models
 {
-    public class UserInfo
+    [MetadataType(typeof(UserInfoMetadata))]
+    public partial class UserInfo
     {
+    }
+
+    internal sealed class UserInfoMetadata
+    {
+        private UserInfoMetadata()
+        {
+        }
+
+        [Key]
         public int Id { get; set; }
 
+        [Display(Name = "User")]
         public int Userid { get; set; }
 
         [Display(Name = "FirstName")]
@@ -33,10 +41,12 @@ namespace LMS.Models
         public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Mobile No.")]
+        [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "Please Enter Mobile No.!")]
         public string MobileNo { get; set; }
 
         [Display(Name = "Home Contact No.")]
+        [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "Please Enter Home Contact No.!")]
         public string HomeContactNo { get; set; }
 
@@ -60,14 +70,13 @@ namespace LMS.Models
         public string Country { get; set; }
 
         [Display(Name = "PinCode")]
+        [Range(4, 6)]
         [Required(ErrorMessage = "Please Enter PinCode!")]
         public string Pincode { get; set; }
 
         [Display(Name = "Addmission Date")]
-        public DateTime DateOfAdmission { get; set; }
-
-        [Display(Name = "Semester")]
-        public int Semester { get; set; }
+        [Required(ErrorMessage = "Please select Date of Join Date!")]
+        public DateTime DateOfJoin { get; set; }
 
         [Display(Name = "Addmission Date")]
         public Image Photo { get; set; }

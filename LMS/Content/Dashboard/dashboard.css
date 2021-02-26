@@ -1,30 +1,50 @@
 body
 {
-    font-family: 'Work Sans', sans-serif;
-    background-color: #404850;
+    padding:5px;
+    background-color:#334767
 }
-    
-#div-main{
-    background-color: #EEE;
-}
-#header-navbar .navbar-brand,
-#header-navbar .navbar-text, 
-#footer-navbar .navbar-brand,
-#footer-navbar .navbar-text { 
-    color: white;
-    margin-left: 10px;
-}
-    
-.nav-button
+#lms-sidebar
 {
-    type: "button";
-    data-toggle: "collapse";
-    data-target: "#NavbarMain";
-    aria-controls: "NavbarMain";
-    aria-expanded: "false";
-    aria-label: "Toggle navigation";
+    overflow-x: hidden;
+    background-color:#334767
 }
-
-.btn:not(:disabled):not(.disabled) {
-    cursor: pointer;
+#lms-sidebar *
+{
+    border-bottom-color:Black;
+    border-bottom:5px;
+}
+#lms-sidebar button
+{
+    border-bottom-color:Black;
+    border-bottom:5px;
+    background-color:#384E72
+}
+#lms-sidebar a
+{
+    color:White;
+    border-bottom-color:Black;
+    border-bottom:5px;
+    margin-left:15px;
+}
+#header-div
+{
+    border-bottom:5px;
+    border-bottom-color:White;
+}
+#openNav
+{
+    display:none;
+    margin-right:120px;
+}
+#header-title
+{
+    font-size:20px;
+    font-weight:500;
+    color: White;
+}
+.w3-sidebar
+{
+    font-size:14px;
+    font-weight:500;
+    color: White;
 }
