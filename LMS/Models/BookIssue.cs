@@ -36,7 +36,7 @@ namespace LMS.Models
         public Int32 ReceivedBy { get; set; }
 
         [Display(Name = "Received On")]
-        public DateTime ReceivedOn { get; set; }
+        public DateTime ReturnedOn { get; set; }
 
         public string Remarks { get; set; }
 

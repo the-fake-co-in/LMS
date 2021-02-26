@@ -40,7 +40,7 @@ namespace LMS.Models
 
         [Display(Name = "Price")]
         [Required(ErrorMessage = "Please enter Book Price!")]
-        public Int32 price { get; set; }
+        public Int32 Price { get; set; }
 
         [DefaultValue(false)]
         [Display(Name = "Is Deleted?")]

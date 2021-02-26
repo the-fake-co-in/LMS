@@ -17,7 +17,7 @@
 		@Scripts.Render("~/bundles/modernizr")
 	</head>
 	<body>
-      @if (Session["UserId"] != null)
+      @if (true || Session["UserId"] != null)
       {
          @*---------------------------------------------*@
          <!-- SIDEBAR BEGINS -->
@@ -33,12 +33,12 @@
                {
                   string w3cardId = "w3CardId-" + formType.Id.ToString();
                   <button class="w3-button w3-block w3-left-align" onclick="SetAccordion(this)">
-                     @formType.FormType<i class="fa fa-caret-down pull-right  "></i>
+                     @formType.Type<i class="fa fa-caret-down pull-right  "></i>
                   </button>
                   <div id="@w3cardId" class="w3-card @(i == 0 ? "w3-show" : "w3-hide")">
                   @foreach (LMS.Models.FormMaster form in forms)
                   {
-                     <a href="@form.FormPath" class="w3-bar-item w3-button">@form.FormName</a>
+                     <a href="@form.Path" class="w3-bar-item w3-button">@form.Name</a>
                   }
                   </div>
                }
@@ -54,19 +54,21 @@
             @*---------------------------------------------*@
             <!-- HEADER -->
             @*---------------------------------------------*@
-            <span id="header-div" class="w3-container">
-               @if (Session["UserId"] != null)
-               {
-                  <span id="openNav" class="w3-button w3-indigo w3-medium" onclick="w3_open()">&#9776;</span>
-               }
-               <span id="header-title">
-                  <img id="brand-img" class="mr-3" src="../../Content/Images/Logo38-32.png"/>
-                  @LMS.Utilities.Utility.PROJECT_TITLE
+            <div id="header-div">
+               <span class="w3-container p-1">
+                  @if (true || Session["UserId"] != null)
+                  {
+                     <span id="openNav" class="w3-button w3-indigo w3-medium" onclick="w3_open()">&#9776;</span>
+                  }
+                  <span id="header-title">
+                     <img id="brand-img" class="mr-3" src="../../Content/Images/Logo38-32.png"/>
+                     @LMS.Utilities.Utility.PROJECT_TITLE
+                  </span>
+                  <span class="col-md-auto">
+                     <span id="show-modal" class="w3-button w3-indigo w3-medium float-right" data-toggle="modal" data-target="#login-modal">Login</span>
+                  </span>
                </span>
-               <span class="col-md-auto">
-                  <span id="show-modal" class="w3-button w3-indigo w3-medium float-right" data-toggle="modal" data-target="#login-modal">Login</span>
-               </span>
-            </span>
+            </div>
             @*---------------------------------------------*@
             <!-- HEADER ENDS -->
             @*---------------------------------------------*@

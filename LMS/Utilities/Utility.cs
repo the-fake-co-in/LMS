@@ -18,8 +18,8 @@ namespace LMS.Utilities
             IEnumerable<FormMaster> forms = FormController.forms;
 
             forms = userId == 1 ? forms : forms
-                .Where(x => x.ReadAcces == "0" || x.WriteAccess == "0"
-                    || x.ReadAcces == userId.ToString()
+                .Where(x => x.ReadAccess == "0" || x.WriteAccess == "0"
+                    || x.ReadAccess == userId.ToString()
                     || x.WriteAccess == userId.ToString());
 
             return forms;

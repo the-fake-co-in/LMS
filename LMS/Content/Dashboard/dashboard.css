@@ -3,6 +3,9 @@ body
     padding:5px;
     background-color:#334767
 }
+.carousel-inner img {
+  margin: auto;
+}
 #lms-sidebar
 {
     overflow-x: hidden;
@@ -28,8 +31,7 @@ body
 }
 #header-div
 {
-    border-bottom:5px;
-    border-bottom-color:White;
+    border-bottom:1px solid black;
 }
 #openNav
 {

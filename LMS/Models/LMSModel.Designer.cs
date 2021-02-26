@@ -647,10 +647,10 @@ namespace LMS.Models
         /// <param name="isDamaged">Initial value of the IsDamaged property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static BookCodeMaster CreateBookCodeMaster(global::System.Int32 id, global::System.Int32 bookId, global::System.String bookCode, global::System.Boolean isIssued, global::System.Boolean isLost, global::System.Boolean isDamaged, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 modifiedBy, global::System.DateTime modifiedDate)
+        /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
+        public static BookCodeMaster CreateBookCodeMaster(global::System.Int32 id, global::System.Int32 bookId, global::System.String bookCode, global::System.Boolean isIssued, global::System.Boolean isLost, global::System.Boolean isDamaged, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             BookCodeMaster bookCodeMaster = new BookCodeMaster();
             bookCodeMaster.Id = id;
@@ -661,9 +661,9 @@ namespace LMS.Models
             bookCodeMaster.IsDamaged = isDamaged;
             bookCodeMaster.IsDeleted = isDeleted;
             bookCodeMaster.CreatedBy = createdBy;
-            bookCodeMaster.CreatedDate = createdDate;
+            bookCodeMaster.CreatedOn = createdOn;
             bookCodeMaster.ModifiedBy = modifiedBy;
-            bookCodeMaster.ModifiedDate = modifiedDate;
+            bookCodeMaster.ModifiedOn = modifiedOn;
             return bookCodeMaster;
         }
 
@@ -871,24 +871,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
+        public global::System.DateTime CreatedOn
         {
             get
             {
-                return _CreatedDate;
+                return _CreatedOn;
             }
             set
             {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
             }
         }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
+        partial void OnCreatedOnChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -919,24 +919,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
+        public global::System.DateTime ModifiedOn
         {
             get
             {
-                return _ModifiedDate;
+                return _ModifiedOn;
             }
             set
             {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
+                OnModifiedOnChanging(value);
+                ReportPropertyChanging("ModifiedOn");
+                _ModifiedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedOn");
+                OnModifiedOnChanged();
             }
         }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
-        partial void OnModifiedDateChanged();
+        private global::System.DateTime _ModifiedOn;
+        partial void OnModifiedOnChanging(global::System.DateTime value);
+        partial void OnModifiedOnChanged();
 
         #endregion
 
@@ -964,10 +964,10 @@ namespace LMS.Models
         /// <param name="lateFeeIncreasePercentage">Initial value of the LateFeeIncreasePercentage property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static BookFineMaster CreateBookFineMaster(global::System.Byte id, global::System.Byte bookTypeId, global::System.Byte lateFeeBaseChargeAmount, global::System.Byte lateFeeBaseChargePercent, global::System.Byte lateFeeIncreaseAmount, global::System.Byte lateFeeIncreasePercentage, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 modifiedBy, global::System.DateTime modifiedDate)
+        /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
+        public static BookFineMaster CreateBookFineMaster(global::System.Byte id, global::System.Byte bookTypeId, global::System.Byte lateFeeBaseChargeAmount, global::System.Byte lateFeeBaseChargePercent, global::System.Byte lateFeeIncreaseAmount, global::System.Byte lateFeeIncreasePercentage, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             BookFineMaster bookFineMaster = new BookFineMaster();
             bookFineMaster.Id = id;
@@ -978,9 +978,9 @@ namespace LMS.Models
             bookFineMaster.LateFeeIncreasePercentage = lateFeeIncreasePercentage;
             bookFineMaster.IsDeleted = isDeleted;
             bookFineMaster.CreatedBy = createdBy;
-            bookFineMaster.CreatedDate = createdDate;
+            bookFineMaster.CreatedOn = createdOn;
             bookFineMaster.ModifiedBy = modifiedBy;
-            bookFineMaster.ModifiedDate = modifiedDate;
+            bookFineMaster.ModifiedOn = modifiedOn;
             return bookFineMaster;
         }
 
@@ -1188,24 +1188,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
+        public global::System.DateTime CreatedOn
         {
             get
             {
-                return _CreatedDate;
+                return _CreatedOn;
             }
             set
             {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
             }
         }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
+        partial void OnCreatedOnChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1236,24 +1236,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
+        public global::System.DateTime ModifiedOn
         {
             get
             {
-                return _ModifiedDate;
+                return _ModifiedOn;
             }
             set
             {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
+                OnModifiedOnChanging(value);
+                ReportPropertyChanging("ModifiedOn");
+                _ModifiedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedOn");
+                OnModifiedOnChanged();
             }
         }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
-        partial void OnModifiedDateChanged();
+        private global::System.DateTime _ModifiedOn;
+        partial void OnModifiedOnChanging(global::System.DateTime value);
+        partial void OnModifiedOnChanged();
 
         #endregion
 
@@ -1280,10 +1280,10 @@ namespace LMS.Models
         /// <param name="issuedOn">Initial value of the IssuedOn property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static BookIssue CreateBookIssue(global::System.Int32 id, global::System.Int32 bookId, global::System.Int32 issuedFor, global::System.Int32 issuedBy, global::System.DateTime issuedOn, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 modifiedBy, global::System.DateTime modifiedDate)
+        /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
+        public static BookIssue CreateBookIssue(global::System.Int32 id, global::System.Int32 bookId, global::System.Int32 issuedFor, global::System.Int32 issuedBy, global::System.DateTime issuedOn, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             BookIssue bookIssue = new BookIssue();
             bookIssue.Id = id;
@@ -1293,9 +1293,9 @@ namespace LMS.Models
             bookIssue.IssuedOn = issuedOn;
             bookIssue.IsDeleted = isDeleted;
             bookIssue.CreatedBy = createdBy;
-            bookIssue.CreatedDate = createdDate;
+            bookIssue.CreatedOn = createdOn;
             bookIssue.ModifiedBy = modifiedBy;
-            bookIssue.ModifiedDate = modifiedDate;
+            bookIssue.ModifiedOn = modifiedOn;
             return bookIssue;
         }
 
@@ -1551,24 +1551,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
+        public global::System.DateTime CreatedOn
         {
             get
             {
-                return _CreatedDate;
+                return _CreatedOn;
             }
             set
             {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
             }
         }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
+        partial void OnCreatedOnChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1599,24 +1599,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
+        public global::System.DateTime ModifiedOn
         {
             get
             {
-                return _ModifiedDate;
+                return _ModifiedOn;
             }
             set
             {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
+                OnModifiedOnChanging(value);
+                ReportPropertyChanging("ModifiedOn");
+                _ModifiedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedOn");
+                OnModifiedOnChanged();
             }
         }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
-        partial void OnModifiedDateChanged();
+        private global::System.DateTime _ModifiedOn;
+        partial void OnModifiedOnChanging(global::System.DateTime value);
+        partial void OnModifiedOnChanged();
 
         #endregion
 
@@ -1645,8 +1645,8 @@ namespace LMS.Models
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static BookMaster CreateBookMaster(global::System.Int32 id, global::System.Byte bookTypeId, global::System.String name, global::System.Int32 authorId, global::System.Int32 price, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedDate)
+        /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
+        public static BookMaster CreateBookMaster(global::System.Int32 id, global::System.Byte bookTypeId, global::System.String name, global::System.Int32 authorId, global::System.Int32 price, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             BookMaster bookMaster = new BookMaster();
             bookMaster.Id = id;
@@ -1658,7 +1658,7 @@ namespace LMS.Models
             bookMaster.CreatedBy = createdBy;
             bookMaster.CreatedOn = createdOn;
             bookMaster.ModifiedBy = modifiedBy;
-            bookMaster.ModifiedDate = modifiedDate;
+            bookMaster.ModifiedOn = modifiedOn;
             return bookMaster;
         }
 
@@ -1986,24 +1986,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
+        public global::System.DateTime ModifiedOn
         {
             get
             {
-                return _ModifiedDate;
+                return _ModifiedOn;
             }
             set
             {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
+                OnModifiedOnChanging(value);
+                ReportPropertyChanging("ModifiedOn");
+                _ModifiedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedOn");
+                OnModifiedOnChanged();
             }
         }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
-        partial void OnModifiedDateChanged();
+        private global::System.DateTime _ModifiedOn;
+        partial void OnModifiedOnChanging(global::System.DateTime value);
+        partial void OnModifiedOnChanged();
 
         #endregion
 
@@ -2027,19 +2027,19 @@ namespace LMS.Models
         /// <param name="type">Initial value of the Type property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static BookTypeMaster CreateBookTypeMaster(global::System.Byte id, global::System.String type, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 modifiedBy, global::System.DateTime modifiedDate)
+        /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
+        public static BookTypeMaster CreateBookTypeMaster(global::System.Byte id, global::System.String type, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             BookTypeMaster bookTypeMaster = new BookTypeMaster();
             bookTypeMaster.Id = id;
             bookTypeMaster.Type = type;
             bookTypeMaster.IsDeleted = isDeleted;
             bookTypeMaster.CreatedBy = createdBy;
-            bookTypeMaster.CreatedDate = createdDate;
+            bookTypeMaster.CreatedOn = createdOn;
             bookTypeMaster.ModifiedBy = modifiedBy;
-            bookTypeMaster.ModifiedDate = modifiedDate;
+            bookTypeMaster.ModifiedOn = modifiedOn;
             return bookTypeMaster;
         }
 
@@ -2223,24 +2223,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
+        public global::System.DateTime CreatedOn
         {
             get
             {
-                return _CreatedDate;
+                return _CreatedOn;
             }
             set
             {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
             }
         }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
+        partial void OnCreatedOnChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2271,24 +2271,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
+        public global::System.DateTime ModifiedOn
         {
             get
             {
-                return _ModifiedDate;
+                return _ModifiedOn;
             }
             set
             {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
+                OnModifiedOnChanging(value);
+                ReportPropertyChanging("ModifiedOn");
+                _ModifiedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedOn");
+                OnModifiedOnChanged();
             }
         }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
-        partial void OnModifiedDateChanged();
+        private global::System.DateTime _ModifiedOn;
+        partial void OnModifiedOnChanging(global::System.DateTime value);
+        partial void OnModifiedOnChanged();
 
         #endregion
 
@@ -2309,7 +2309,7 @@ namespace LMS.Models
         /// Create a new FinePayment object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="typeId">Initial value of the TypeId property.</param>
+        /// <param name="fineTypeId">Initial value of the FineTypeId property.</param>
         /// <param name="bookId">Initial value of the BookId property.</param>
         /// <param name="paidBy">Initial value of the PaidBy property.</param>
         /// <param name="baseAmount">Initial value of the BaseAmount property.</param>
@@ -2320,14 +2320,14 @@ namespace LMS.Models
         /// <param name="paidOn">Initial value of the PaidOn property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static FinePayment CreateFinePayment(global::System.Int32 id, global::System.Byte typeId, global::System.Int32 bookId, global::System.Int32 paidBy, global::System.Int16 baseAmount, global::System.Int16 finalAmount, global::System.Int16 paidAmount, global::System.Int16 exemptionAmount, global::System.String paymentReceiptNo, global::System.DateTime paidOn, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 modifiedBy, global::System.DateTime modifiedDate)
+        /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
+        public static FinePayment CreateFinePayment(global::System.Int32 id, global::System.Byte fineTypeId, global::System.Int32 bookId, global::System.Int32 paidBy, global::System.Int16 baseAmount, global::System.Int16 finalAmount, global::System.Int16 paidAmount, global::System.Int16 exemptionAmount, global::System.String paymentReceiptNo, global::System.DateTime paidOn, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             FinePayment finePayment = new FinePayment();
             finePayment.Id = id;
-            finePayment.TypeId = typeId;
+            finePayment.FineTypeId = fineTypeId;
             finePayment.BookId = bookId;
             finePayment.PaidBy = paidBy;
             finePayment.BaseAmount = baseAmount;
@@ -2338,9 +2338,9 @@ namespace LMS.Models
             finePayment.PaidOn = paidOn;
             finePayment.IsDeleted = isDeleted;
             finePayment.CreatedBy = createdBy;
-            finePayment.CreatedDate = createdDate;
+            finePayment.CreatedOn = createdOn;
             finePayment.ModifiedBy = modifiedBy;
-            finePayment.ModifiedDate = modifiedDate;
+            finePayment.ModifiedOn = modifiedOn;
             return finePayment;
         }
 
@@ -2380,24 +2380,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte TypeId
+        public global::System.Byte FineTypeId
         {
             get
             {
-                return _TypeId;
+                return _FineTypeId;
             }
             set
             {
-                OnTypeIdChanging(value);
-                ReportPropertyChanging("TypeId");
-                _TypeId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("TypeId");
-                OnTypeIdChanged();
+                OnFineTypeIdChanging(value);
+                ReportPropertyChanging("FineTypeId");
+                _FineTypeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FineTypeId");
+                OnFineTypeIdChanged();
             }
         }
-        private global::System.Byte _TypeId;
-        partial void OnTypeIdChanging(global::System.Byte value);
-        partial void OnTypeIdChanged();
+        private global::System.Byte _FineTypeId;
+        partial void OnFineTypeIdChanging(global::System.Byte value);
+        partial void OnFineTypeIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2644,24 +2644,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
+        public global::System.DateTime CreatedOn
         {
             get
             {
-                return _CreatedDate;
+                return _CreatedOn;
             }
             set
             {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
             }
         }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
+        partial void OnCreatedOnChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2692,24 +2692,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
+        public global::System.DateTime ModifiedOn
         {
             get
             {
-                return _ModifiedDate;
+                return _ModifiedOn;
             }
             set
             {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
+                OnModifiedOnChanging(value);
+                ReportPropertyChanging("ModifiedOn");
+                _ModifiedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedOn");
+                OnModifiedOnChanged();
             }
         }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
-        partial void OnModifiedDateChanged();
+        private global::System.DateTime _ModifiedOn;
+        partial void OnModifiedOnChanging(global::System.DateTime value);
+        partial void OnModifiedOnChanged();
 
         #endregion
 
@@ -2730,22 +2730,22 @@ namespace LMS.Models
         /// Create a new FineTypeMaster object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="fineType">Initial value of the FineType property.</param>
+        /// <param name="type">Initial value of the Type property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static FineTypeMaster CreateFineTypeMaster(global::System.Byte id, global::System.String fineType, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 modifiedBy, global::System.DateTime modifiedDate)
+        /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
+        public static FineTypeMaster CreateFineTypeMaster(global::System.Byte id, global::System.String type, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             FineTypeMaster fineTypeMaster = new FineTypeMaster();
             fineTypeMaster.Id = id;
-            fineTypeMaster.FineType = fineType;
+            fineTypeMaster.Type = type;
             fineTypeMaster.IsDeleted = isDeleted;
             fineTypeMaster.CreatedBy = createdBy;
-            fineTypeMaster.CreatedDate = createdDate;
+            fineTypeMaster.CreatedOn = createdOn;
             fineTypeMaster.ModifiedBy = modifiedBy;
-            fineTypeMaster.ModifiedDate = modifiedDate;
+            fineTypeMaster.ModifiedOn = modifiedOn;
             return fineTypeMaster;
         }
 
@@ -2785,24 +2785,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String FineType
+        public global::System.String Type
         {
             get
             {
-                return _FineType;
+                return _Type;
             }
             set
             {
-                OnFineTypeChanging(value);
-                ReportPropertyChanging("FineType");
-                _FineType = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("FineType");
-                OnFineTypeChanged();
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
             }
         }
-        private global::System.String _FineType;
-        partial void OnFineTypeChanging(global::System.String value);
-        partial void OnFineTypeChanged();
+        private global::System.String _Type;
+        partial void OnTypeChanging(global::System.String value);
+        partial void OnTypeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2857,24 +2857,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
+        public global::System.DateTime CreatedOn
         {
             get
             {
-                return _CreatedDate;
+                return _CreatedOn;
             }
             set
             {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
             }
         }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
+        partial void OnCreatedOnChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2905,24 +2905,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
+        public global::System.DateTime ModifiedOn
         {
             get
             {
-                return _ModifiedDate;
+                return _ModifiedOn;
             }
             set
             {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
+                OnModifiedOnChanging(value);
+                ReportPropertyChanging("ModifiedOn");
+                _ModifiedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedOn");
+                OnModifiedOnChanged();
             }
         }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
-        partial void OnModifiedDateChanged();
+        private global::System.DateTime _ModifiedOn;
+        partial void OnModifiedOnChanging(global::System.DateTime value);
+        partial void OnModifiedOnChanged();
 
         #endregion
 
@@ -2944,25 +2944,27 @@ namespace LMS.Models
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="formTypeId">Initial value of the FormTypeId property.</param>
-        /// <param name="formName">Initial value of the FormName property.</param>
-        /// <param name="formPath">Initial value of the FormPath property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="path">Initial value of the Path property.</param>
+        /// <param name="displayOrder">Initial value of the DisplayOrder property.</param>
         /// <param name="writeAccess">Initial value of the WriteAccess property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
-        public static FormMaster CreateFormMaster(global::System.Byte id, global::System.Byte formTypeId, global::System.String formName, global::System.String formPath, global::System.String writeAccess, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
+        public static FormMaster CreateFormMaster(global::System.Byte id, global::System.Byte formTypeId, global::System.String name, global::System.String path, global::System.Byte displayOrder, global::System.String writeAccess, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             FormMaster formMaster = new FormMaster();
             formMaster.Id = id;
             formMaster.FormTypeId = formTypeId;
-            formMaster.FormName = formName;
-            formMaster.FormPath = formPath;
+            formMaster.Name = name;
+            formMaster.Path = path;
+            formMaster.DisplayOrder = displayOrder;
             formMaster.WriteAccess = writeAccess;
             formMaster.IsDeleted = isDeleted;
             formMaster.CreatedBy = createdBy;
-            formMaster.CreatedDate = createdDate;
+            formMaster.CreatedOn = createdOn;
             formMaster.ModifiedBy = modifiedBy;
             formMaster.ModifiedOn = modifiedOn;
             return formMaster;
@@ -3028,72 +3030,96 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String FormName
+        public global::System.String Name
         {
             get
             {
-                return _FormName;
+                return _Name;
             }
             set
             {
-                OnFormNameChanging(value);
-                ReportPropertyChanging("FormName");
-                _FormName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("FormName");
-                OnFormNameChanged();
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
             }
         }
-        private global::System.String _FormName;
-        partial void OnFormNameChanging(global::System.String value);
-        partial void OnFormNameChanged();
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String FormPath
+        public global::System.String Path
         {
             get
             {
-                return _FormPath;
+                return _Path;
             }
             set
             {
-                OnFormPathChanging(value);
-                ReportPropertyChanging("FormPath");
-                _FormPath = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("FormPath");
-                OnFormPathChanged();
+                OnPathChanging(value);
+                ReportPropertyChanging("Path");
+                _Path = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Path");
+                OnPathChanged();
             }
         }
-        private global::System.String _FormPath;
-        partial void OnFormPathChanging(global::System.String value);
-        partial void OnFormPathChanged();
+        private global::System.String _Path;
+        partial void OnPathChanging(global::System.String value);
+        partial void OnPathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte DisplayOrder
+        {
+            get
+            {
+                return _DisplayOrder;
+            }
+            set
+            {
+                OnDisplayOrderChanging(value);
+                ReportPropertyChanging("DisplayOrder");
+                _DisplayOrder = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DisplayOrder");
+                OnDisplayOrderChanged();
+            }
+        }
+        private global::System.Byte _DisplayOrder;
+        partial void OnDisplayOrderChanging(global::System.Byte value);
+        partial void OnDisplayOrderChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String ReadAcces
+        public global::System.String ReadAccess
         {
             get
             {
-                return _ReadAcces;
+                return _ReadAccess;
             }
             set
             {
-                OnReadAccesChanging(value);
-                ReportPropertyChanging("ReadAcces");
-                _ReadAcces = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ReadAcces");
-                OnReadAccesChanged();
+                OnReadAccessChanging(value);
+                ReportPropertyChanging("ReadAccess");
+                _ReadAccess = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ReadAccess");
+                OnReadAccessChanged();
             }
         }
-        private global::System.String _ReadAcces;
-        partial void OnReadAccesChanging(global::System.String value);
-        partial void OnReadAccesChanged();
+        private global::System.String _ReadAccess;
+        partial void OnReadAccessChanging(global::System.String value);
+        partial void OnReadAccessChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3220,24 +3246,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
+        public global::System.DateTime CreatedOn
         {
             get
             {
-                return _CreatedDate;
+                return _CreatedOn;
             }
             set
             {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
             }
         }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
+        partial void OnCreatedOnChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3306,24 +3332,24 @@ namespace LMS.Models
         /// Create a new FormTypeMaster object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="formType">Initial value of the FormType property.</param>
+        /// <param name="type">Initial value of the Type property.</param>
         /// <param name="displayOrder">Initial value of the DisplayOrder property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static FormTypeMaster CreateFormTypeMaster(global::System.Byte id, global::System.String formType, global::System.Byte displayOrder, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 modifiedBy, global::System.DateTime modifiedDate)
+        /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
+        public static FormTypeMaster CreateFormTypeMaster(global::System.Byte id, global::System.String type, global::System.Byte displayOrder, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             FormTypeMaster formTypeMaster = new FormTypeMaster();
             formTypeMaster.Id = id;
-            formTypeMaster.FormType = formType;
+            formTypeMaster.Type = type;
             formTypeMaster.DisplayOrder = displayOrder;
             formTypeMaster.IsDeleted = isDeleted;
             formTypeMaster.CreatedBy = createdBy;
-            formTypeMaster.CreatedDate = createdDate;
+            formTypeMaster.CreatedOn = createdOn;
             formTypeMaster.ModifiedBy = modifiedBy;
-            formTypeMaster.ModifiedDate = modifiedDate;
+            formTypeMaster.ModifiedOn = modifiedOn;
             return formTypeMaster;
         }
 
@@ -3363,24 +3389,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String FormType
+        public global::System.String Type
         {
             get
             {
-                return _FormType;
+                return _Type;
             }
             set
             {
-                OnFormTypeChanging(value);
-                ReportPropertyChanging("FormType");
-                _FormType = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("FormType");
-                OnFormTypeChanged();
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
             }
         }
-        private global::System.String _FormType;
-        partial void OnFormTypeChanging(global::System.String value);
-        partial void OnFormTypeChanged();
+        private global::System.String _Type;
+        partial void OnTypeChanging(global::System.String value);
+        partial void OnTypeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3459,24 +3485,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
+        public global::System.DateTime CreatedOn
         {
             get
             {
-                return _CreatedDate;
+                return _CreatedOn;
             }
             set
             {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
             }
         }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
+        partial void OnCreatedOnChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3507,24 +3533,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
+        public global::System.DateTime ModifiedOn
         {
             get
             {
-                return _ModifiedDate;
+                return _ModifiedOn;
             }
             set
             {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
+                OnModifiedOnChanging(value);
+                ReportPropertyChanging("ModifiedOn");
+                _ModifiedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedOn");
+                OnModifiedOnChanged();
             }
         }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
-        partial void OnModifiedDateChanged();
+        private global::System.DateTime _ModifiedOn;
+        partial void OnModifiedOnChanging(global::System.DateTime value);
+        partial void OnModifiedOnChanged();
 
         #endregion
 
@@ -3735,19 +3761,19 @@ namespace LMS.Models
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static RoleMaster CreateRoleMaster(global::System.Byte id, global::System.String name, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 modifiedBy, global::System.DateTime modifiedDate)
+        /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
+        public static RoleMaster CreateRoleMaster(global::System.Byte id, global::System.String name, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             RoleMaster roleMaster = new RoleMaster();
             roleMaster.Id = id;
             roleMaster.Name = name;
             roleMaster.IsDeleted = isDeleted;
             roleMaster.CreatedBy = createdBy;
-            roleMaster.CreatedDate = createdDate;
+            roleMaster.CreatedOn = createdOn;
             roleMaster.ModifiedBy = modifiedBy;
-            roleMaster.ModifiedDate = modifiedDate;
+            roleMaster.ModifiedOn = modifiedOn;
             return roleMaster;
         }
 
@@ -3859,24 +3885,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
+        public global::System.DateTime CreatedOn
         {
             get
             {
-                return _CreatedDate;
+                return _CreatedOn;
             }
             set
             {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
             }
         }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
+        partial void OnCreatedOnChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3907,24 +3933,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
+        public global::System.DateTime ModifiedOn
         {
             get
             {
-                return _ModifiedDate;
+                return _ModifiedOn;
             }
             set
             {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
+                OnModifiedOnChanging(value);
+                ReportPropertyChanging("ModifiedOn");
+                _ModifiedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedOn");
+                OnModifiedOnChanged();
             }
         }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
-        partial void OnModifiedDateChanged();
+        private global::System.DateTime _ModifiedOn;
+        partial void OnModifiedOnChanging(global::System.DateTime value);
+        partial void OnModifiedOnChanged();
 
         #endregion
 

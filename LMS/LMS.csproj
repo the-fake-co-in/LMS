@@ -131,6 +131,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AuthorMasterController.cs" />
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -632,6 +633,11 @@
     <None Include="Scripts\umd\popper.js.map" />
     <None Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="Views\AuthorMaster\Index.cshtml" />
+    <Content Include="Views\AuthorMaster\Details.cshtml" />
+    <Content Include="Views\AuthorMaster\Create.cshtml" />
+    <Content Include="Views\AuthorMaster\Edit.cshtml" />
+    <Content Include="Views\AuthorMaster\Delete.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,32 @@
+﻿@model LMS.Models.AuthorMaster
+
+@{
+    ViewBag.Title = "Add Author";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+
+   <div class="editor-label">
+   </div>
+   <div class="editor-field">
+      @Html.LabelFor(model => model.Name)
+      @Html.EditorFor(model => model.Name)
+      @Html.ValidationMessageFor(model => model.Name)
+   </div>
+
+   <p class="mt-3">
+      <input type="submit" value="Create" />
+   </p>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

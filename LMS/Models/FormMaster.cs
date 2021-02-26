@@ -26,14 +26,11 @@ namespace LMS.Models
         [Required(ErrorMessage = "Please select FormType!")]
         public Byte FormTypeId { get; set; }
 
-        [Required(ErrorMessage = "Please enter FormName!")]
-        public String FormName { get; set; }
-
         [Required(ErrorMessage = "Please enter FormPath!")]
-        public String FormPath { get; set; }
+        public String Path { get; set; }
 
         [DefaultValue("0")]
-        public String ReadAcces { get; set; }
+        public String ReadAccess { get; set; }
 
         [DefaultValue("0")]
         public String WriteAccess { get; set; }
@@ -42,7 +39,7 @@ namespace LMS.Models
         public String SpecialReadAccess { get; set; }
 
         [DefaultValue("0")]
-        public String SpecialReadAcces { get; set; }
+        public String SpecialWriteAccess { get; set; }
         
         [DefaultValue(false)]
         [Display(Name = "Is Deleted?")]

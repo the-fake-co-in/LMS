@@ -20,7 +20,7 @@ namespace LMS.Models
 
         [Display(Name = "FineType")]
         [Required(ErrorMessage = "Please select Fine!")]
-        Byte TypeId { get; set; }
+        Byte FineTypeId { get; set; }
 
         [Display(Name = "Book")]
         [Required(ErrorMessage = "Please select Book!")]

@@ -20,7 +20,7 @@ namespace LMS.Models
 
         [Display(Name = "FineType")]
         [Required(ErrorMessage = "Please enter FineType!")]
-        public string FineType { get; set; }
+        public string Type { get; set; }
 
         [DefaultValue(false)]
         [Display(Name = "Is Deleted?")]

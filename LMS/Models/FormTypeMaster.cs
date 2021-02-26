@@ -20,7 +20,7 @@ namespace LMS.Models
 
         [Display(Name = "FormType")]
         [Required(ErrorMessage = "Please enter FormType!")]
-        public string FormType { get; set; }
+        public string Type { get; set; }
 
         [Display(Name = "Form Sort Order")]
         [Required(ErrorMessage = "Please enter Form sort order!")]
