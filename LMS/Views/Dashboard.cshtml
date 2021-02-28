@@ -1,0 +1,140 @@
+﻿@{
+   Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width" />
+   <title>Library Management System</title>
+   <link rel="preconnect" href="https://fonts.gstatic.com" />
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+   @Styles.Render("~/Content/css")
+   @Styles.Render("~/Content/themes/base/css")
+   @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+   @*---------------------------------------------*@
+   <!-- SIDEBAR BEGINS -->
+   @*---------------------------------------------*@
+   <div class="w3-sidebar w3-bar-block w3-card w3-animate-zoom" id="lms-sidebar">
+      <span class="btn btn-danger m-1" onclick="w3_close()">&#8633;</span>
+      <img id="user" src="../../Content/Images/UserImage.png" style="width: 100%" />
+      @for (int i = 0; i < LMS.Controllers.FormController.formTypes.Count(); i++)
+      {
+         LMS.Models.FormTypeMaster formType = LMS.Controllers.FormController.formTypes.ToList()[i];
+         IEnumerable<LMS.Models.FormMaster> forms = LMS.Utilities.Utility.GetForms(1, formType.Id);
+         if (forms != null && forms.Where(x => !x.IsDeleted).Count() > 0)
+         {
+            string w3cardId = "w3CardId-" + formType.Id.ToString();
+         <button class="w3-button w3-block w3-left-align" onclick="SetAccordion(this)">
+            @formType.Type<i class="fa fa-caret-down pull-right"></i>
+         </button>
+         <div id="@w3cardId" class="w3-card @(i == 0 ? "w3-show" : "w3-hide")">
+            @foreach (LMS.Models.FormMaster form in forms)
+            {
+               <a href="@form.Path" class="w3-bar-item w3-button">@form.Name</a>
+            }
+         </div>
+         }
+      }
+   </div>
+   @*---------------------------------------------*@
+   <!-- SIDEBAR ENDS -->
+   @*---------------------------------------------*@
+   <div id="main" style="margin-left: 200px">
+      <div class="w3-container">
+         @*---------------------------------------------*@
+         <!-- HEADER -->
+         @*---------------------------------------------*@
+         <div id="header-div" class="p-1 bg-navy">
+            <span class="w3-container">
+               @if (Session["UserId"] != null)
+               {
+                  <span id="openNav" class="btn btn-success pull-left" onclick="w3_open()">&#8633;</span>
+               }
+               <span id="header-title">
+                  <img id="brand-img" class="mr-3" src="../../Content/Images/Logo38-32.png" />
+                  @LMS.Utilities.Utility.PROJECT_TITLE
+               </span>
+               <span class="col-md-auto">
+                  <a id="logout" href="@Url.Action("LogOut", "Login")" type="submit" class="btn btn-danger pull-right">&#128104; Logout &#128105;</a>
+               </span></span>
+         </div>
+         @*---------------------------------------------*@
+         <!-- HEADER ENDS -->
+         @*---------------------------------------------*@
+         <div id="render-body">
+            @RenderBody()
+         </div>
+         @*---------------------------------------------*@
+         <!-- FOOTER STARTS -->
+         @*---------------------------------------------*@
+         <nav id="footer-navbar" class="navbar navbar-expand-md border-top fixed-bottom ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footer-nav-div" aria-controls="footer-nav-div" aria-expanded="false" aria-label="Toggle navigation">
+			      <span class="navbar-toggler-icon"/>
+		      </button>
+		      <div class="collapse navbar-collapse" id="footer-nav-div">
+			      <a href="#" class="nav-link ml-3">Privacy Policy</a>
+			      <a href="#" class="nav-link ml-3">Term of use</a>
+			      <a href="#" class="nav-link ml-3">© Copyright 2021. All Rights Reserved by Parul University.</a>
+		      </div>
+	      </nav>
+         @*---------------------------------------------*@
+         <!-- FOOTER ENDS -->
+         @*---------------------------------------------*@
+      </div>
+   </div>
+   @*------------------------------------------------------
+         Scripts
+      ------------------------------------------------------*@
+   <script type="text/javascript">
+      function w3_open() {
+         alert('w3_open() called')
+         document.getElementById("main").style.marginLeft = "200px";
+         document.getElementById("lms-sidebar").style.width = "200px";
+         document.getElementById("lms-sidebar").style.display = "block";
+         document.getElementById("openNav").style.display = 'none';
+      }
+      function w3_close() {
+         alert('w3_close() called')
+         document.getElementById("main").style.marginLeft = "0";
+         document.getElementById("lms-sidebar").style.display = "none";
+         document.getElementById("openNav").style.display = "inline-block";
+      }
+   </script>
+   <script type="text/javascript">
+      function SetAccordion(obj) {
+         debugger;
+         var x = $(obj).next('div').first();
+         if ($(x).hasClass("w3-show")) {
+            $(x).removeClass("w3-show").addClass("w3-hide");
+         }
+         else {
+            $('#lms-sidebar div.w3-show').removeClass("w3-show").addClass("w3-hide");
+            $(x).removeClass("w3-hide").addClass("w3-show");
+         }
+      }
+   </script>
+   <script type="text/javascript">
+      function changeAddEventBtn() {
+         if ($('body').width() <= 60) {
+            $('#header-title').css('font-size', '30px');
+         } else {
+            $('#add_event_btn').css('font-size', '13px');
+         }
+      }
+   </script>
+   @Scripts.Render("~/bundles/jquery")
+   @Scripts.Render("~/bundles/modernizr")
+   @Scripts.Render("~/bundles/jqueryval")
+   @Scripts.Render("~/bundles/bootstrap")
+   @Scripts.Render("~/bundles/custom")
+   <!-- jQuery -->
+   <!-- Bootstrap tooltips -->
+   @RenderSection("scripts", required: false)
+   @*------------------------------------------------------
+         Scripts
+      ------------------------------------------------------*@
+</body>
+</html>
