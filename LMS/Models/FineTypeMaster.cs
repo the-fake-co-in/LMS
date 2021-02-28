@@ -31,6 +31,7 @@ namespace LMS.Models
 
 
         [Display(Name = "Created On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime CreatedOn { get; set; }
 
         [Display(Name = "Modified By")]
@@ -38,6 +39,7 @@ namespace LMS.Models
 
 
         [Display(Name = "Modified On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime ModifiedOn { get; set; }
     }
 }

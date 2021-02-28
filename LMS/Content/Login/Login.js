@@ -28,33 +28,13 @@
     //        });
     //    });
 
-    $('#hide-error').click(function () {
-        HideError();
-    });
-
-    function ShowError(errMsg) {
-        debugger;
-        $("#error-span").css('display', 'block');
-        $('#error-msg').html(errMsg);
-    };
-
-    function HideError() {
-        debugger;
-        $("#error-span").css('display', 'none');
-        $("#error-span").hide();
-        $('#error-msg').html('');
-    };
-
     $('#show-modal').click(function () {
         $("#login-modal").modal('show');
-        $('#error-msg').html('');
         GoToLogin();
     });
 
     function CloseModal() {
-        HideError();
         $("#login-modal").modal('hide');
-        $('#error-msg').html('');
     }
 
     $('#close-modal').click(function () {
@@ -71,7 +51,6 @@
 
 
     $('#forgot-pwd').click(function () {
-        HideError();
         $('#div-login').hide('slow')
         $('#div-forgot-pwd').show('slow')
         $('#div-set-pwd').hide('slow')
@@ -86,15 +65,16 @@
     });
 
     function GoToLogin() {
-        HideError();
         $('#div-login').show('slow')
         $('#div-forgot-pwd').hide('slow')
         $('#div-set-pwd').hide('slow')
+        alert('GoToLogin');
     }
 
     // Validate form for Empty/invalid Fields before submit
     function validateForm() {
         var errorMsg = "";
+        alert('Validate');
 
         if ($(username).val().trim().length == 0) {
             if ($(password).val().trim().length == 0) {
@@ -112,7 +92,8 @@
     };
 
     $('#Login').click(function () {
-        HideError();
+        alert('Login');
+
         var username = $('#username').val();
         var password = $('#password').val();
         var headers = { __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() };
@@ -122,7 +103,7 @@
         errorMsg = validateForm()
         if (errorMsg == "") {
             $.ajax({
-                url: "Login/VerifyLogin",
+                url: "Home/Login",
                 method: "Get",
                 headers: headers,
                 data: { username: username, password: password },
@@ -134,29 +115,45 @@
                 success: function (data) {
                     $('#Login').val("Login");
                     debugger;
-                    if (data == "Success") {
-                        // similar behavior as an HTTP redirect
-                        window.location.replace("Login/LMSDashboard");
+                    if (data.toString().indexOf("Error:") == -1) {
+                        $("#main").css("margin-left", "200px");
+                        //similar behavior as an HTTP redirect
+                        window.location.replace("Home/Dashboard");
 
                         // similar behavior as clicking on a link
-                        //window.location.href = "Login/LMSDashBoard";
+                        //window.location.href = "Home/DashBoard";
                     }
                     else {
-                        var options = {
-                            distance: '40',
-                            direction: 'left',
-                            times: '3'
-                        }
-                        debugger;
-                        ShowError(data);
+                        $.notify(data, "error");
                     }
                 }
             });
         }
         else {
-            debugger;
-            ShowError(errorMsg);
+            $.notify(errorMsg, "error");
         }
     });
 
+//    $('#logout').click(function () {
+//        debugger;
+//        alert('Logout');
+//        $.ajax({
+//            url: "Home/Logout",
+//            method: "Get",
+//            success: function (data) {
+//                debugger;
+//                if (data == "Success") {
+//                    //similar behavior as an HTTP redirect
+//                    window.location.replace("Home/Home");
+//                    $("#main").css("margin-left", "200px");
+//                    // similar behavior as clicking on a link
+//                    //window.location.href = "Home/DashBoard";
+//                }
+//                else {
+//                    debugger;
+//                    $.notify(data, "error");
+//                }
+//            }
+//        });
+//    });
 }); 

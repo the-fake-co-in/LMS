@@ -2,13 +2,11 @@
 using System.Web.Mvc;
 using LMS.Models;
 using LMS.Utilities;
-
+   
 namespace LMS.Controllers
 {
     public class FormController : Controller
     {
-        private static LMSEntities dbEntities = Utility.dbEntities;
-
         [HttpGet]
         public ActionResult Index()
         {
@@ -22,7 +20,7 @@ namespace LMS.Controllers
             {
                 if (_formTypes == null)
                 {
-                    _formTypes = dbEntities.FormTypeMasters;
+                    _formTypes = Utility.dbEntities.FormTypeMasters;
                 }
                 return _formTypes;
             }
@@ -39,7 +37,7 @@ namespace LMS.Controllers
             {
                 if (_forms == null)
                 {
-                    forms = dbEntities.FormMasters;
+                    forms = Utility.dbEntities.FormMasters;
                 }
                 return _forms;
             }

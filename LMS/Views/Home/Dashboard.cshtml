@@ -1,0 +1,82 @@
+﻿@model LMS.Models.UserDetail
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DashBoard</title>
+</head>
+<body>
+    <fieldset>
+        <legend>UserDetail</legend>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.MiddleName)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.MiddleName)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.MobileNo)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.MobileNo)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.HomeContactNo)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.HomeContactNo)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Address1)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Address1)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.City)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.City)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.State)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.State)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Country)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Country)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Pincode)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Pincode)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.ImagePath)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ImagePath)
+        </div>
+    </fieldset>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

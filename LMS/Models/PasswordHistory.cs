@@ -32,6 +32,7 @@ namespace LMS.Models
         public String ModifyingSource { get; set; }
 
         [Display(Name = "Modified On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime ModifiedOn { get; set; }
     }
 }

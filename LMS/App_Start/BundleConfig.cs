@@ -9,9 +9,7 @@ namespace LMS
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                        "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -23,7 +21,21 @@ namespace LMS
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      "~/Scripts/bootstrap.bundle.js",
+                      "~/Scripts/respond.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+                      "~/Scripts/Scripts.js",
+                      "~/Scripts/notify.min.js",
+                      "~/Content/Login/Login.js"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/font-awesome.min.css",
+                      "~/Content/w3.css",
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css",
+                      "~/Content/Login/Login.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

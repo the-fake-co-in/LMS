@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace LMS.Models
 {
@@ -38,6 +39,7 @@ namespace LMS.Models
 
         [Display(Name = "Date of Birth")]
         [Required(ErrorMessage = "Please select Date of Birth!")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Mobile No.")]
@@ -76,9 +78,10 @@ namespace LMS.Models
 
         [Display(Name = "Addmission Date")]
         [Required(ErrorMessage = "Please select Date of Join Date!")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime DateOfJoin { get; set; }
 
-        [Display(Name = "Addmission Date")]
-        public Image Photo { get; set; }
+        [Display(Name = "Photo")]
+        public string ImagePage { get; set; }
     }
 }

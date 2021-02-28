@@ -32,6 +32,7 @@ namespace LMS.Models
         public string Publisher { get; set; }
 
         [Display(Name = "Published On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public Int32 PublishDate { get; set; }
 
         public string Edition { get; set; }
@@ -50,12 +51,14 @@ namespace LMS.Models
         public Int32 CreatedBy { get; set; }
 
         [Display(Name = "Created On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime CreatedOn { get; set; }
 
         [Display(Name = "Modified By")]
         public Int32 ModifiedBy { get; set; }
 
         [Display(Name = "Modified On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime ModifiedOn { get; set; }
     }
 }

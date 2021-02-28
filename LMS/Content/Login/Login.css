@@ -1,55 +1,4 @@
-﻿#header-navbar, #footer-navbar
-{
-    background-color: #6030A0;
-}
-
-#header-navbar .navbar-brand,
-#header-navbar .navbar-text, 
-#footer-navbar .navbar-brand,
-#footer-navbar .navbar-text { 
-    color: white;
-    margin-left: 10px;
-}
-    
-.nav-button
-{
-    type: "button";
-    data-toggle: "collapse";
-    data-target: "#NavbarMain";
-    aria-controls: "NavbarMain";
-    aria-expanded: "false";
-    aria-label: "Toggle navigation";
-}
-
-.btn:not(:disabled):not(.disabled) {
-    cursor: pointer;
-}
-
-.carousel-item
-{
-    text-align: center;
-    margin-top: 48px;
-    data-interval: 1000;
-}
-
-.carousel-item img
-{
-    width: 100%;
-}
-
-.carousel-quote
-{
-    font-style:italic;
-    font-size:large;
-}
-
-.carousel-author
-{
-    font-style:oblique;
-    font-size:large;
-}
-
-#login-modal
+﻿#login-modal
 {
     margin-top: 50px;
     role: "dialog";
@@ -69,11 +18,6 @@
     padding:5px;
     background-color:#eee;
     box-shadow: 1px 1px 10px #000;
-}
-
-.input-group-prepend span
-{
-    width:"150px";
 }
 
 .control-btn

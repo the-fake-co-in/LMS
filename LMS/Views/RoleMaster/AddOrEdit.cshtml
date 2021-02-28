@@ -1,0 +1,38 @@
+﻿@model LMS.Models.RoleMaster
+
+@{
+    ViewBag.Title = "AddOrEdit";
+    Layout = null;
+}
+
+@Styles.Render("~/Content/css")
+
+@using (Html.BeginForm("AddOrEdit", "RoleMaster", FormMethod.Post, new { onSubmit = "return jQueryAjaxPost(this);", data_restUrl = Url.Action("AddOrEdit", "RoleMaster", new { id = 0 }) }))//data-resetUrl
+{
+   <h2>@(Model.Id == 0 ? "   Add Role" : "   Edit Role")</h2>
+    @Html.AntiForgeryToken()
+   <div class="d-flex justify-content-center">
+      @Html.ValidationSummary(true)
+      @Html.HiddenFor(model => model.Id)
+
+      <div class="form-group">
+         @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+      
+         <div>
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name)
+         </div>
+      
+         <div class="form-group mt-2">
+            <button type="submit" class="btn btn-primary btn-sm">
+               <i class="fa fa-check-square"></i> submit
+            </button>
+            @if (Model.Id != 0)
+            {
+               <a class="btn btn-success btn-sm" onclick="refreshAddNewTab('@Url.Action("AddOrEdit", "RoleMaster", new { id = 0 })',false)">
+               <i class="fa fa-plus-square"></i> Add New</a>
+            }
+         </div>
+      </div>
+   </div>
+}

@@ -56,9 +56,11 @@ namespace LMS.Models
         public bool BlockReason { get; set; }
 
         [Display(Name = "Last Login Date")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         DateTime LastLoginDate { get; set; }
         
         [Display(Name = "Last LogOut Date")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         DateTime LastLogoutDate { get; set; }
 
         [DefaultValue(false)]
@@ -68,15 +70,15 @@ namespace LMS.Models
         [Display(Name = "Created By")]
         public Int32 CreatedBy { get; set; }
 
-
         [Display(Name = "Created On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime CreatedOn { get; set; }
 
         [Display(Name = "Modified By")]
         public Int32 ModifiedBy { get; set; }
 
-
         [Display(Name = "Modified On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime ModifiedOn { get; set; }
     }
 }

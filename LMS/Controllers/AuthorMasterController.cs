@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LMS.Models;
+using LMS.Utilities;
 
 namespace LMS.Controllers
 {
@@ -15,101 +16,72 @@ namespace LMS.Controllers
 
         //
         // GET: /AuthorMaster/
-
         public ActionResult Index()
-        {
-            return View(db.AuthorMasters.ToList());
-        }
-
-        //
-        // GET: /AuthorMaster/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            AuthorMaster authormaster = db.AuthorMasters.Single(a => a.Id == id);
-            if (authormaster == null)
-            {
-                return HttpNotFound();
-            }
-            return View(authormaster);
-        }
-
-        //
-        // GET: /AuthorMaster/Create
-
-        public ActionResult Create()
         {
             return View();
         }
 
         //
-        // POST: /AuthorMaster/Create
+        // GET: /AuthorMaster/
+        public ActionResult GetData()
+        {
+            List<AuthorMaster> authors = db.AuthorMasters.ToList<AuthorMaster>();
+            return Json(new { data = authors }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult InsertOrUpdate(int id = 0)
+        {
+            if (id == 0)
+            {
+                return View(new AuthorMaster());
+            }
+            else
+            {
+                return View(db.AuthorMasters.Where(x => x.Id == id).FirstOrDefault<AuthorMaster>());
+            }
+        }
 
         [HttpPost]
-        public ActionResult Create(AuthorMaster authormaster)
+        public ActionResult InsertUpdateOrDelete(AuthorMaster author)
         {
-            if (ModelState.IsValid)
+            using (LMSEntities db = new LMSEntities())
             {
-                db.AuthorMasters.AddObject(authormaster);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                author.CreatedOn = author.ModifiedOn = DateTime.Now;
+
+                if (author.Id == 0)
+                {
+                    author.CreatedBy = 1;
+                    db.AuthorMasters.AddObject(author);
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Author".ObjCreated() }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    AuthorMaster authorInDb = db.AuthorMasters.Where(x => x.Id == author.Id).FirstOrDefault<AuthorMaster>();
+                    if(authorInDb == null)
+                    {
+                        return Json(new { success = false, message = "Author".ObjNotFoundInDb() }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        //db.ObjectStateManager.ChangeObjectState(authorInDb, System.Data.EntityState.Modified);
+                        //authorInDb = author;
+                        db.Attach(author);
+                        db.ObjectStateManager.ChangeObjectState(author, System.Data.EntityState.Modified);
+                        db.SaveChanges();
+
+                        if(authorInDb.IsDeleted)
+                        {
+                            return Json(new { success = true, message = "Author".ObjDeleted() }, JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            return Json(new { success = true, message = "Author".ObjUpdated() }, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                }
             }
-
-            return View(authormaster);
-        }
-
-        //
-        // GET: /AuthorMaster/Edit/5
-
-        public ActionResult Edit(int id = 0)
-        {
-            AuthorMaster authormaster = db.AuthorMasters.Single(a => a.Id == id);
-            if (authormaster == null)
-            {
-                return HttpNotFound();
-            }
-            return View(authormaster);
-        }
-
-        //
-        // POST: /AuthorMaster/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(AuthorMaster authormaster)
-        {
-            if (ModelState.IsValid)
-            {
-                db.AuthorMasters.Attach(authormaster);
-                db.ObjectStateManager.ChangeObjectState(authormaster, System.Data.EntityState.Modified);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(authormaster);
-        }
-
-        //
-        // GET: /AuthorMaster/Delete/5
-
-        public ActionResult Delete(int id = 0)
-        {
-            AuthorMaster authormaster = db.AuthorMasters.Single(a => a.Id == id);
-            if (authormaster == null)
-            {
-                return HttpNotFound();
-            }
-            return View(authormaster);
-        }
-
-        //
-        // POST: /AuthorMaster/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            AuthorMaster authormaster = db.AuthorMasters.Single(a => a.Id == id);
-            db.AuthorMasters.DeleteObject(authormaster);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

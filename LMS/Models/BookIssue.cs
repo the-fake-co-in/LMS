@@ -30,12 +30,14 @@ namespace LMS.Models
         public Int32 IssuedBy { get; set; }
 
         [Display(Name = "Issued On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime IssuedOn { get; set; }
 
         [Display(Name = "Received By")]
         public Int32 ReceivedBy { get; set; }
 
         [Display(Name = "Received On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime ReturnedOn { get; set; }
 
         public string Remarks { get; set; }
@@ -48,12 +50,14 @@ namespace LMS.Models
         public Int32 CreatedBy { get; set; }
 
         [Display(Name = "Created On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime CreatedOn { get; set; }
 
         [Display(Name = "Modified By")]
         public Int32 ModifiedBy { get; set; }
 
         [Display(Name = "Modified On")]
+        [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime ModifiedOn { get; set; }
     }
 }
