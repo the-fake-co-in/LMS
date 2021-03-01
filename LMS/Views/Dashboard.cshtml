@@ -11,13 +11,13 @@
    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
    @Styles.Render("~/Content/css")
    @Styles.Render("~/Content/themes/base/css")
-   @Scripts.Render("~/bundles/modernizr")
+   @Styles.Render("~/Content/datatables")
 </head>
 <body>
    @*---------------------------------------------*@
    <!-- SIDEBAR BEGINS -->
    @*---------------------------------------------*@
-   <div class="w3-sidebar w3-bar-block w3-card w3-animate-zoom" id="lms-sidebar">
+   <div class="w3-sidebar w3-bar-block w3-card" id="lms-sidebar">
       <span class="btn btn-danger m-1" onclick="w3_close()">&#8633;</span>
       <img id="user" src="../../Content/Images/UserImage.png" style="width: 100%" />
       @for (int i = 0; i < LMS.Controllers.FormController.formTypes.Count(); i++)
@@ -130,6 +130,7 @@
    @Scripts.Render("~/bundles/jqueryval")
    @Scripts.Render("~/bundles/bootstrap")
    @Scripts.Render("~/bundles/custom")
+   @Scripts.Render("~/bundles/datatables")
    <!-- jQuery -->
    <!-- Bootstrap tooltips -->
    @RenderSection("scripts", required: false)

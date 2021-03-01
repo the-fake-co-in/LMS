@@ -1,13 +1,10 @@
-﻿@{
-    Layout = null;
-}
-
-@model LMS.Models.AuthorMaster
+﻿@model LMS.Models.AuthorMaster
 @{
-    ViewBag.Title = "Add Author";
+   Layout = null;
+   ViewBag.Title = "Add Author";
 }
 
-@using (Html.BeginForm("Index", "AuthorMaster", FormMethod.Get, new { onsubmit = "return SubmitForm(this)" }))
+@using (Html.BeginForm("Index", "AuthorMaster", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
     @Html.HiddenFor(model => model.Id)
 
@@ -23,5 +20,6 @@
     </div>
 }
 @section Scripts {
+   @Scripts.Render("~/bundles/jquery")
    @Scripts.Render("~/bundles/jqueryval")
 }

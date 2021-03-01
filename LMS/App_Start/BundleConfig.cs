@@ -23,11 +23,12 @@ namespace LMS
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.bundle.js",
+                      "~/Scripts/notify.min.js",
                       "~/Scripts/respond.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                       "~/Scripts/Scripts.js",
-                      "~/Scripts/notify.min.js",
                       "~/Content/Login/Login.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -50,6 +51,14 @@ namespace LMS
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            bundles.Add(new StyleBundle("~/Content/datatables").Include(
+                "~/Content/DataTables/css/jquery.dataTables.min.css",
+                "~/Content/DataTables/css/dataTables.bootstrap.min.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                "~/Content/DataTables/js/jquery.dataTables.js",
+                "~/Content/DataTables/js/dataTables.bootstrap4.js"));
         }
     }
 }

@@ -6,11 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LMS.Models;
+using LMS.Utilities;
 
 namespace LMS.Controllers
 {
     public class RoleMasterController : Controller
     {
+        private LMSEntities db = new LMSEntities();
+
         //
         // GET: /RoleMaster/
         public ActionResult Index()
@@ -18,79 +21,81 @@ namespace LMS.Controllers
             return View();
         }
 
-        public ActionResult ViewAll()
+        //
+        // GET: /RoleMaster/
+        public ActionResult GetData()
         {
-            return View(GetAllRoleMaster());
+            List<RoleMaster> Roles = db.RoleMasters.ToList<RoleMaster>();
+            return Json(new { data = Roles }, JsonRequestBehavior.AllowGet);
         }
 
-        IEnumerable<RoleMaster> GetAllRoleMaster()
+        [HttpGet]
+        public ActionResult InsertOrUpdate(int id = 0)
         {
-            using (LMSEntities dbEntities = new LMSEntities())
+            if (id == 0)
             {
-                return dbEntities.RoleMasters.ToList<RoleMaster>();
+                return View(new RoleMaster());
             }
-        }
-
-        public ActionResult AddOrEdit(int id = 0)
-        {
-            RoleMaster role = new RoleMaster();
-            if (id != 0)
+            else
             {
-                using (LMSEntities dbEntities = new LMSEntities())
-                {
-                    role = dbEntities.RoleMasters.Where(x => x.Id == id).FirstOrDefault<RoleMaster>();
-                }
+                return View(db.RoleMasters.Where(x => x.Id == id).FirstOrDefault<RoleMaster>());
             }
-            return View(role);
         }
 
         [HttpPost]
-        public ActionResult AddOrEdit(RoleMaster role)
+        public ActionResult InsertUpdateOrDelete(RoleMaster Role)
         {
-            try
+            using (LMSEntities dbEntities = new LMSEntities())
             {
-                using (LMSEntities dbEntities = new LMSEntities())
+                Role.CreatedOn = Role.ModifiedOn = DateTime.Now;
+
+                if (Role.Id == 0)
                 {
-                    role.CreatedOn = role.ModifiedOn = DateTime.Now;
-                    if (role.Id == 0)
+                    Role.CreatedBy = 1;
+                    dbEntities.RoleMasters.AddObject(Role);
+                    dbEntities.SaveChanges();
+                    return Json(new { success = true, message = "Role".ObjCreated() }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    RoleMaster RoleInDb = dbEntities.RoleMasters.Where(x => x.Id == Role.Id).FirstOrDefault<RoleMaster>();
+                    if (RoleInDb == null)
                     {
-                        role.CreatedBy = 1;
-                        dbEntities.RoleMasters.AddObject(role);
-                        dbEntities.SaveChanges();
+                        return Json(new { success = false, message = "Role".ObjNotFoundInDb() }, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
-                        role.ModifiedBy = 1;
-                        dbEntities.AttachTo("RoleMasters", role);
-                        dbEntities.ObjectStateManager.ChangeObjectState(role, System.Data.EntityState.Modified);
+                        if (Role.IsDeleted)
+                        {
+                            RoleInDb.IsDeleted = true;
+                            dbEntities.ObjectStateManager.ChangeObjectState(RoleInDb, System.Data.EntityState.Modified);
+                        }
+                        else
+                        {
+                            Role.ModifiedBy = 1;
+                            dbEntities.Detach(RoleInDb);
+                            dbEntities.AttachTo("RoleMasters", Role);
+                            dbEntities.ObjectStateManager.ChangeObjectState(Role, System.Data.EntityState.Modified);
+                        }
                         dbEntities.SaveChanges();
+
+                        if (RoleInDb.IsDeleted)
+                        {
+                            return Json(new { success = true, message = "Role".ObjDeleted() }, JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            return Json(new { success = true, message = "Role".ObjUpdated() }, JsonRequestBehavior.AllowGet);
+                        }
                     }
                 }
-                return Json(new { success = true, html = Utilities.Utility.RenderRazorViewToString(this, "ViewAll", GetAllRoleMaster()), message = "Submitted Successfully" }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-
-                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 
-        public ActionResult Delete(int id)
+        protected override void Dispose(bool disposing)
         {
-            try
-            {
-                using (LMSEntities dbEntities = new LMSEntities())
-                {
-                    RoleMaster role = dbEntities.RoleMasters.Where(x => x.Id == id).FirstOrDefault<RoleMaster>();
-                    role.IsDeleted = true;
-                    dbEntities.SaveChanges();
-                }
-                return Json(new { success = true, html = Utilities.Utility.RenderRazorViewToString(this, "ViewAll", GetAllRoleMaster()), message = "Deleted Successfully" }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
-            }
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

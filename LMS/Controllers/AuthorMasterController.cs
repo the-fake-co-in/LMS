@@ -45,31 +45,39 @@ namespace LMS.Controllers
         [HttpPost]
         public ActionResult InsertUpdateOrDelete(AuthorMaster author)
         {
-            using (LMSEntities db = new LMSEntities())
+            using (LMSEntities dbEntities = new LMSEntities())
             {
                 author.CreatedOn = author.ModifiedOn = DateTime.Now;
 
                 if (author.Id == 0)
                 {
                     author.CreatedBy = 1;
-                    db.AuthorMasters.AddObject(author);
-                    db.SaveChanges();
+                    dbEntities.AuthorMasters.AddObject(author);
+                    dbEntities.SaveChanges();
                     return Json(new { success = true, message = "Author".ObjCreated() }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    AuthorMaster authorInDb = db.AuthorMasters.Where(x => x.Id == author.Id).FirstOrDefault<AuthorMaster>();
+                    AuthorMaster authorInDb = dbEntities.AuthorMasters.Where(x => x.Id == author.Id).FirstOrDefault<AuthorMaster>();
                     if(authorInDb == null)
                     {
                         return Json(new { success = false, message = "Author".ObjNotFoundInDb() }, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
-                        //db.ObjectStateManager.ChangeObjectState(authorInDb, System.Data.EntityState.Modified);
-                        //authorInDb = author;
-                        db.Attach(author);
-                        db.ObjectStateManager.ChangeObjectState(author, System.Data.EntityState.Modified);
-                        db.SaveChanges();
+                        if (author.IsDeleted)
+                        {
+                            authorInDb.IsDeleted = true;
+                            dbEntities.ObjectStateManager.ChangeObjectState(authorInDb, System.Data.EntityState.Modified);
+                        }
+                        else
+                        {
+                            author.ModifiedBy = 1;
+                            dbEntities.Detach(authorInDb);
+                            dbEntities.AttachTo("AuthorMasters", author);
+                            dbEntities.ObjectStateManager.ChangeObjectState(author, System.Data.EntityState.Modified);
+                        }
+                        dbEntities.SaveChanges();
 
                         if(authorInDb.IsDeleted)
                         {

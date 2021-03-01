@@ -1,9 +1,6 @@
-﻿@{
-    Layout = null;
-}
-
-@model LMS.Models.AuthorMaster
+﻿@model LMS.Models.AuthorMaster
 @{
+    Layout = null;
     ViewBag.Title = "Add Author";
 }
 
@@ -23,5 +20,6 @@
     </div>
 }
 @section Scripts {
+   @Scripts.Render("~/bundles/jquery")
    @Scripts.Render("~/bundles/jqueryval")
 }
