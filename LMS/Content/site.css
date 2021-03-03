@@ -16,6 +16,15 @@ ul{
     padding:0px;
 }
 
+table.dataTable tbody td
+{
+    padding:0px !important;
+}
+
+td.table-cell-edit{
+    background-color: lightgoldenrodyellow;
+}
+
 i
 {
     padding:0px;
@@ -105,6 +114,11 @@ img
     color: White;
 }
 
+/*.ui-dialog-titlebar
+{
+    display:none;
+}*/
+
 .width100
 {
     width:100px;
@@ -112,11 +126,6 @@ img
 .width200
 {
     width:200px;
-}
-
-#PopupForm
-{
-    background-color:White;
 }
 
 .field-validation-error {

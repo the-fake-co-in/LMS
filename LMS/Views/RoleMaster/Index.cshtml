@@ -6,7 +6,7 @@
 <center><h2>Role Master</h2></center>
 <div class="p-2">
    <a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("InsertOrUpdate")/0')"><i class="fa fa-plus"></i> Add New</a>
-   <table id="UserMasterTable" class="table table-striped table-bordered" style="width:100%">
+   <table id="RoleMasterTable" class="table table-striped table-bordered" style="width:100%">
        <thead>
            <tr>
                <th>Id</th>
@@ -19,7 +19,7 @@
 </div>
 
 @section scripts{
-   <script>
+   <script type="text/javascript">
       var Popup, dataTable;
       $(document).ready(function () {
          bindDatatable();
@@ -27,7 +27,7 @@
 
       function bindDatatable()
       {
-         dataTable =  $("#UserMasterTable").DataTable({
+         dataTable =  $("#RoleMasterTable").DataTable({
             "ajax": {
                "url": "/RoleMaster/GetData",
                "type": "GET",
@@ -44,27 +44,48 @@
                   + " <a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete("+data+")><i class='fa fa-trash'></i> Delete</a>";
                },
                   "orderable": false,
-                  "searchable":false,
+                  "searchable":true,
                   "width":"150px"
                }
             ],
             "language": {
-               "emptyTable" : "No data found, Please click on <b>Add New</b> Button",  
+               "emptyTable" : "No roles found, Please click on <b>Add New</b> Button",  
                "processing" : "<i class='fa fa-spinner fa-spin fa-3x fa-fw' style='color:#2a2b2b;'></i><span class='sr-only'>Loading...</span>" 
             }
          });
       };
 
+//      function PopupForm(url) {
+//         debugger;
+//         var formDiv = $('<div style="background-color:White;"/>');
+//         $.get(url)
+//         .done(function (response) {
+//            debugger;
+//            formDiv.html(response);
+//            Popup = formDiv.dialog({
+//               autoOpen: true,
+//               resizable: false,
+//               title: 'Fill Role Details',
+//               height: 500,
+//               width: 700,
+//               close: function () {
+//                  Popup.dialog('destroy').remove();
+//               }
+//            });
+//         });
+//      }
+
       function PopupForm(url) {
-         var formDiv = $('<div id="PopupForm"/>');
+         debugger;
+         var formDiv = $();
          $.get(url)
          .done(function (response) {
+            debugger;
             formDiv.html(response);
             Popup = formDiv.dialog({
                autoOpen: true,
-               resizable: true,
-               draggable:true,
-               title: 'Fill RoleMaster Details',
+               resizable: false,
+               title: 'Fill Role Details',
                height: 500,
                width: 700,
                close: function () {
@@ -74,7 +95,8 @@
          });
       }
 
-      function SubmitForm(form) {
+        function SubmitForm(form) {
+         debugger;
          $.validator.unobtrusive.parse(form);
          if($(form).valid()){
             $.ajax({
@@ -88,16 +110,16 @@
                      dataTable.ajax.reload();
 
                      $.notify(data.message,{
-                        globalPosition :"top center",
+                        globalPosition :"top right",
                         className : "success"
                      })
                   }
                   else
                   {
                      $.notify(data.message,{
-                        globalPosition :"top center",
+                        globalPosition :"top right",
                         className : "error"
-                        })
+                     })
                   }
                }
             });
@@ -106,24 +128,42 @@
       }
 
       function Delete(id) {
-         if(confirm('Are You Sure to Delete this UserMaster Record ?'))
+         if(confirm('Are You Sure to Delete this RoleMaster Record ?'))
          {
             $.ajax({
                type: "POST",
-               url: '@Url.Action("InsertUpdateOrDelete","RoleMaster")/' + id,
+               data: { "Id": id, "IsDeleted": true },
+               url: '@Url.Action("InsertUpdateOrDelete","RoleMaster")',
                success: function (data) {
                   if (data.success)
                   {
                      dataTable.ajax.reload();
-
                      $.notify(data.message, {
-                        globalPosition: "top center",
+                        globalPosition: "top right",
                         className: "success"
+                     })
+                  }
+                  else
+                  {
+                     $.notify(data.message, {
+                        globalPosition: "top right",
+                        className: "error"
                      })
                   }
                }
             });
          }
       }
+
+      $(document).mouseup(function(e) 
+      {
+          var container = $("#popup-form");
+
+          // if the target of the click isn't the container nor a descendant of the container
+          if (!container.is(e.target) && container.has(e.target).length === 0) 
+          {
+              container.hide();
+          }
+      });
    </script>
 }

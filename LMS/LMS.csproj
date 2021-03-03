@@ -134,6 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthorMasterController.cs" />
+    <Compile Include="Controllers\BookTypeMasterController.cs" />
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -504,12 +505,12 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\AuthorMaster\Index.cshtml" />
     <Content Include="Views\AuthorMaster\InsertOrUpdate.cshtml" />
-    <Content Include="Views\AuthorMaster\InsertUpdateOrDelete.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Dashboard.cshtml" />
     <Content Include="Views\RoleMaster\Index.cshtml" />
     <Content Include="Views\RoleMaster\InsertOrUpdate.cshtml" />
-    <Content Include="Views\RoleMaster\InsertUpdateOrDelete.cshtml" />
+    <Content Include="Views\BookTypeMaster\Index.cshtml" />
+    <Content Include="Views\BookTypeMaster\InsertOrUpdate.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
