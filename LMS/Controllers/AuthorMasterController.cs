@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using LMS.Models;
 using LMS.Utilities;
@@ -12,7 +9,9 @@ namespace LMS.Controllers
 {
     public class AuthorMasterController : Controller
     {
-        private LMSEntities db = new LMSEntities();
+        private LMSEntities dbEntities = new LMSEntities();
+
+        private static List<AuthorMaster> authors = new List<AuthorMaster>();
 
         //
         // GET: /AuthorMaster/
@@ -23,10 +22,25 @@ namespace LMS.Controllers
 
         //
         // GET: /AuthorMaster/
-        public ActionResult GetData()
+        public ActionResult GetData(Utility.DisplayRecords displayRecords)
         {
-            List<AuthorMaster> authors = db.AuthorMasters.ToList<AuthorMaster>();
-            return Json(new { data = authors }, JsonRequestBehavior.AllowGet);
+            if (displayRecords == Utility.DisplayRecords.Default)
+            {
+                authors = dbEntities.AuthorMasters.ToList<AuthorMaster>();
+                return Json(new { data = authors.Where(x => !x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+            }
+            else if (displayRecords == Utility.DisplayRecords.Active)
+            {
+                return Json(new { data = authors.Where(x => !x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+            }
+            else if (displayRecords == Utility.DisplayRecords.Deleted)
+            {
+                return Json(new { data = authors.Where(x => x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+            }
+            {
+                authors = dbEntities.AuthorMasters.ToList<AuthorMaster>();
+                return Json(new { data = authors }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpGet]
@@ -38,7 +52,7 @@ namespace LMS.Controllers
             }
             else
             {
-                return View(db.AuthorMasters.Where(x => x.Id == id).FirstOrDefault<AuthorMaster>());
+                return View(dbEntities.AuthorMasters.Where(x => x.Id == id).FirstOrDefault<AuthorMaster>());
             }
         }
 
@@ -59,7 +73,7 @@ namespace LMS.Controllers
                 else
                 {
                     AuthorMaster authorInDb = dbEntities.AuthorMasters.Where(x => x.Id == author.Id).FirstOrDefault<AuthorMaster>();
-                    if(authorInDb == null)
+                    if (authorInDb == null)
                     {
                         return Json(new { success = false, message = "Author".ObjNotFoundInDb() }, JsonRequestBehavior.AllowGet);
                     }
@@ -79,7 +93,7 @@ namespace LMS.Controllers
                         }
                         dbEntities.SaveChanges();
 
-                        if(authorInDb.IsDeleted)
+                        if (authorInDb.IsDeleted)
                         {
                             return Json(new { success = true, message = "Author".ObjDeleted() }, JsonRequestBehavior.AllowGet);
                         }
@@ -94,7 +108,7 @@ namespace LMS.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            dbEntities.Dispose();
             base.Dispose(disposing);
         }
     }

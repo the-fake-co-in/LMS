@@ -135,6 +135,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthorMasterController.cs" />
     <Compile Include="Controllers\BookTypeMasterController.cs" />
+    <Compile Include="Controllers\FormTypeMasterController.cs" />
+    <Compile Include="Controllers\FineTypeMasterController.cs" />
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Models\UserMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\EncryptDecrypt.cs" />
     <Compile Include="Utilities\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -511,6 +514,11 @@
     <Content Include="Views\RoleMaster\InsertOrUpdate.cshtml" />
     <Content Include="Views\BookTypeMaster\Index.cshtml" />
     <Content Include="Views\BookTypeMaster\InsertOrUpdate.cshtml" />
+    <Content Include="Views\Shared\_FilterData.cshtml" />
+    <Content Include="Views\FineTypeMaster\Index.cshtml" />
+    <Content Include="Views\FineTypeMaster\InsertOrUpdate.cshtml" />
+    <Content Include="Views\FormTypeMaster\Index.cshtml" />
+    <Content Include="Views\FormTypeMaster\InsertOrUpdate.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -528,7 +536,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3434</DevelopmentServerPort>
+          <DevelopmentServerPort>4507</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

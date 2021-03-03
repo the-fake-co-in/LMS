@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using LMS.Models;
+using LMS.Utilities;
 
 namespace LMS.Controllers
 {
@@ -19,8 +20,7 @@ namespace LMS.Controllers
             {
                 using (LMSEntities db = new LMSEntities())
                 {
-                    var obj = db.UserMasters.Where(a => a.UserName.Trim().ToLower() == objUser.UserName.Trim().ToLower()
-                        && a.Password == objUser.Password).FirstOrDefault();
+                    var obj = db.UserMasters.Where(a => a.UserName.Trim().ToLower() == objUser.UserName.Trim().ToLower()).FirstOrDefault();
                     if (obj != null)
                     {
                         if (obj.IsBlocked)
@@ -33,6 +33,12 @@ namespace LMS.Controllers
                         {
                             ModelState.AddModelError("UserName", "Your account is no more active!");
                             objUser.LoginErrorMessage = "Your account is no more active!";
+                            return View("Index", objUser);
+                        }
+                        else if(EncryptDecrypt.Decrypt(obj.Password) != objUser.Password)
+                        {
+                            ModelState.AddModelError("UserName", "Enter valid UserName & password!");
+                            objUser.LoginErrorMessage = "Enter valid UserName & password!";
                             return View("Index", objUser);
                         }
                         else

@@ -9,6 +9,8 @@ body * {
     font-size:14px;
     font-weight:500;
     color: White;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 ul{
@@ -19,10 +21,7 @@ ul{
 table.dataTable tbody td
 {
     padding:0px !important;
-}
-
-td.table-cell-edit{
-    background-color: lightgoldenrodyellow;
+    padding-left:10px !important;
 }
 
 i

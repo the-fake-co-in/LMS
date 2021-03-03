@@ -13,7 +13,13 @@ namespace LMS.Utilities
 
         public const string MAX_DATETIME = "9999-12-31";
 
-        public static LMSEntities dbEntities = new LMSEntities();
+        public enum DisplayRecords
+        {
+            Default,
+            Active,
+            Deleted,
+            All
+        }
 
         public static string AddNewObj(this string input)
         {

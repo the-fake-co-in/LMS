@@ -7,6 +7,8 @@ namespace LMS.Controllers
 {
     public class FormController : Controller
     {
+        private static LMSEntities dbEntities = new LMSEntities();
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -20,7 +22,7 @@ namespace LMS.Controllers
             {
                 if (_formTypes == null)
                 {
-                    _formTypes = Utility.dbEntities.FormTypeMasters;
+                    _formTypes = dbEntities.FormTypeMasters;
                 }
                 return _formTypes;
             }
@@ -37,7 +39,7 @@ namespace LMS.Controllers
             {
                 if (_forms == null)
                 {
-                    forms = Utility.dbEntities.FormMasters;
+                    forms = dbEntities.FormMasters;
                 }
                 return _forms;
             }

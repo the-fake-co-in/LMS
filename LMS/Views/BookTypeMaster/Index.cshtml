@@ -6,6 +6,7 @@
 <center><h2>BookType Master</h2></center>
 <div class="p-2">
    <a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("InsertOrUpdate")/0')"><i class="fa fa-plus"></i> Add New</a>
+      @{ Html.RenderPartial("_FilterData"); }
    <table id="BookTypeMasterTable" class="table table-striped table-bordered" style="width:100%">
        <thead>
            <tr>
@@ -20,16 +21,26 @@
 
 @section scripts{
    <script type="text/javascript">
-      var Popup, dataTable;
-      $(document).ready(function () {
-         bindDatatable();
+      $('#filterRecord').find('input').change(function() {
+         bindDatatable(this.value)
       });
 
-      function bindDatatable()
+      var Popup, dataTable;
+      $(document).ready(function () {
+         bindDatatable(0);
+      });
+
+      function bindDatatable(displayRecords)
       {
+         $('#BookTypeMasterTable').dataTable({
+            "bDestroy": true
+         }).fnDestroy();
+
+         debugger;
          dataTable =  $("#BookTypeMasterTable").DataTable({
             "ajax": {
-               "url": "/BookTypeMaster/GetData",
+               "url": "/BookTypeMaster/GetData/",
+               "data": { "displayRecords" : displayRecords },
                "type": "GET",
                "datatype": "json"
             },
@@ -38,8 +49,9 @@
                { "data": "Type" },
                { "data": "IsDeleted" },
                { "data": "Id" ,
-               "render" : function (data) {
-                  return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("InsertOrUpdate")/" + data + "')>"
+               "render" : function (data, isDeleted) {
+               debugger;
+                  return "<a class='btn btn-primary btn-sm" + (data.IsDeleted ? " disabled" : "") + "' onclick=PopupForm('@Url.Action("InsertOrUpdate")/" + data + "')>"
                   + " <i class='fa fa-pencil'></i> Edit</a>"
                   + " <a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete("+data+")><i class='fa fa-trash'></i> Delete</a>";
                },
@@ -55,26 +67,6 @@
          });
       };
 
-//      function PopupForm(url) {
-//         debugger;
-//         var formDiv = $('<div style="background-color:White;"/>');
-//         $.get(url)
-//         .done(function (response) {
-//            debugger;
-//            formDiv.html(response);
-//            Popup = formDiv.dialog({
-//               autoOpen: true,
-//               resizable: false,
-//               title: 'Fill BookType Details',
-//               height: 500,
-//               width: 700,
-//               close: function () {
-//                  Popup.dialog('destroy').remove();
-//               }
-//            });
-//         });
-//      }
-
       function PopupForm(url) {
          debugger;
          $.get(url)
@@ -86,64 +78,39 @@
          });
       }
 
-//      function PopupForm(url) {
-//         debugger;
-//         var formDiv = $('<div id="popup-form" class="card border-secondary mb-3">'
-//                           + '<h5 class="card-header">BookType Master</h5>'
-//                           + '<div class="card-body text-secondary"></div>'
-//                           + '<div class="card-footer border-secondary mb-3"><button</div>'
-//                       + '</div>');
-//         $.get(url)
-//         .done(function (response) {
-//            debugger;
-//            formDiv.find('div.card-body').html(response);
-//            Popup = formDiv.dialog({
-//               autoOpen: true,
-//               resizable: false,
-//               title: 'Fill BookType Details',
-//               height: 500,
-//               width: 700,
-//               close: function () {
-//                  Popup.dialog('destroy').remove();
-//               }
-//            });
-//         });
-//      }
+      function SubmitForm(form) {
+      debugger;
+      $.validator.unobtrusive.parse(form);
+      if($(form).valid()){
+         $.ajax({
+            type : "POST",
+            url : form.action,
+            data : $(form).serialize(),
+            success : function (data) {
+               if(data.success)
+               {
+                  debugger;
+                  $.notify(data.message,{
+                     globalPosition :"top right",
+                     className : "success"
+                  })
 
-        function SubmitForm(form) {
-         debugger;
-         $.validator.unobtrusive.parse(form);
-         if($(form).valid()){
-            $.ajax({
-               type : "POST",
-               url : form.action,
-               data : $(form).serialize(),
-               success : function (data) {
-                  if(data.success)
-                  {
-                     debugger;
-                     $.notify(data.message,{
-                        globalPosition :"top right",
-                        className : "success"
-                     })
-
-                     $('.modal').modal('hide');
-//                     $('.modal').find('btn.data-dismiss').click()
-                     dataTable.ajax.reload();
-                  }
-                  else
-                  {
-                     debugger;
-                     $.notify(data.message,{
-                        globalPosition :"top right",
-                        className : "error"
-                     })
-                  }
+                  $('.modal').modal('hide');
+                  dataTable.ajax.reload();
                }
-            });
-         }
-         return false;
+               else
+               {
+                  debugger;
+                  $.notify(data.message,{
+                     globalPosition :"top right",
+                     className : "error"
+                  })
+               }
+            }
+         });
       }
+      return false;
+   }
 
       function Delete(id) {
          if(confirm('Are You Sure to Delete this BookTypeMaster Record ?'))

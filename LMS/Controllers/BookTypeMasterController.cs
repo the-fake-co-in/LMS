@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using LMS.Models;
 using LMS.Utilities;
@@ -12,7 +9,9 @@ namespace LMS.Controllers
 {
     public class BookTypeMasterController : Controller
     {
-        private LMSEntities db = new LMSEntities();
+        private LMSEntities dbEntities = new LMSEntities();
+
+        private static List<BookTypeMaster> bookTypes = new List<BookTypeMaster>();
 
         //
         // GET: /BookTypeMaster/
@@ -23,10 +22,25 @@ namespace LMS.Controllers
 
         //
         // GET: /BookTypeMaster/
-        public ActionResult GetData()
+        public ActionResult GetData(Utility.DisplayRecords displayRecords)
         {
-            List<BookTypeMaster> bookTypes = db.BookTypeMasters.ToList<BookTypeMaster>();
-            return Json(new { data = bookTypes }, JsonRequestBehavior.AllowGet);
+            if (displayRecords == Utility.DisplayRecords.Default)
+            {
+                bookTypes = dbEntities.BookTypeMasters.ToList<BookTypeMaster>();
+                return Json(new { data = bookTypes.Where(x => !x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+            }
+            else if (displayRecords == Utility.DisplayRecords.Active)
+            {
+                return Json(new { data = bookTypes.Where(x => !x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+            }
+            else if (displayRecords == Utility.DisplayRecords.Deleted)
+            {
+                return Json(new { data = bookTypes.Where(x => x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+            }
+            {
+                bookTypes = dbEntities.BookTypeMasters.ToList<BookTypeMaster>();
+                return Json(new { data = bookTypes }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpGet]
@@ -38,7 +52,7 @@ namespace LMS.Controllers
             }
             else
             {
-                return View(db.BookTypeMasters.Where(x => x.Id == id).FirstOrDefault<BookTypeMaster>());
+                return View(dbEntities.BookTypeMasters.Where(x => x.Id == id).FirstOrDefault<BookTypeMaster>());
             }
         }
 
@@ -94,7 +108,7 @@ namespace LMS.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            dbEntities.Dispose();
             base.Dispose(disposing);
         }
     }

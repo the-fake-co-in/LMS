@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using LMS.Models;
 using LMS.Utilities;
@@ -12,7 +9,9 @@ namespace LMS.Controllers
 {
     public class RoleMasterController : Controller
     {
-        private LMSEntities db = new LMSEntities();
+        private LMSEntities dbEntities = new LMSEntities();
+
+        private static List<RoleMaster> roles = new List<RoleMaster>();
 
         //
         // GET: /RoleMaster/
@@ -23,10 +22,25 @@ namespace LMS.Controllers
 
         //
         // GET: /RoleMaster/
-        public ActionResult GetData()
+        public ActionResult GetData(Utility.DisplayRecords displayRecords)
         {
-            List<RoleMaster> roles = db.RoleMasters.ToList<RoleMaster>();
-            return Json(new { data = roles }, JsonRequestBehavior.AllowGet);
+            if (displayRecords == Utility.DisplayRecords.Default)
+            {
+                roles = dbEntities.RoleMasters.ToList<RoleMaster>();
+                return Json(new { data = roles.Where(x => !x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+            }
+            else if (displayRecords == Utility.DisplayRecords.Active)
+            {
+                return Json(new { data = roles.Where(x => !x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+            }
+            else if (displayRecords == Utility.DisplayRecords.Deleted)
+            {
+                return Json(new { data = roles.Where(x => x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+            }
+            {
+                roles = dbEntities.RoleMasters.ToList<RoleMaster>();
+                return Json(new { data = roles }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpGet]
@@ -38,7 +52,7 @@ namespace LMS.Controllers
             }
             else
             {
-                return View(db.RoleMasters.Where(x => x.Id == id).FirstOrDefault<RoleMaster>());
+                return View(dbEntities.RoleMasters.Where(x => x.Id == id).FirstOrDefault<RoleMaster>());
             }
         }
 
@@ -94,7 +108,7 @@ namespace LMS.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            dbEntities.Dispose();
             base.Dispose(disposing);
         }
     }
