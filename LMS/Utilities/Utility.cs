@@ -4,6 +4,7 @@ using LMS.Models;
 using LMS.Controllers;
 using System.Web.Mvc;
 using System.IO;
+using System;
 
 namespace LMS.Utilities
 {
@@ -53,9 +54,8 @@ namespace LMS.Utilities
 
         public static string DeleteConfirm(this string input)
         {
-            return string.Format("Are you sure, you want to delete this {0}?", input);
+            return string.Format("Are you sure, you want to delete the selected {0}?", input);
         }
-
 
         public static IEnumerable<FormMaster> GetForms(int userId)
         {
@@ -71,7 +71,7 @@ namespace LMS.Utilities
         public static IEnumerable<FormMaster> GetForms(int userId, int formtypeId)
         {
             IEnumerable<FormMaster> forms = GetForms(userId);
-            return forms.Where(x => x.FormTypeId == formtypeId);
+            return forms.Where(x => x.FormTypeId == formtypeId).OrderBy(x => x.DisplayOrder);
         }
 
         public static string RenderRazorViewToString(Controller controller, string viewName, object model = null)
@@ -86,6 +86,13 @@ namespace LMS.Utilities
                 viewResult.ViewEngine.ReleaseView(controller.ControllerContext, viewResult.View);
                 return sw.GetStringBuilder().ToString();
             }
+        }
+
+        public static string GenerateOTP()
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, 5).Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

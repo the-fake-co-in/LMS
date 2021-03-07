@@ -32,6 +32,7 @@ namespace LMS.Models
         public string Publisher { get; set; }
 
         [Display(Name = "Published On")]
+        [DataType(DataType.Date)]
         [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public Int32 PublishDate { get; set; }
 
@@ -40,6 +41,7 @@ namespace LMS.Models
         public string ISBN { get; set; }
 
         [Display(Name = "Price")]
+        [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Please enter Book Price!")]
         public Int32 Price { get; set; }
 

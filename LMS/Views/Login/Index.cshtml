@@ -11,112 +11,124 @@
          <center>
             <div class="modal-content">
                @Html.ValidationSummary(true)
-               <center>
-                  <img id="user-image" src="../../Content/Images/Login.png" class="card-img-top mb-3" />
+               <center class="mb-2">
+                  <img id="user-image" src="../../Content/Images/Login.png" class="card-img-top" />
                </center>
+               <label class="error-msg">
+               @Html.DisplayFor(model => model.LoginErrorMessage)</label>
                
-               <label class="error-msg">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
-               @Html.ValidationMessageFor(x => x.LoginErrorMessage)
-
                @*--------------------------------------------
                LOGIN SECTION
                --------------------------------------------*@
                <div id="div-login">
+                  @*@Html.ValidationMessageFor(x => x.LoginErrorMessage)*@
                   @*-------------- INPUT SECTION ---------------*@
-                  <div class="input-group mb-2">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text">UserName</span>
-                     </div>
-                     @Html.TextBoxFor(model => model.UserName, new { @id = "username", @class = "form-control" })
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                     <span class="input-group-text">&#128100;</span>
+                    </div>
+                     @Html.TextBoxFor(model => model.UserName, new { @id = "username", @class = "form-control", @placeholder="UserName" })
                   </div>
-                  @Html.ValidationMessageFor(x => x.UserName)
-                  <div class="input-group mb-2">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text">Password</span>
-                     </div>
-                     @Html.PasswordFor(model => model.Password, new { @id = "password", @type = "password", @class = "form-control" })
+                  <div>
+                     @Html.ValidationMessageFor(x => x.UserName)
                   </div>
-                  @Html.ValidationMessageFor(x => x.Password)
+                  <div class="input-group mt-2">
+                     <div class="input-group-prepend">
+                        <span class="input-group-text">&#128274;</span>
+                     </div>
+                     @Html.PasswordFor(model => model.Password, new { @id = "password", @type = "password", @class = "form-control", @placeholder = "Password" })
+                  </div>
+                  <div>
+                     @Html.ValidationMessageFor(x => x.Password)
+                  </div>
                   @*--------------- CONTROL BUTTONS -----------------*@
-                  <div class="btn-group">
-                     <input id="Login" value="Login" type="Submit" class="btn btn-primary btn-sm control-btn"
-                        readonly />
-                     <input id="close-modal" type="reset" value="Close" class="btn btn-danger btn-sm control-btn"
-                        readonly />
+                  <div class="btn-group mt-3">
+                     <button id="Login" type="submit" value="Login" class="btn btn-primary btn-sm control-btn">
+                        <i class="fa fa-user"></i> Login
+                     </button>
                   </div>
-                  <div style="color: DarkGreen;">
-                     <span>
-                        <label>
-                           <input type="checkbox" value="remember-me" />
-                           Remember me
-                        </label>
-                     </span><span>
-                        <button id="forgot-pwd" type="button" class="btn btn-link">
-                           Forgot Password?</button>
-                     </span>
+                  <div class="btn-group mt-3">
+                     <button id="close-modal" type="reset" value="Close" class="btn btn-danger btn-sm control-btn">
+                        <i class="fa fa-close"></i> Close
+                     </button>
                   </div>
+                  <div class="mt-2">
+                     <button id="forgot-username" type="button" class="btn btn-link button-link px-0 mx-0">
+                        Forgot username?</button>
+                     <button id="forgot-pwd" type="button" class="btn btn-link button-link px-0 mx-0">
+                        Forgot Password?</button>
+                     </div>
                   @*-------------- CONTROL SECTION ---------------*@
                </div>
                @*--------------------------------------
                LOGIN SECTION
+               FORGOT USERNAME SECTION
+               ------------------------------------------*@
+               <div id="div-forgot-username" style="display: none">
+                  <div id="div-email" class="input-group">
+                     <div class="input-group-prepend">
+                        <div class="input-group-text">
+                           &#9993;
+                        </div>
+                     </div>
+                     @Html.TextBoxFor(model => model.Email, new { @id = "email-1", @class = "form-control", @placeholder="Email Address" })
+                  </div>
+                  @*-------------- INPUT SECTION ---------------*@ @*-------------- CONTROL SECTION ---------------*@
+                  <div class="btn-group mt-3">
+                     <button id="send-email-1" type="button" value="Send e-mail" class="btn btn-success btn-sm control-btn">
+                        &#9993; Send Email
+                     </button>
+                  </div>
+                  <div class="btn-group mt-3">
+                     <button id="close-modal-1" value="Close" class="btn btn-danger btn-sm control-btn">
+                        <i class="fa fa-close"></i> Close
+                     </button>
+                  </div>
+                  <div class="btn-group mt-3">
+                     <button id="goto-login-1" value="Go to Login" class="btn btn-primary btn-sm">
+                        &#8635; Go to Login
+                     </button>
+                  </div>
+                  @*-------------- CONTROL SECTION ---------------*@
+               </div>
+               @*---------------------------------------------
+               FORGOT USERNAME SECTION 
                FORGOT PASSWORD SECTION
                ------------------------------------------*@
                <div id="div-forgot-pwd" style="display: none">
-                  <div id="div-email" class="input-group mb-3" data-toggle="tooltip" data-placement="right"
-                     title="Please enter Email Address...">
+                  <div id="div-username" class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">&#128100;</span>
+                    </div>
+                     @Html.TextBoxFor(model => model.UserName, new { @id = "username-2", @class = "form-control", @placeholder="UserName" })
+                  </div>
+                  <div class="input-group mt-2">
                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                           E-Mail
-                        </div>
+                        <span class="input-group-text">&#9993;</span>
                      </div>
-                     @Html.TextBoxFor(model => model.Email, new { @id = "email", @class = "form-control" })
+                     @Html.TextBoxFor(model => model.Email, new { @id = "email-2", @class = "form-control", @placeholder = "Email Address" })
                   </div>
                   @*-------------- INPUT SECTION ---------------*@ @*-------------- CONTROL SECTION ---------------*@
-                  <div class="btn-group mb-3">
-                     <input id="send-email" value="Send e-mail" class="btn btn-success btn-sm" style="padding: 5px;
-                        margin-right: 10px; width: 100px;" />
-                     <input id="close-modal-2" value="Close" class="btn btn-danger btn-sm" style="padding: 5px;
-                        margin-left: 10px; width: 100px;" />
+                  <div class="btn-group mt-3">
+                     <button id="send-email-2" type="button" value="Send e-mail" class="btn btn-success btn-sm control-btn">
+                        &#9993; Send Email
+                     </button>
                   </div>
-                  <input id="goto-login" value="Go to Login" class="btn btn-primary btn-sm" />
+                  <div class="btn-group mt-3">
+                     <button id="close-modal-2" value="Close" class="btn btn-danger btn-sm control-btn">
+                        <i class="fa fa-close"></i> Close
+                     </button>
+                  </div>
+                  <div class="btn-group mt-3">
+                     <button id="goto-login-2" value="Go to Login" class="btn btn-primary btn-sm" >
+                        &#8635; Go to Login
+                     </button>
+                  </div>
                   @*-------------- CONTROL SECTION ---------------*@
                </div>
                @*---------------------------------------------
                FORGOT PASSWORD SECTION 
-               SET PASSWORD SECTION
                ----------------------------------------------*@
-               <div id="div-set-pwd" style="display: none">
-                  <div id="div-password-1" class="input-group" data-toggle="tooltip" data-placement="right"
-                     title="Please enter Password...">
-                     <div class="input-group-prepend">
-                        <div class="input-group-text">
-                           Enter Password
-                        </div>
-                     </div>
-                     @Html.TextBoxFor(model => model.Password, new { @id = "password-1", @class = "form-control", @required = "required", @type = "password" })
-                  </div>
-                  <div id="div-password-2" class="input-group" data-toggle="tooltip" data-placement="right"
-                     title="Please confirm Password...">
-                     <div class="input-group-prepend">
-                        <div class="input-group-text">
-                           Confirm Password
-                        </div>
-                     </div>
-                     @Html.PasswordFor(model => model.Password, new { @id = "password-2", @class = "form-control", @required = "required", @type = "password" })
-                  </div>
-                  @*--------------------------------------------
-                  INPUT SECTION
-                  CONTROL SECTION
-                  ---------------------------------------------*@
-                  <div class="btn-group mb-3">
-                     <input id="set-pwd" value="Set Password" class="btn btn-primary btn-sm" style="padding: 5px;
-                        margin-right: 10px; width: 100px;" />
-                     <input id="close-modal-3" value="Close" class="btn btn-danger btn-sm" style="padding: 5px;
-                        margin-left: 10px; width: 100px;" />
-                  </div>
-                  <input id="goto-login-2" value="Go To Login" class="btn btn-primary btn-sm" />
-                  @*-------------- CONTROL SECTION ---------------*@
-               </div>
             </div>
          </center>
       </div>

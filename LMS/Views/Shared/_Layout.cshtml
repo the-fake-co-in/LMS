@@ -3,6 +3,7 @@
 <head>
    <title>Library Management System</title>
    @Styles.Render("~/Content/css")
+   <link href="../../Content/Login/Login.css" rel="stylesheet" type="text/css" />
    <link rel="preconnect" href="https://fonts.gstatic.com" />
    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
 </head>
@@ -108,8 +109,8 @@
          </a>
       </div>
    </main>
-   <!-- MAIN -->
    @RenderBody()
+
    <!-- FOOTER -->
    <footer class="container-fluid">
       <nav id="footer-navbar" class="navbar navbar-expand-md navbar-dark fixed-bottom border-top border-secondary">
@@ -127,21 +128,18 @@
 		   </div>
 	   </nav>
    </footer>
-   <script>
+   @*<script>
       $(document).ready(function () {
-         alert('HideError Called')
-
          if ($('.error-msg').val() != '') {
             $("#show-modal").click()
          } else {
             $('.error-msg').hide()
          }
-
       });
-   </script>
+   </script>*@
    @Scripts.Render("~/bundles/jquery")
-   @Scripts.Render("~/bundles/modernizr")
    @Scripts.Render("~/bundles/jqueryval")
+   @Scripts.Render("~/bundles/modernizr")
    @Scripts.Render("~/bundles/bootstrap")
    @Scripts.Render("~/bundles/custom")
    <!-- jQuery -->

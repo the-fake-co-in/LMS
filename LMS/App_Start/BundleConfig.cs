@@ -22,21 +22,17 @@ namespace LMS
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.bundle.js",
+                      "~/Scripts/bootstrap.bundle.min.js",
                       "~/Scripts/notify.min.js",
                       "~/Scripts/respond.js"));
 
-
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
-                      "~/Scripts/Scripts.js",
                       "~/Content/Login/Login.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/font-awesome.min.css",
-                      "~/Content/w3.css",
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/Login/Login.css"));
+                      "~/Content/font-awesome.min.css",
+                      "~/Content/w3.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
@@ -52,13 +48,15 @@ namespace LMS
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
 
-            bundles.Add(new StyleBundle("~/Content/datatables").Include(
+            bundles.Add(new StyleBundle("~/Content/DataTables/css").Include(
                 "~/Content/DataTables/css/jquery.dataTables.min.css",
-                "~/Content/DataTables/css/dataTables.bootstrap.min.css"));
+                "~/Content/DataTables/css/dataTables.bootstrap4.min.css"
+                ));
 
-            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
-                "~/Content/DataTables/js/jquery.dataTables.js",
-                "~/Content/DataTables/js/dataTables.bootstrap4.js"));
+            bundles.Add(new ScriptBundle("~/bundles/DataTables").Include(
+                "~/Scripts/DataTables/jquery.dataTables.min.js",
+                "~/Scripts/DataTables/dataTables.bootstrap4.min.js"
+                ));
         }
     }
 }

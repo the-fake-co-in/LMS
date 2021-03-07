@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using LMS.Utilities;
 
 namespace LMS.Models
 {
@@ -13,6 +16,9 @@ namespace LMS.Models
     {
         private BookFineMasterMetadata()
         {
+            using (LMSEntities dbEntities = new LMSEntities())
+            {
+            }
         }
 
         [Key]

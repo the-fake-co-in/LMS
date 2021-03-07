@@ -1,0 +1,73 @@
+﻿@using LMS.Utilities;
+@model LMS.Models.BookFineMaster
+@{
+    Layout = null;
+    ViewBag.Title = "Add BookFine";
+}
+   <link rel="preconnect" href="https://fonts.gstatic.com" />
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+   @Styles.Render("~/Content/css")
+   @Styles.Render("~/Content/themes/base/css")
+   @Styles.Render("~/Content/datatables")
+
+@using (Html.BeginForm("InsertUpdateOrDelete", "BookFineMaster", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+   @Html.HiddenFor(model => model.Id)
+   <div class="modal-dialog modal-dialog-centered .modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title">BookFine Master</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <div class="form-group">
+               @Html.LabelFor(model => model.BookTypeId, new { @class = "control-label" })
+               @Html.DropDownListFor(model => model.BookTypeId, DropdownListHelper.DDLForBookTypeMaster(), "Select BookType", new { htmlAttributes = new { @class = "form-control" } })
+               @Html.ValidationMessageFor(model => model.BookTypeId)
+            </div>
+
+            <div class="form-group">
+               @Html.LabelFor(model => model.BookTypeId, new { @class = "control-label" })
+               @Html.DropDownListFor(model => model.FineTypeId, DropdownListHelper.DDLForFineTypeMaster(), "Select FineType", new { htmlAttributes = new { @class = "form-control" } })
+               @Html.ValidationMessageFor(model => model.BookTypeId)
+            </div>
+
+            <div class="form-group">
+               @Html.LabelFor(model => model.LateFeeBaseChargeAmount, new { @class = "control-label" })
+               @Html.EditorFor(model => model.LateFeeBaseChargeAmount, new { htmlAttributes = new { @class = "form-control" } })
+               @Html.ValidationMessageFor(model => model.LateFeeBaseChargeAmount)
+            </div>
+
+            <div class="form-group">
+               @Html.LabelFor(model => model.LateFeeBaseChargePercent, new { @class = "control-label" })
+               @Html.EditorFor(model => model.LateFeeBaseChargePercent, new { htmlAttributes = new { @class = "form-control" } })
+               @Html.ValidationMessageFor(model => model.LateFeeBaseChargePercent)
+            </div>
+
+            <div class="form-group">
+               @Html.LabelFor(model => model.LateFeeIncreaseAmount, new { @class = "control-label" })
+               @Html.EditorFor(model => model.LateFeeIncreaseAmount, new { htmlAttributes = new { @class = "form-control" } })
+               @Html.ValidationMessageFor(model => model.LateFeeIncreaseAmount)
+            </div>
+
+            <div class="form-group">
+               @Html.LabelFor(model => model.LateFeeIncreasePercentage, new { @class = "control-label" })
+               @Html.EditorFor(model => model.LateFeeIncreasePercentage, new { htmlAttributes = new { @class = "form-control" } })
+               @Html.ValidationMessageFor(model => model.LateFeeIncreasePercentage)
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+}
+
+@section Scripts {
+   @Scripts.Render("~/bundles/jquery")
+   @Scripts.Render("~/bundles/jqueryval")
+}
