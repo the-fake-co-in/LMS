@@ -1,24 +1,21 @@
-﻿@model LMS.Models.BookMaster
+﻿@model LMS.Models.BookCodeMaster
 @{
    ViewBag.Title = "Index";
 }
 
-<center><h2>Book Master</h2></center>
+<center><h2>BookCode Master</h2></center>
 <div class="p-2">
    <a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("InsertOrUpdate")/0')"><i class="fa fa-plus"></i> Add New</a>
    @{ Html.RenderPartial("_FilterData"); }
-   <table id="BookMasterTable" class="table table-striped table-bordered" style="width: 100%">
+   <table id="BookCodeMasterTable" class="table table-striped table-bordered" style="width: 100%">
       <thead>
          <tr>
-            <th>BookType</th>
-            <th>BookName</th> 
-            <th>AuthorName</th> 
-            <th>Publisher</th> 
-            <th>PublishDate</th> 
-            <th>Edition</th> 
-            <th>ISBN</th> 
-            <th>Price</th> 
-            <th>Control</th>
+            <th>BookName</th>
+			   <th>BookCode</th>
+			   <th>IsIssued</th>
+			   <th>IsLost</th>
+			   <th>IsDamaged</th>
+			   <th>Control</th>
          </tr>
       </thead>
    </table>
@@ -41,30 +38,27 @@
 
       function bindDatatable(displayRecords)
       {
-         if($('#BookMasterTable'))
+         if($('#BookCodeMasterTable'))
          {
-            $('#BookMasterTable').dataTable({
+            $('#BookCodeMasterTable').dataTable({
                "bDestroy": true
             }).fnDestroy();
          }
 
          debugger;
-         dataTable =  $("#BookMasterTable").DataTable({
+         dataTable =  $("#BookCodeMasterTable").DataTable({
             "ajax": {
-               "url": "/BookMaster/GetData/",
+               "url": "/BookCodeMaster/GetData/",
                "data": { "displayRecords" : displayRecords },
                "type": "GET",
                "datatype": "json"
             },
             "columns": [
-               { "data": "BookType" },
                { "data": "BookName" },
-               { "data": "AuthorName" },
-               { "data": "Publisher" },
-               { "data": "PublishDate" },
-               { "data": "Edition" },
-               { "data": "ISBN" },
-               { "data": "Price" },
+               { "data": "BookCode" },
+               { "data": "IsIssued" },
+               { "data": "IsLost" },
+               { "data": "IsDamaged" },
                { "data": "Id" ,
                "render" : function (data, isDeleted) {
                debugger;
@@ -74,16 +68,15 @@
                },
                   "orderable": false,
                   "searchable":true,
-                  "width":"150px"
                }
             ],
             "language": {
-               "emptyTable" : "No books found, Please click on <b>Add New</b> Button",  
+               "emptyTable" : "No bookCodes found, Please click on <b>Add New</b> Button",  
                "processing" : "<i class='fa fa-spinner fa-spin fa-3x fa-fw' style='color:#2a2b2b;'></i><span class='sr-only'>Loading...</span>" 
             }
          });
 
-         $("#BookMasterTable").css('width','100%');
+         $("#BookCodeMasterTable").css('width','100%');
       };
 
       function PopupForm(url) {
@@ -97,8 +90,7 @@
                Popup = formDiv.dialog({
                   autoOpen: true,
                   resizable: false,
-                  title: 'Book Master',
-                  width:"700px",
+                  title: 'BookCode Master',
                   close: function () {
                      closeJQryDlg();
                   }
@@ -142,12 +134,12 @@
       }
 
       function Delete(id) {
-         if(confirm('Are You Sure to Delete this BookMaster Record ?'))
+         if(confirm('Are You Sure to Delete this BookCodeMaster Record ?'))
          {
             $.ajax({
                type: "POST",
                data: { "Id": id, "IsDeleted": true },
-               url: '@Url.Action("InsertUpdateOrDelete", "BookMaster")',
+               url: '@Url.Action("InsertUpdateOrDelete", "BookCodeMaster")',
                success: function (data) {
                   if (data.success)
                   {

@@ -4,11 +4,6 @@
     Layout = null;
     ViewBag.Title = "Add BookFine";
 }
-   <link rel="preconnect" href="https://fonts.gstatic.com" />
-   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
-   @Styles.Render("~/Content/css")
-   @Styles.Render("~/Content/themes/base/css")
-   @Styles.Render("~/Content/datatables")
 
 @using (Html.BeginForm("InsertUpdateOrDelete", "BookFineMaster", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
@@ -69,5 +64,7 @@
 
 @section Scripts {
    @Scripts.Render("~/bundles/jquery")
+   @Scripts.Render("~/bundles/bootstrap")
    @Scripts.Render("~/bundles/jqueryval")
+   @Scripts.Render("~/bundles/jqueryUI")
 }

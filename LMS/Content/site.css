@@ -1,30 +1,29 @@
 /*body * {
     font-family: 'Open Sans', sans-serif;
-    /*background-color:##304363;
+    /*background-color:##405090;
 }*/
 
 body
 {
-    background-color: #304363;
+    background-color: #405090;
 }
 
 #render-body, .model-content
 {
-    margin: 5px;
+    margin: 10px;
     margin-bottom: 40px;
-    border: 2px solid #555555;
     background-color:#F2F2F2;
 }
 
 #render-body h2
 {
     color:Yellow;
-    background-color:#304363;
+    background-color:#5060B0;
 }
 
 .w3-sidebar
 {
-    background-color:#304363;
+    background-color:#405090;
     font-size:14px;
     font-weight:500;
     color: White;
@@ -58,7 +57,7 @@ img
 .close-button
 {
     height:42px;
-    background-color:#304363;
+    background-color:#405090;
     text-align:right;
 }
 
@@ -91,7 +90,7 @@ img
 #header-div, #footer-navbar
 {
     padding:0px;
-    background-color:#304363;
+    background-color:#405090;
     color:White;
 }
 
@@ -103,7 +102,7 @@ img
 
 #lms-sidebar button,img
 {
-    background-color:#304363;
+    background-color:#405090;
 }
 
 #lms-sidebar button
@@ -118,9 +117,14 @@ img
     outline: none;
     box-shadow: none;
     color:White;
-    background-color:#202D42;
+    background-color:#304070;
     border-bottom: 1px solid #000;
     padding-left:30px;
+}
+
+#w3-card a:hover {
+  background-color: #4CAF50;
+  color: white;
 }
 
 #openNav
@@ -143,6 +147,18 @@ img
 input.input-validation-error {
     border: 1px solid #e80c4d;
 }
+
+.form-group label
+{
+    color:Navy;
+}
+
+/*
+.ui-widget-overlay {
+   background: #AAA url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x;
+   opacity: .30;
+   filter: Alpha(Opacity=30);
+}*/
 
 /*-----------------------------
 .button {

@@ -365,6 +365,7 @@
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
         </EntityType>
+        <Function Name="SP_GetBookCodeMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetBookFineMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetBookMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetFormMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -395,6 +396,7 @@
           <FunctionImport Name="GetBookMaster" ReturnType="Collection(LMSModel.GetBookMaster)" />
           <EntitySet Name="GlobalSettings" EntityType="LMSModel.GlobalSetting" />
           <EntitySet Name="OTPDetails" EntityType="LMSModel.OTPDetail" />
+          <FunctionImport Name="GetBookCodeMaster" ReturnType="Collection(LMSModel.GetBookCodeMaster)" />
         </EntityContainer>
         <EntityType Name="AuthorMaster">
           <Key>
@@ -754,6 +756,20 @@
           <Property Type="String" Name="OTP" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="ExpiresOn" Nullable="false" />
         </EntityType>
+        <ComplexType Name="GetBookCodeMaster">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="BookId" Nullable="false" />
+          <Property Type="String" Name="BookName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BookCode" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="IsIssued" Nullable="false" />
+          <Property Type="Boolean" Name="IsLost" Nullable="false" />
+          <Property Type="Boolean" Name="IsDamaged" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1131,6 +1147,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetBookCodeMaster" FunctionName="LMSModel.Store.SP_GetBookCodeMaster">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LMSModel.GetBookCodeMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+                <ScalarProperty Name="IsIssued" ColumnName="IsIssued" />
+                <ScalarProperty Name="IsLost" ColumnName="IsLost" />
+                <ScalarProperty Name="IsDamaged" ColumnName="IsDamaged" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

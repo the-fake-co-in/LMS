@@ -1,24 +1,26 @@
 ﻿@model LMS.Models.FineTypeMaster
 @{
-    ViewBag.Title = "Index";
+   ViewBag.Title = "Index";
 }
-
-<center><h2>FineType Master</h2></center>
+<center>
+   <h2>
+      FineType Master</h2>
+</center>
 <div class="p-2">
-   <a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("InsertOrUpdate")/0')"><i class="fa fa-plus"></i> Add New</a>
-      @{ Html.RenderPartial("_FilterData"); }
-   <table id="FineTypeMasterTable" class="table table-striped table-bordered" style="width:100%">
-       <thead>
-           <tr>
-               <th>Id</th>
-               <th>Type</th>
-               <th>IsDeleted</th>
-               <th>Control</th>
-           </tr>
-       </thead>
+   <a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("InsertOrUpdate")/0')">
+      <i class="fa fa-plus"></i>Add New</a>
+   @{ Html.RenderPartial("_FilterData"); }
+   <table id="FineTypeMasterTable" class="table table-striped table-bordered" style="width: 100%">
+      <thead>
+         <tr>
+            <th>Id</th>
+            <th>Type</th>
+            <th>IsDeleted</th>
+            <th>Control</th>
+         </tr>
+      </thead>
    </table>
 </div>
-
 @section scripts{
    <script type="text/javascript">
       $('#filterRecord').find('input').change(function() {
@@ -30,11 +32,19 @@
          bindDatatable(0);
       });
 
+      function closeJQryDlg(){
+         debugger;
+         Popup.dialog('destroy').remove();
+      }
+
       function bindDatatable(displayRecords)
       {
-         $('#FineTypeMasterTable').dataTable({
-            "bDestroy": true
-         }).fnDestroy();
+         if($('#FineTypeMasterTable'))
+         {
+            $('#FineTypeMasterTable').dataTable({
+               "bDestroy": true
+            }).fnDestroy();
+         }
 
          debugger;
          dataTable =  $("#FineTypeMasterTable").DataTable({
@@ -57,7 +67,6 @@
                },
                   "orderable": false,
                   "searchable":true,
-                  "width":"150px"
                }
             ],
             "language": {
@@ -71,10 +80,10 @@
          debugger;
          $.get(url)
          .done(function (response) {
-            var formDiv = $('<div class="modal" data-backdrop="static"/>')
+            var formDiv = $('<div/>')
             formDiv.html(response)
             debugger;
-            formDiv.modal('show');
+            Popup = formDiv.dialog({show: "slide", modal: true, autoOpen: true});
          });
       }
 
@@ -95,8 +104,8 @@
                      className : "success"
                   })
 
-                  $('.modal').modal('hide');
                   dataTable.ajax.reload();
+                  closeJQryDlg();
                }
                else
                {
@@ -105,6 +114,7 @@
                      globalPosition :"top right",
                      className : "error"
                   })
+                  closeJQryDlg();
                }
             }
          });
@@ -118,7 +128,7 @@
             $.ajax({
                type: "POST",
                data: { "Id": id, "IsDeleted": true },
-               url: '@Url.Action("InsertUpdateOrDelete","FineTypeMaster")',
+               url: '@Url.Action("InsertUpdateOrDelete", "FineTypeMaster")',
                success: function (data) {
                   if (data.success)
                   {

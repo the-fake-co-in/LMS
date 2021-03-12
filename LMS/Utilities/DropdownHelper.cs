@@ -31,6 +31,17 @@ namespace LMS.Utilities
             }
         }
 
+        public static List<SelectListItem> DDLForBookMaster()
+        {
+            using (LMSEntities dbEntities = new LMSEntities())
+            {
+                return dbEntities.BookMasters
+                    .Where(x => !x.IsDeleted).ToList()
+                    .Select(y => new SelectListItem() { Text = y.Name, Value = y.Id.ToString() })
+                    .OrderBy(z => z.Value).ToList<SelectListItem>();
+            }
+        }
+
         public static List<SelectListItem> DDLForFineTypeMaster()
         {
             using (LMSEntities dbEntities = new LMSEntities())

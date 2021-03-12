@@ -137,6 +137,7 @@
     <Compile Include="Controllers\BookMasterController.cs" />
     <Compile Include="Controllers\BookTypeMasterController.cs" />
     <Compile Include="Controllers\BookFineMasterController.cs" />
+    <Compile Include="Controllers\BookCodeMasterController.cs" />
     <Compile Include="Controllers\FormTypeMasterController.cs" />
     <Compile Include="Controllers\FineTypeMasterController.cs" />
     <Compile Include="Controllers\FormController.cs" />
@@ -507,6 +508,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\LMSCommon.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\notify.min.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -661,6 +663,8 @@
     <Content Include="Views\BookMaster\InsertOrUpdate.cshtml" />
     <Content Include="Views\SendEmail\SendEmail.cshtml" />
     <Content Include="Views\Login\ResetPassword.cshtml" />
+    <Content Include="Views\BookCodeMaster\Index.cshtml" />
+    <Content Include="Views\BookCodeMaster\InsertOrUpdate.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
