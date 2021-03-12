@@ -1,9 +1,9 @@
 ﻿@model LMS.Models.FineTypeMaster
 @{
-    Layout = null;
-    ViewBag.Title = "Add FineType";
+   Layout = null;
+   ViewBag.Title = "Add FineType";
 }
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
 @using (Html.BeginForm("InsertUpdateOrDelete", "FineTypeMaster", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
    @Html.HiddenFor(model => model.Id)

@@ -3,7 +3,7 @@
    Layout = null;
    ViewBag.Title = "Add BookType";
 }
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
 @using (Html.BeginForm("InsertUpdateOrDelete", "BookTypeMaster", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
    @Html.HiddenFor(model => model.Id)

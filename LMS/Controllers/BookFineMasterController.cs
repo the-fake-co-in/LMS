@@ -12,7 +12,7 @@ namespace LMS.Controllers
     {
         private LMSEntities dbEntities = new LMSEntities();
 
-        private static ObjectResult<GetBookFineMaster> bookFineMasters;
+        private static List<GetBookFineMaster> bookFineMasters;
 
         //
         // GET: /BookFineMaster/
@@ -27,7 +27,7 @@ namespace LMS.Controllers
         {
             if (displayRecords == Utility.DisplayRecords.Default)
             {
-                bookFineMasters = dbEntities.GetBookFineMaster();
+                bookFineMasters = dbEntities.GetBookFineMaster().ToList();
                 return Json(new { data = bookFineMasters.Where(x => !x.IsDeleted) }, JsonRequestBehavior.AllowGet);
             }
             else if (displayRecords == Utility.DisplayRecords.Active)
@@ -39,7 +39,7 @@ namespace LMS.Controllers
                 return Json(new { data = bookFineMasters.Where(x => x.IsDeleted) }, JsonRequestBehavior.AllowGet);
             }
             {
-                bookFineMasters = dbEntities.GetBookFineMaster();
+                bookFineMasters = dbEntities.GetBookFineMaster().ToList();
                 return Json(new { data = bookFineMasters }, JsonRequestBehavior.AllowGet);
             }
         }

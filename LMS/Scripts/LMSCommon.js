@@ -13,11 +13,12 @@ function PopupForm(url, dlgTitle) {
       formDiv.find('.form-group input').attr('class', '');
       formDiv.find('.form-group input').attr('class', 'form-control');
       Popup = formDiv.dialog({
-         autoOpen: true,
-         title: dlgTitle,
-         close: function () {
-            closeJQryDlg();
-         }
+        autoOpen: true,
+        show: 'slide',
+        modal: true,
+        title: dlgTitle,
+        hide: 'slide',
+        width: '700px'
       });
    });
 }
@@ -87,6 +88,6 @@ $(document).mouseup(function (e) {
 
    // if the target of the click isn't the container nor a descendant of the container
    if (!container.is(e.target) && container.has(e.target).length === 0) {
-      container.hide();
+       closeJQryDlg();
    }
 });

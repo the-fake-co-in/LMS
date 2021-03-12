@@ -1,40 +1,48 @@
 ﻿@model LMS.Models.RoleMaster
 @{
-    ViewBag.Title = "Index";
+   ViewBag.Title = "Index";
 }
-
-<center><h2>Role Master</h2></center>
+<center>
+   <h2>Role Master</h2>
+</center>
 <div class="p-2">
-   <a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("InsertOrUpdate")/0')"><i class="fa fa-plus"></i> Add New</a>
-      @{ Html.RenderPartial("_FilterData"); }
-   <table id="RoleMasterTable" class="table table-striped table-bordered" style="width:100%">
-       <thead>
-           <tr>
-               <th>Id</th>
-               <th>Name</th>
-               <th>IsDeleted</th>
-               <th>Control</th>
-           </tr>
-       </thead>
+   <a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("InsertOrUpdate")/0', 'Role Master')">
+      <i class="fa fa-plus"></i>Add New</a>
+   @{ Html.RenderPartial("_FilterData"); }
+   <table id="RoleMasterTable" class="table table-striped table-bordered" style="width: 100%">
+      <thead>
+         <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>IsDeleted</th>
+            <th>Control</th>
+         </tr>
+      </thead>
    </table>
 </div>
 
 @section scripts{
+   <script type="text/javascript" src="../../Scripts/LMSCommon.js"></script>
    <script type="text/javascript">
-      $('#filterRecord').find('input').change(function() {
-         bindDatatable(this.value)
-      });
-
-      var Popup, dataTable;
       $(document).ready(function () {
          bindDatatable(0);
       });
 
+      $('#filterRecord').find('input').change(function() {
+         bindDatatable(this.value)
+      });
+
       function bindDatatable(displayRecords)
       {
-         $('#RoleMasterTable').dataTable({
-            "bDestroy": true
-         }).fnDestroy();
+         if($('#RoleMasterTable'))
+         {
+            $('#RoleMasterTable').dataTable({
+               "bDestroy": true
+            }).fnDestroy();
+         }
+
+         var editUrl = '@Url.Action("InsertOrUpdate")/';
+         var deleteUrl = '@Url.Action("InsertUpdateOrDelete", "RoleMaster")';
 
          debugger;
          dataTable =  $("#RoleMasterTable").DataTable({
@@ -51,13 +59,13 @@
                { "data": "Id" ,
                "render" : function (data, isDeleted) {
                debugger;
-                  return "<a class='btn btn-primary btn-sm" + (data.IsDeleted ? " disabled" : "") + "' onclick=PopupForm('@Url.Action("InsertOrUpdate")/" + data + "')>"
+                  return "<a class='btn btn-primary btn-sm" + (data.IsDeleted ? " disabled" : "") + "' onclick=PopupForm('" + editUrl + data + "','RoleMaster')>"
                   + " <i class='fa fa-pencil'></i> Edit</a>"
-                  + " <a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete("+data+")><i class='fa fa-trash'></i> Delete</a>";
+                  + " <a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ",'RoleMaster','" + deleteUrl + "')>"
+                  + " <i class='fa fa-trash'></i> Delete</a>";
                },
                   "orderable": false,
                   "searchable":true,
-                  "width":"150px"
                }
             ],
             "language": {
@@ -66,89 +74,5 @@
             }
          });
       };
-
-      function PopupForm(url) {
-         debugger;
-         $.get(url)
-         .done(function (response) {
-            var formDiv = $('<div class="modal" data-backdrop="static"/>')
-            formDiv.html(response)
-            debugger;
-            formDiv.modal('show');
-         });
-      }
-
-      function SubmitForm(form) {
-      debugger;
-      $.validator.unobtrusive.parse(form);
-      if($(form).valid()){
-         $.ajax({
-            type : "POST",
-            url : form.action,
-            data : $(form).serialize(),
-            success : function (data) {
-               if(data.success)
-               {
-                  debugger;
-                  $.notify(data.message,{
-                     globalPosition :"top right",
-                     className : "success"
-                  })
-
-                  $('.modal').modal('hide');
-                  dataTable.ajax.reload();
-               }
-               else
-               {
-                  debugger;
-                  $.notify(data.message,{
-                     globalPosition :"top right",
-                     className : "error"
-                  })
-               }
-            }
-         });
-      }
-      return false;
-   }
-
-      function Delete(id) {
-         if(confirm('Are You Sure to Delete this RoleMaster Record ?'))
-         {
-            $.ajax({
-               type: "POST",
-               data: { "Id": id, "IsDeleted": true },
-               url: '@Url.Action("InsertUpdateOrDelete","RoleMaster")',
-               success: function (data) {
-                  if (data.success)
-                  {
-                     dataTable.ajax.reload();
-                     $.notify(data.message, {
-                        globalPosition: "top right",
-                        className: "success"
-                     })
-                  }
-                  else
-                  {
-                     $.notify(data.message, {
-                        globalPosition: "top right",
-                        className: "error"
-                     })
-                  }
-               }
-            });
-         }
-      }
-
-      $(document).mouseup(function(e) 
-      {
-          var container = $("#popup-form");
-
-          // if the target of the click isn't the container nor a descendant of the container
-          if (!container.is(e.target) && container.has(e.target).length === 0) 
-          {
-              container.hide();
-          }
-      });
    </script>
 }
