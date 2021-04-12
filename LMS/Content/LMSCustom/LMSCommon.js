@@ -1,28 +1,28 @@
 ﻿var Popup, dataTable;
 
 function closeJQryDlg() {
-   Popup.dialog('close');
-   //Popup.dialog('destroy').remove();
+    Popup.dialog('close');
+    //Popup.dialog('destroy').remove();
 }
 
 function PopupForm(url, dlgTitle, width) {
    var formDiv = $('<div/>');
    $.get(url)
    .done(function (response) {
-      formDiv.html(response);
-      formDiv.find('.form-group input').attr('class', '');
-      formDiv.find('.form-group input').attr('class', 'form-control');
-      $('select').removeAttr("htmlattributes").addClass("form-control")
-      Popup = formDiv.dialog({
-        autoOpen: true,
-        show: 'slide',
-        modal: false,
-        title: dlgTitle,
-        hide: 'slide',
-        responsive: true,
-        dialogClass: "test",
-        width: width + "px"
-    });
+       formDiv.html(response);
+       formDiv.find('.form-group input').attr('class', '');
+       formDiv.find('.form-group input').attr('class', 'form-control');
+       $('select').removeAttr("htmlattributes").addClass("form-control");
+       Popup = formDiv.dialog({
+           autoOpen: true,
+           show: 'slide',
+           modal: false,
+           title: dlgTitle,
+           hide: 'slide',
+           responsive: true,
+           dialogClass: "test",
+           width: width + "px"
+       });
    });
 }
 

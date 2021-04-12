@@ -138,6 +138,7 @@
     <Compile Include="Controllers\BookTypeMasterController.cs" />
     <Compile Include="Controllers\BookFineMasterController.cs" />
     <Compile Include="Controllers\BookCodeMasterController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\FormTypeMasterController.cs" />
     <Compile Include="Controllers\FineTypeMasterController.cs" />
     <Compile Include="Controllers\FormController.cs" />
@@ -674,6 +675,7 @@
     <Content Include="Views\BookCodeMaster\Index.cshtml" />
     <Content Include="Views\BookCodeMaster\InsertOrUpdate.cshtml" />
     <Content Include="Views\User\InsertOrUpdate.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,17 +1,17 @@
 ﻿$(document).ready(function () {
+
     $(function () {
-        $('[type="datetime"]').datepicker();
-        $('[type="datetime"]')({
-            format: "dd.mm.yyyy",
-            todayBtn: "linked"
-        });
+        if ($('[type="datetime"]')) {
+            $('[type="datetime"]').datepicker();
+        }
     });
+
     window.onload = function () {
         $(".text-box").removeClass("text-box").removeClass("single-line").addClass("form-control").addClass("w-100");
 
         $('select').removeAttr("htmlattributes").addClass("form-control");
 
-//        $('[type="datetime"]').attr("type", "text");
+        //$('[type="datetime"]').attr("type", "text");
 
         $("div[readonly] input").prop("readonly", true);
 
@@ -37,7 +37,6 @@
                 }
             }
         }
-
     }
 
     var inputFile = document.createElement('input');
@@ -91,4 +90,5 @@
             }
         });
     }
+
 }); 
