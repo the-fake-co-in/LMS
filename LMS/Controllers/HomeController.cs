@@ -44,8 +44,8 @@ namespace LMS.Controllers
             {
                 UserInfo userInDb = dbEntities.UserInfoes.Where(x => x.Userid == userInfo.Userid).FirstOrDefault<UserInfo>();
                 dbEntities.Detach(userInDb);
-                dbEntities.AttachTo("UserInfoes", userInfo); 
-                dbEntities.ObjectStateManager.ChangeObjectState(userInDb, System.Data.EntityState.Modified);
+                dbEntities.AttachTo("UserInfoes", userInfo);
+                dbEntities.ObjectStateManager.ChangeObjectState(userInfo, System.Data.EntityState.Modified);
                 dbEntities.SaveChanges();
                 return View("Index");
             }

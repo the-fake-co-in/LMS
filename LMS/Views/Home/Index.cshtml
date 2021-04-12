@@ -20,38 +20,35 @@
       @Html.HiddenFor(model => model.Id)
       @Html.HiddenFor(model => model.Userid)
 
-      <div class="form-group col-md-9 my-0 py-0">
-         <div class="row">
-            <div class="form-group col-md-4">
-               @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
-               @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-               @Html.ValidationMessageFor(model => model.FirstName)
-            </div>
-            <div class="form-group col-md-4">
-               @Html.LabelFor(model => model.MiddleName, new { @class = "control-label" })
-               @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
-               @Html.ValidationMessageFor(model => model.MiddleName)
-            </div>
-            <div class="form-group col-md-4">
-               @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
-               @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-               @Html.ValidationMessageFor(model => model.LastName)
-            </div>
-            <div class="form-group col-md-12">
-               @Html.LabelFor(model => model.Address1, new { @class = "control-label" })
-               @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
-               @Html.ValidationMessageFor(model => model.Address1)
-            </div>
-            <div class="form-group col-md-12">
-               @Html.LabelFor(model => model.Address2, new { @class = "control-label" })
-               @Html.EditorFor(model => model.Address2, new { htmlAttributes = new { @class = "form-control" } })
-               @Html.ValidationMessageFor(model => model.Address2)
-            </div>
-         </div>
+      <div class="form-group col-md-3">
+         @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
+         @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.FirstName)
       </div>
-      <div class="form-group col-md-3 my-0 py-0" data-toggle="tooltip" data-placement="top" title="Change Profile Picture">
-         <img id="profilePic" class="rounded" src="../../Content/Images/UserImage.png" alt="Profile Picture"
-            style="max-width: 100%; height: auto;" />
+      <div class="form-group col-md-3">
+         @Html.LabelFor(model => model.MiddleName, new { @class = "control-label" })
+         @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.MiddleName)
+      </div>
+      <div class="form-group col-md-3">
+         @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
+         @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.LastName)
+      </div>
+      <div class="form-group col-md-3">
+         @Html.LabelFor(model => model.Gender, new { @class = "control-label" })
+         @Html.DropDownListFor(model => model.Gender, LMS.Utilities.DropdownListHelper.DDLForGender(), "Select Gender", new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.Gender)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.Address1, new { @class = "control-label" })
+         @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.Address1)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.Address2, new { @class = "control-label" })
+         @Html.EditorFor(model => model.Address2, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.Address2)
       </div>
       <div class="form-group col-md-3">
          @Html.LabelFor(model => model.City, new { @class = "control-label" })
@@ -63,15 +60,23 @@
          @Html.DropDownListFor(model => model.State, LMS.Utilities.DropdownListHelper.DDLForState(), "Select State", new { htmlAttributes = new { @class = "form-control" } })
          @Html.ValidationMessageFor(model => model.State)
       </div>
+      <div class="form-group col-md-3" disabled>
+         @Html.LabelFor(model => model.Country, new { @class = "control-label" })
+         @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.Country)
+      </div>
       <div class="form-group col-md-3">
          @Html.LabelFor(model => model.Pincode, new { @class = "control-label" })
          @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control" } })
          @Html.ValidationMessageFor(model => model.Pincode)
       </div>
-      <div class="form-group col-md-3" disabled readonly>
-         @Html.LabelFor(model => model.Country, new { @class = "control-label" })
-         @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
-         @Html.ValidationMessageFor(model => model.Country)
+      <div class="form-group col-md-3" readonly>
+         @Html.LabelFor(model => model.DateOfBirth, new { @class = "control-label", @type = "date" })
+         @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+      </div>
+      <div class="form-group col-md-3" readonly>
+         @Html.LabelFor(model => model.DateOfJoin, new { @class = "control-label", @type="date" })
+         @Html.EditorFor(model => model.DateOfJoin, new { htmlAttributes = new { @class = "form-control" } })
       </div>
       <div class="form-group col-md-3">
          @Html.LabelFor(model => model.MobileNo, new { @class = "control-label" })
@@ -91,7 +96,4 @@
             Reset</button>
       </div>
    </div>
-   @section Scripts {
-      <script src="../../Content/LMSCustom/UserProfile.js" type="text/javascript"></script>
-   }
 }

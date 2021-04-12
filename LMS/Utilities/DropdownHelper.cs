@@ -9,6 +9,14 @@ namespace LMS.Utilities
 {
     public class DropdownListHelper
     {
+        public static List<SelectListItem> DDLForGender()
+        {
+            List<SelectListItem> lstStates = new List<SelectListItem>();
+            lstStates.Add(new SelectListItem() { Value = "M", Text = "Male" });
+            lstStates.Add(new SelectListItem() { Value = "F", Text = "Female" });
+            return lstStates;
+        }
+
         public static List<SelectListItem> DDLForState()
         {
             List<SelectListItem> lstStates = new List<SelectListItem>();
