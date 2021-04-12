@@ -180,6 +180,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\LMSCustom\Site.js" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -351,12 +352,19 @@
     <Content Include="Content\Images\Logo58-48.png" />
     <Content Include="Content\Images\Logo77-64.png" />
     <Content Include="Content\Images\UserImage.png" />
+    <Content Include="Content\JQryModal\css\jquery.modal.css" />
+    <Content Include="Content\JQryModal\css\jquery.modal.theme-atlant.css" />
+    <Content Include="Content\JQryModal\css\jquery.modal.theme-xenon.css" />
+    <Content Include="Content\JQryModal\js\jquery-latest.min.js" />
+    <Content Include="Content\JQryModal\js\jquery.modal.js" />
+    <Content Include="Content\JQryModal\js\jquery.modal.min.js" />
+    <Content Include="Content\LMSCustom\UserProfile.js" />
     <Content Include="Content\Login\Login.css" />
     <Content Include="Content\Login\Login.js" />
     <Content Include="Content\pdfmake-0.1.36\pdfmake.js" />
     <Content Include="Content\pdfmake-0.1.36\pdfmake.min.js" />
     <Content Include="Content\pdfmake-0.1.36\vfs_fonts.js" />
-    <Content Include="Content\site.css" />
+    <Content Include="Content\LMSCustom\site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -508,7 +516,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
-    <Content Include="Scripts\LMSCommon.js" />
+    <Content Include="Content\LMSCustom\LMSCommon.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\notify.min.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -601,6 +609,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\ProfilePhotos\Temp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -665,6 +674,7 @@
     <Content Include="Views\Login\ResetPassword.cshtml" />
     <Content Include="Views\BookCodeMaster\Index.cshtml" />
     <Content Include="Views\BookCodeMaster\InsertOrUpdate.cshtml" />
+    <Content Include="Views\User\InsertOrUpdate.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

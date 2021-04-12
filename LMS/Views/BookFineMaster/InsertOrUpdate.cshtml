@@ -1,59 +1,56 @@
 ﻿@using LMS.Utilities;
 @model LMS.Models.BookFineMaster
 @{
-    Layout = null;
-    ViewBag.Title = "Add BookFine";
+   Layout = null;
+   ViewBag.Title = "Add BookFine";
 }
-
 @using (Html.BeginForm("InsertUpdateOrDelete", "BookFineMaster", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
    @Html.HiddenFor(model => model.Id)
-   <div class="form-group">
-      @Html.LabelFor(model => model.BookTypeId, new { @class = "control-label" })
-      @Html.DropDownListFor(model => model.BookTypeId, DropdownListHelper.DDLForBookTypeMaster(), "Select BookType", new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.BookTypeId)
+   <div class="row">
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.BookTypeId, new { @class = "control-label" })
+         @Html.DropDownListFor(model => model.BookTypeId, DropdownListHelper.DDLForBookTypeMaster(), "Select BookType", new { htmlAttributes = new { @id = "form-control" } })
+         @Html.ValidationMessageFor(model => model.BookTypeId)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.BookTypeId, new { @class = "control-label" })
+         @Html.DropDownListFor(model => model.FineTypeId, DropdownListHelper.DDLForFineTypeMaster(), "Select FineType", new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.BookTypeId)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.LateFeeBaseChargeAmount, new { @class = "control-label" })
+         @Html.EditorFor(model => model.LateFeeBaseChargeAmount, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.LateFeeBaseChargeAmount)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.LateFeeBaseChargePercent, new { @class = "control-label" })
+         @Html.EditorFor(model => model.LateFeeBaseChargePercent, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.LateFeeBaseChargePercent)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.LateFeeIncreaseAmount, new { @class = "control-label" })
+         @Html.EditorFor(model => model.LateFeeIncreaseAmount, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.LateFeeIncreaseAmount)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.LateFeeIncreasePercentage, new { @class = "control-label" })
+         @Html.EditorFor(model => model.LateFeeIncreasePercentage, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.LateFeeIncreasePercentage)
+      </div>
    </div>
 
-   <div class="form-group">
-      @Html.LabelFor(model => model.BookTypeId, new { @class = "control-label" })
-      @Html.DropDownListFor(model => model.FineTypeId, DropdownListHelper.DDLForFineTypeMaster(), "Select FineType", new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.BookTypeId)
-   </div>
-
-   <div class="form-group">
-      @Html.LabelFor(model => model.LateFeeBaseChargeAmount, new { @class = "control-label" })
-      @Html.EditorFor(model => model.LateFeeBaseChargeAmount, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.LateFeeBaseChargeAmount)
-   </div>
-
-   <div class="form-group">
-      @Html.LabelFor(model => model.LateFeeBaseChargePercent, new { @class = "control-label" })
-      @Html.EditorFor(model => model.LateFeeBaseChargePercent, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.LateFeeBaseChargePercent)
-   </div>
-
-   <div class="form-group">
-      @Html.LabelFor(model => model.LateFeeIncreaseAmount, new { @class = "control-label" })
-      @Html.EditorFor(model => model.LateFeeIncreaseAmount, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.LateFeeIncreaseAmount)
-   </div>
-
-   <div class="form-group">
-      @Html.LabelFor(model => model.LateFeeIncreasePercentage, new { @class = "control-label" })
-      @Html.EditorFor(model => model.LateFeeIncreasePercentage, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.LateFeeIncreasePercentage)
-   </div>
-   <hr />
-   <div class="form-group">
-      <button type="submit" class="btn btn-primary">Save changes</button>
-      <button type="reset" class="btn btn-secondary">Reset</button>
-      <button type="button" class="btn btn-danger" onclick="closeJQryDlg()">Close</button>
+   <hr class="mb-2 mt-0"/>
+   <div class="form-group float-right m-0">
+      <button type="submit" class="btn btn-primary">
+         Save changes</button>
+      <button type="reset" class="btn btn-secondary">
+         Reset</button>
+      <button type="button" class="btn btn-danger" onclick="closeJQryDlg()">
+         Close</button>
    </div>
 
    @section Scripts {
-      @Scripts.Render("~/bundles/jquery")
-      @Scripts.Render("~/bundles/bootstrap")
-      @Scripts.Render("~/bundles/jqueryval")
-      @Scripts.Render("~/bundles/jqueryUI")
+      @Scripts.Render("~/bundles/jqueryModal")
    }
 }

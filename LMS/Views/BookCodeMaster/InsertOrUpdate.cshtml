@@ -4,7 +4,6 @@
    Layout = null;
    ViewBag.Title = "Add BookCode";
 }
-
 @using (Html.BeginForm("InsertUpdateOrDelete", "BookCodeMaster", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
    @Html.HiddenFor(model => model.Id)
@@ -18,23 +17,22 @@
       @Html.EditorFor(model => model.BookCode, new { htmlAttributes = new { @class = "form-control" } })
       @Html.ValidationMessageFor(model => model.BookCode)
    </div>
-   <div class="form-group">
-      @Html.LabelFor(model => model.IsIssued, new { @class = "control-label" })
-      @Html.CheckBoxFor(model => model.IsIssued, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.IsIssued)
+   <div>
+      <span class="mx-3">
+         @Html.CheckBoxFor(model => model.IsIssued, new { htmlAttributes = new { @type = "checkbox" } })
+         @Html.LabelFor(model => model.IsIssued, new { @class = "control-label" })
+      </span>
+      <span class="mx-3">
+         @Html.CheckBoxFor(model => model.IsLost, new { htmlAttributes = new { @type = "checkbox" } })
+         @Html.LabelFor(model => model.IsLost, new { @class = "control-label" })
+      </span>
+      <span class="mx-3">
+         @Html.CheckBoxFor(model => model.IsDamaged, new { htmlAttributes = new { @type = "checkbox" } })
+         @Html.LabelFor(model => model.IsDamaged, new { @class = "control-label" })
+      </span>
    </div>
-   <div class="form-group">
-      @Html.LabelFor(model => model.IsLost, new { @class = "control-label" })
-      @Html.CheckBoxFor(model => model.IsLost, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.IsLost)
-   </div>
-   <div class="form-group">
-      @Html.LabelFor(model => model.IsDamaged, new { @class = "control-label" })
-      @Html.CheckBoxFor(model => model.IsDamaged, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.IsDamaged)
-   </div>
-   <hr />
-   <div class="form-group pull-right">
+   <hr class="mb-2 mt-0"/>
+   <div class="form-group float-right m-0">
       <button type="submit" class="btn btn-primary">
          Save changes</button>
       <button type="reset" class="btn btn-secondary">
@@ -42,11 +40,7 @@
       <button type="button" class="btn btn-danger" onclick="closeJQryDlg()">
          Close</button>
    </div>
-
    @section Scripts {
-      @Scripts.Render("~/bundles/jquery")
-      @Scripts.Render("~/bundles/bootstrap")
-      @Scripts.Render("~/bundles/jqueryval")
-      @Scripts.Render("~/bundles/jqueryUI")
+      @Scripts.Render("~/bundles/jqueryModal")
    }
 }

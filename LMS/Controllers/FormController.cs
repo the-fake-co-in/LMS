@@ -2,7 +2,8 @@
 using System.Web.Mvc;
 using LMS.Models;
 using LMS.Utilities;
-   
+using System.Linq;
+
 namespace LMS.Controllers
 {
     public class FormController : Controller
@@ -39,7 +40,7 @@ namespace LMS.Controllers
             {
                 if (_forms == null)
                 {
-                    forms = dbEntities.FormMasters;
+                    forms = dbEntities.FormMasters.Where(x => x.IsDeleted == false);
                 }
                 return _forms;
             }

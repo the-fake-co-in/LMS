@@ -50,7 +50,6 @@
       [UserDetail].[Country] AS [Country], 
       [UserDetail].[Pincode] AS [Pincode], 
       [UserDetail].[DateOfJoin] AS [DateOfJoin], 
-      [UserDetail].[ImagePath] AS [ImagePath], 
       [UserDetail].[Password] AS [Password], 
       [UserDetail].[BlockReason] AS [BlockReason], 
       [UserDetail].[LastLoginDate] AS [LastLoginDate], 
@@ -286,7 +285,6 @@
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
           <Property Name="Pincode" Type="varchar" MaxLength="10" />
           <Property Name="DateOfJoin" Type="date" Nullable="false" />
-          <Property Name="ImagePath" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="UserMaster">
           <Key>
@@ -336,7 +334,7 @@
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="RoleId" Type="tinyint" Nullable="false" />
           <Property Name="FailAttempt" Type="tinyint" Nullable="false" />
           <Property Name="IsBlocked" Type="bit" Nullable="false" />
@@ -355,8 +353,7 @@
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
           <Property Name="Pincode" Type="varchar" MaxLength="10" />
           <Property Name="DateOfJoin" Type="date" Nullable="false" />
-          <Property Name="ImagePath" Type="varchar" MaxLength="100" />
-          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="130" />
           <Property Name="BlockReason" Type="varchar" MaxLength="200" />
           <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
           <Property Name="LastLogoutDate" Type="datetime" Nullable="false" />
@@ -387,9 +384,7 @@
           <EntitySet Name="FormTypeMasters" EntityType="LMSModel.FormTypeMaster" />
           <EntitySet Name="PasswordHistories" EntityType="LMSModel.PasswordHistory" />
           <EntitySet Name="RoleMasters" EntityType="LMSModel.RoleMaster" />
-          <EntitySet Name="UserInfoes" EntityType="LMSModel.UserInfo" />
           <EntitySet Name="UserMasters" EntityType="LMSModel.UserMaster" />
-          <EntitySet Name="UserDetails" EntityType="LMSModel.UserDetail" />
           <FunctionImport Name="GetBookFineMaster" ReturnType="Collection(LMSModel.GetBookFineMaster)" />
           <FunctionImport Name="GetFormMaster" ReturnType="Collection(LMSModel.GetFormMaster)" />
           <FunctionImport Name="GetPasswordHistory" ReturnType="Collection(LMSModel.GetPasswordHistory)" />
@@ -397,6 +392,8 @@
           <EntitySet Name="GlobalSettings" EntityType="LMSModel.GlobalSetting" />
           <EntitySet Name="OTPDetails" EntityType="LMSModel.OTPDetail" />
           <FunctionImport Name="GetBookCodeMaster" ReturnType="Collection(LMSModel.GetBookCodeMaster)" />
+          <EntitySet Name="UserInfoes" EntityType="LMSModel.UserInfo" />
+          <EntitySet Name="UserDetails" EntityType="LMSModel.UserDetail" />
         </EntityContainer>
         <EntityType Name="AuthorMaster">
           <Key>
@@ -582,28 +579,6 @@
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedOn" Type="DateTime" Nullable="false" />
         </EntityType>
-        <EntityType Name="UserInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Userid" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" />
-          <Property Name="MobileNo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="HomeContactNo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Address1" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Address2" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="State" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Country" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Pincode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="DateOfJoin" Type="DateTime" Nullable="false" />
-          <Property Name="ImagePath" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-        </EntityType>
         <EntityType Name="UserMaster">
           <Key>
             <PropertyRef Name="UserId" />
@@ -619,60 +594,6 @@
           <Property Name="LastLoginDate" Type="DateTime" Nullable="false" />
           <Property Name="LastLogoutDate" Type="DateTime" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserDetail">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="UserName" />
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="RoleId" />
-            <PropertyRef Name="FailAttempt" />
-            <PropertyRef Name="IsBlocked" />
-            <PropertyRef Name="IsDeleted" />
-            <PropertyRef Name="FirstName" />
-            <PropertyRef Name="LastName" />
-            <PropertyRef Name="Gender" />
-            <PropertyRef Name="DateOfBirth" />
-            <PropertyRef Name="Address2" />
-            <PropertyRef Name="DateOfJoin" />
-            <PropertyRef Name="Password" />
-            <PropertyRef Name="LastLoginDate" />
-            <PropertyRef Name="LastLogoutDate" />
-            <PropertyRef Name="CreatedBy" />
-            <PropertyRef Name="CreatedOn" />
-            <PropertyRef Name="ModifiedBy" />
-            <PropertyRef Name="ModifiedOn" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="RoleId" Type="Byte" Nullable="false" />
-          <Property Name="FailAttempt" Type="Byte" Nullable="false" />
-          <Property Name="IsBlocked" Type="Boolean" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" />
-          <Property Name="MobileNo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="HomeContactNo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Address1" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Address2" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="State" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Country" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Pincode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="DateOfJoin" Type="DateTime" Nullable="false" />
-          <Property Name="ImagePath" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="BlockReason" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" />
-          <Property Name="LastLogoutDate" Type="DateTime" Nullable="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
@@ -770,6 +691,80 @@
           <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
           <Property Type="DateTime" Name="ModifiedOn" Nullable="false" Precision="23" />
         </ComplexType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Userid" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MiddleName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="MobileNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="HomeContactNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address1" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address2" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="State" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Country" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Pincode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DateOfJoin" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="FailAttempt" />
+            <PropertyRef Name="IsBlocked" />
+            <PropertyRef Name="IsDeleted" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="DateOfBirth" />
+            <PropertyRef Name="Address2" />
+            <PropertyRef Name="DateOfJoin" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="LastLoginDate" />
+            <PropertyRef Name="LastLogoutDate" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="CreatedOn" />
+            <PropertyRef Name="ModifiedBy" />
+            <PropertyRef Name="ModifiedOn" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Byte" Name="RoleId" Nullable="false" />
+          <Property Type="Byte" Name="FailAttempt" Nullable="false" />
+          <Property Type="Boolean" Name="IsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MiddleName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="MobileNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="HomeContactNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address1" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address2" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="State" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Country" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Pincode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DateOfJoin" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="130" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BlockReason" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="LastLoginDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastLogoutDate" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -972,29 +967,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserInfoes">
-            <EntityTypeMapping TypeName="LMSModel.UserInfo">
-              <MappingFragment StoreEntitySet="UserInfo">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Userid" ColumnName="Userid" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-                <ScalarProperty Name="HomeContactNo" ColumnName="HomeContactNo" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-                <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserMasters">
             <EntityTypeMapping TypeName="LMSModel.UserMaster">
               <MappingFragment StoreEntitySet="UserMaster">
@@ -1009,42 +981,6 @@
                 <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
                 <ScalarProperty Name="LastLogoutDate" ColumnName="LastLogoutDate" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="LMSModel.UserDetail">
-              <MappingFragment StoreEntitySet="UserDetail">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="FailAttempt" ColumnName="FailAttempt" />
-                <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-                <ScalarProperty Name="HomeContactNo" ColumnName="HomeContactNo" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-                <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="BlockReason" ColumnName="BlockReason" />
-                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
-                <ScalarProperty Name="LastLogoutDate" ColumnName="LastLogoutDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -1165,6 +1101,63 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="LMSModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="HomeContactNo" ColumnName="HomeContactNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="LMSModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetail">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastLogoutDate" ColumnName="LastLogoutDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="BlockReason" ColumnName="BlockReason" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="HomeContactNo" ColumnName="HomeContactNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
+                <ScalarProperty Name="FailAttempt" ColumnName="FailAttempt" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1198,11 +1191,11 @@
         <EntityTypeShape EntityType="LMSModel.FormTypeMaster" Width="1.5" PointX="0.75" PointY="8.75" Height="2.2496956380208317" IsExpanded="true" />
         <EntityTypeShape EntityType="LMSModel.PasswordHistory" Width="1.5" PointX="2.75" PointY="8.75" Height="1.9210009765625031" IsExpanded="true" />
         <EntityTypeShape EntityType="LMSModel.RoleMaster" Width="1.5" PointX="8.75" PointY="4.75" Height="2.0853483072916674" IsExpanded="true" />
-        <EntityTypeShape EntityType="LMSModel.UserInfo" Width="1.5" PointX="4.75" PointY="8.75" Height="3.7288216145833388" IsExpanded="true" />
         <EntityTypeShape EntityType="LMSModel.UserMaster" Width="1.5" PointX="6.75" PointY="8.75" Height="3.4001269531250031" IsExpanded="true" />
-        <EntityTypeShape EntityType="LMSModel.UserDetail" Width="1.5" PointX="8.75" PointY="7.75" Height="5.8653369140625031" IsExpanded="true" />
         <EntityTypeShape EntityType="LMSModel.GlobalSetting" Width="1.5" PointX="11.75" PointY="0.75" Height="1.2636116536458388" />
         <EntityTypeShape EntityType="LMSModel.OTPDetail" Width="1.5" PointX="0.75" PointY="11.75" Height="1.5923063151041674" />
+        <EntityTypeShape EntityType="LMSModel.UserInfo" Width="1.5" PointX="9.375" PointY="7.75" Height="3.5644742838541674" />
+        <EntityTypeShape EntityType="LMSModel.UserDetail" Width="1.5" PointX="11.375" PointY="3.75" Height="5.7009895833333317" />
       </Diagram>
     </Diagrams>
   </Designer>

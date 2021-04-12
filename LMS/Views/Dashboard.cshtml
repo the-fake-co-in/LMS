@@ -4,17 +4,40 @@
    <title>Library Management System</title>
    @Styles.Render("~/Content/css")
    @Styles.Render("~/Content/DataTables/css")
-   <link href="../Content/site.css" rel="stylesheet" type="text/css" />
+   <link href="../Content/LMSCustom/site.css" rel="stylesheet" type="text/css" />
    <link rel="preconnect" href="https://fonts.gstatic.com" />
    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
 </head>
 <body>
    @*---------------------------------------------*@
+   <!-- HEADER -->
+   @*---------------------------------------------*@
+   <div id="header-div" class="p-1 bg-navy">
+	   <span class="w3-container">@if (Session["UserId"] != null) {
+		   <span id="openNav" class="btn btn-danger pull-left" onclick="w3_toggle()">&#8633;</span>
+		   }
+		   <span id="header-title">
+			   <img id="brand-img" class="mr-3" src="../../Content/Images/Logo38-32.png"/>
+			   @LMS.Utilities.Utility.PROJECT_TITLE
+		   </span>
+		   <span class="col-md-auto">
+			   <span class="dropdown">
+				   <button class="btn btn-primary dropdown-toggle pull-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&#128104; &#128105;</button>
+				   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					   <a id="updateProfile" class="dropdown-item" href="@Url.Action(" InsertOrUpdate", " User")" type="submit">&#128104; Update Profile &#128105;</a>
+					   <a id="logout" class="dropdown-item" href="@Url.Action(" LogOut", " Login")" type="submit">&#9940; Logout</a>
+				   </div>
+			   </span>
+		   </span>
+	   </span>
+   </div>
+   @*---------------------------------------------*@
+   <!-- HEADER ENDS -->
+   @*---------------------------------------------*@ @*---------------------------------------------*@
    <!-- SIDEBAR BEGINS -->
    @*---------------------------------------------*@
    <div class="w3-sidebar w3-bar-block w3-card" id="lms-sidebar">
-      <span class="btn btn-danger m-1" onclick="w3_close()">&#8633;</span>
-      <img id="user" src="../../Content/Images/UserImage.png" style="width: 100%" />
+      <img id="profilePic-1" />
       @for (int i = 0; i < LMS.Controllers.FormController.formTypes.Count(); i++)
       {
          LMS.Models.FormTypeMaster formType = LMS.Controllers.FormController.formTypes.ToList()[i];
@@ -39,27 +62,7 @@
    @*---------------------------------------------*@
    <div id="main" style="margin-left: 200px">
       <div class="w3-container">
-         @*---------------------------------------------*@
-         <!-- HEADER -->
-         @*---------------------------------------------*@
-         <div id="header-div" class="p-1 bg-navy">
-            <span class="w3-container">
-               @if (Session["UserId"] != null)
-               {
-                  <span id="openNav" class="btn btn-success pull-left" style="display:none" onclick="w3_open()">&#8633;</span>
-               }
-               <span id="header-title">
-                  <img id="brand-img" class="mr-3" src="../../Content/Images/Logo38-32.png" />
-                  @LMS.Utilities.Utility.PROJECT_TITLE
-               </span>
-               <span class="col-md-auto">
-                  <a id="logout" href="@Url.Action("LogOut", "Login")" type="submit" class="btn btn-danger pull-right">&#128104; Logout &#128105;</a>
-               </span></span>
-         </div>
-         @*---------------------------------------------*@
-         <!-- HEADER ENDS -->
-         @*---------------------------------------------*@
-         <div id="render-body" style="margin:5px">
+         <div id="render-body" style="margin: 5px">
             @RenderBody()
          </div>
          @*---------------------------------------------*@
@@ -69,7 +72,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footer-nav-div" aria-controls="footer-nav-div" aria-expanded="false" aria-label="Toggle navigation">
 			      <span class="navbar-toggler-icon"/>
 		      </button>
-		      <div class="collapse navbar-collapse" id="footer-nav-div">
+		      <div class="collapse navbar-collapse d-flex justify-content-center" id="footer-nav-div">
 			      <a href="#" class="nav-link ml-3">Privacy Policy</a>
 			      <a href="#" class="nav-link ml-3">Term of use</a>
 			      <a href="#" class="nav-link ml-3">© Copyright 2021. All Rights Reserved by Parul University.</a>
@@ -84,21 +87,23 @@
          Scripts
       ------------------------------------------------------*@
    <script type="text/javascript">
-      function w3_open() {
-         document.getElementById("main").style.marginLeft = "200px";
-         document.getElementById("lms-sidebar").style.width = "200px";
-         document.getElementById("lms-sidebar").style.display = "block";
-         document.getElementById("openNav").style.display = 'none';
-      }
-      function w3_close() {
-         document.getElementById("main").style.marginLeft = "0";
-         document.getElementById("lms-sidebar").style.display = "none";
-         document.getElementById("openNav").style.display = "inline-block";
+      function w3_toggle() {
+         if (document.getElementById("main").style.marginLeft == "0px") {
+            document.getElementById("main").style.marginLeft = "200px";
+            document.getElementById("lms-sidebar").style.width = "200px";
+            document.getElementById("openNav").classList.remove('btn-success');
+            document.getElementById("openNav").classList.add('btn-danger');
+         }
+         else {
+            document.getElementById("main").style.marginLeft = "0px";
+            document.getElementById("lms-sidebar").style.width = "0";
+            document.getElementById("openNav").classList.add('btn-success');
+            document.getElementById("openNav").classList.remove('btn-danger');
+         }
       }
    </script>
    <script type="text/javascript">
       function SetAccordion(obj) {
-         debugger;
          var x = $(obj).next('div').first();
          if ($(x).hasClass("w3-show")) {
             $(x).removeClass("w3-show").addClass("w3-hide");
@@ -122,7 +127,6 @@
    @Scripts.Render("~/bundles/bootstrap")
    @Scripts.Render("~/bundles/jqueryval")
    @Scripts.Render("~/bundles/jqueryUI")
-   @Scripts.Render("~/bundles/DataTables")
    @Scripts.Render("~/bundles/custom")
    <!-- jQuery -->
    <!-- Bootstrap tooltips -->

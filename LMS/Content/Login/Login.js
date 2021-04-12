@@ -53,7 +53,6 @@
     });
 
     $('#send-email-1').click(function () {
-        debugger;
         var email = $('#email-1').val();
         if (!email.trim() || email.length == 0) {
             ShowError('Please enter Email!');
@@ -64,7 +63,6 @@
                 data: { 'email': email },
                 url: '/Login/ForgotUserName',
                 success: function (response) {
-                    debugger;
                     if (response == '') {
                         HideError();
                         $.notify('Please check Email to get your UserName!', "success");
@@ -79,7 +77,6 @@
     });
 
     $('#send-email-2').click(function () {
-        debugger;
         var username = $('#username-2').val();
         var email = $('#email-2').val();
         if ((!username.trim() || username.length == 0) && (!email.trim() || email.length == 0)) {
@@ -97,7 +94,6 @@
                 data: { 'userName': username, 'email': email },
                 url: '/Login/ForgotPassword',
                 success: function (response) {
-                    debugger;
                     if (response == '') {
                         HideError();
                         $.notify('Please check Email to reset your Password!', "success");

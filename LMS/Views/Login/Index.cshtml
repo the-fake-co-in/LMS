@@ -27,7 +27,7 @@
                     <div class="input-group-prepend">
                      <span class="input-group-text">&#128100;</span>
                     </div>
-                     @Html.TextBoxFor(model => model.UserName, new { @id = "username", @class = "form-control", @placeholder="UserName" })
+                     @Html.TextBoxFor(model => model.UserName, new { @id = "username", @class = "form-control", @placeholder="UserName", @text="Admin" })
                   </div>
                   <div>
                      @Html.ValidationMessageFor(x => x.UserName)
@@ -36,7 +36,7 @@
                      <div class="input-group-prepend">
                         <span class="input-group-text">&#128274;</span>
                      </div>
-                     @Html.PasswordFor(model => model.Password, new { @id = "password", @type = "password", @class = "form-control", @placeholder = "Password" })
+                     @Html.PasswordFor(model => model.Password, new { @id = "password", @type = "password", @class = "form-control", @placeholder = "Password", @value="admin" })
                   </div>
                   <div>
                      @Html.ValidationMessageFor(x => x.Password)

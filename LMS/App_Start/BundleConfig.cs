@@ -23,7 +23,12 @@ namespace LMS
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                       "~/Scripts/notify.min.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Content/LMSCustom/Site.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryModal").Include(
+                "~/Content/JQryModal/js/jquery-latest.min.js",
+                "~/Content/JQryModal/js/jquery.modal.min.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -35,6 +40,11 @@ namespace LMS
                       "~/Content/themes/base/jquery-ui.min.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/w3.css"));
+
+            bundles.Add(new StyleBundle("~/Content/jqueryModal").Include(
+                      "~/Content//JQryModal/css/jquery.modal.css",
+                      "~/Content//JQryModal/css/jquery.modal.theme-atlant.css",
+                      "~/Content//JQryModal/css/jquery.modal.theme-xenon.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

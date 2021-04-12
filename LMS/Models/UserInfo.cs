@@ -72,7 +72,6 @@ namespace LMS.Models
         public string Country { get; set; }
 
         [Display(Name = "PinCode")]
-        [Range(4, 6)]
         [Required(ErrorMessage = "Please Enter PinCode!")]
         public string Pincode { get; set; }
 
@@ -80,8 +79,5 @@ namespace LMS.Models
         [Required(ErrorMessage = "Please select Date of Join Date!")]
         [DefaultValue(Utilities.Utility.MAX_DATETIME)]
         public DateTime DateOfJoin { get; set; }
-
-        [Display(Name = "Photo")]
-        public string ImagePage { get; set; }
     }
 }

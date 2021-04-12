@@ -260,22 +260,6 @@ namespace LMS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<UserInfo> UserInfoes
-        {
-            get
-            {
-                if ((_UserInfoes == null))
-                {
-                    _UserInfoes = base.CreateObjectSet<UserInfo>("UserInfoes");
-                }
-                return _UserInfoes;
-            }
-        }
-        private ObjectSet<UserInfo> _UserInfoes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<UserMaster> UserMasters
         {
             get
@@ -288,22 +272,6 @@ namespace LMS.Models
             }
         }
         private ObjectSet<UserMaster> _UserMasters;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<UserDetail> UserDetails
-        {
-            get
-            {
-                if ((_UserDetails == null))
-                {
-                    _UserDetails = base.CreateObjectSet<UserDetail>("UserDetails");
-                }
-                return _UserDetails;
-            }
-        }
-        private ObjectSet<UserDetail> _UserDetails;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -336,6 +304,38 @@ namespace LMS.Models
             }
         }
         private ObjectSet<OTPDetail> _OTPDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UserInfo> UserInfoes
+        {
+            get
+            {
+                if ((_UserInfoes == null))
+                {
+                    _UserInfoes = base.CreateObjectSet<UserInfo>("UserInfoes");
+                }
+                return _UserInfoes;
+            }
+        }
+        private ObjectSet<UserInfo> _UserInfoes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UserDetail> UserDetails
+        {
+            get
+            {
+                if ((_UserDetails == null))
+                {
+                    _UserDetails = base.CreateObjectSet<UserDetail>("UserDetails");
+                }
+                return _UserDetails;
+            }
+        }
+        private ObjectSet<UserDetail> _UserDetails;
 
         #endregion
 
@@ -438,27 +438,11 @@ namespace LMS.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the UserInfoes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUserInfoes(UserInfo userInfo)
-        {
-            base.AddObject("UserInfoes", userInfo);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the UserMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToUserMasters(UserMaster userMaster)
         {
             base.AddObject("UserMasters", userMaster);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the UserDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUserDetails(UserDetail userDetail)
-        {
-            base.AddObject("UserDetails", userDetail);
         }
     
         /// <summary>
@@ -475,6 +459,22 @@ namespace LMS.Models
         public void AddToOTPDetails(OTPDetail oTPDetail)
         {
             base.AddObject("OTPDetails", oTPDetail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UserInfoes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUserInfoes(UserInfo userInfo)
+        {
+            base.AddObject("UserInfoes", userInfo);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UserDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUserDetails(UserDetail userDetail)
+        {
+            base.AddObject("UserDetails", userDetail);
         }
 
         #endregion
@@ -4929,30 +4929,6 @@ namespace LMS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ImagePath
-        {
-            get
-            {
-                return _ImagePath;
-            }
-            set
-            {
-                OnImagePathChanging(value);
-                ReportPropertyChanging("ImagePath");
-                _ImagePath = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ImagePath");
-                OnImagePathChanged();
-            }
-        }
-        private global::System.String _ImagePath;
-        partial void OnImagePathChanging(global::System.String value);
-        partial void OnImagePathChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Password
@@ -5593,30 +5569,6 @@ namespace LMS.Models
         private global::System.DateTime _DateOfJoin;
         partial void OnDateOfJoinChanging(global::System.DateTime value);
         partial void OnDateOfJoinChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ImagePath
-        {
-            get
-            {
-                return _ImagePath;
-            }
-            set
-            {
-                OnImagePathChanging(value);
-                ReportPropertyChanging("ImagePath");
-                _ImagePath = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ImagePath");
-                OnImagePathChanged();
-            }
-        }
-        private global::System.String _ImagePath;
-        partial void OnImagePathChanging(global::System.String value);
-        partial void OnImagePathChanged();
 
         #endregion
 
