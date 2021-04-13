@@ -132,38 +132,6 @@ namespace LMS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<FinePayment> FinePayments
-        {
-            get
-            {
-                if ((_FinePayments == null))
-                {
-                    _FinePayments = base.CreateObjectSet<FinePayment>("FinePayments");
-                }
-                return _FinePayments;
-            }
-        }
-        private ObjectSet<FinePayment> _FinePayments;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<FineTypeMaster> FineTypeMasters
-        {
-            get
-            {
-                if ((_FineTypeMasters == null))
-                {
-                    _FineTypeMasters = base.CreateObjectSet<FineTypeMaster>("FineTypeMasters");
-                }
-                return _FineTypeMasters;
-            }
-        }
-        private ObjectSet<FineTypeMaster> _FineTypeMasters;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<FormMaster> FormMasters
         {
             get
@@ -176,22 +144,6 @@ namespace LMS.Models
             }
         }
         private ObjectSet<FormMaster> _FormMasters;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<FormTypeMaster> FormTypeMasters
-        {
-            get
-            {
-                if ((_FormTypeMasters == null))
-                {
-                    _FormTypeMasters = base.CreateObjectSet<FormTypeMaster>("FormTypeMasters");
-                }
-                return _FormTypeMasters;
-            }
-        }
-        private ObjectSet<FormTypeMaster> _FormTypeMasters;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -308,6 +260,22 @@ namespace LMS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<BookTypeMaster> BookTypeMasters
+        {
+            get
+            {
+                if ((_BookTypeMasters == null))
+                {
+                    _BookTypeMasters = base.CreateObjectSet<BookTypeMaster>("BookTypeMasters");
+                }
+                return _BookTypeMasters;
+            }
+        }
+        private ObjectSet<BookTypeMaster> _BookTypeMasters;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<BookFineMaster> BookFineMasters
         {
             get
@@ -324,18 +292,82 @@ namespace LMS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<BookTypeMaster> BookTypeMasters
+        public ObjectSet<FineTypeMaster> FineTypeMasters
         {
             get
             {
-                if ((_BookTypeMasters == null))
+                if ((_FineTypeMasters == null))
                 {
-                    _BookTypeMasters = base.CreateObjectSet<BookTypeMaster>("BookTypeMasters");
+                    _FineTypeMasters = base.CreateObjectSet<FineTypeMaster>("FineTypeMasters");
                 }
-                return _BookTypeMasters;
+                return _FineTypeMasters;
             }
         }
-        private ObjectSet<BookTypeMaster> _BookTypeMasters;
+        private ObjectSet<FineTypeMaster> _FineTypeMasters;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<FormTypeMaster> FormTypeMasters
+        {
+            get
+            {
+                if ((_FormTypeMasters == null))
+                {
+                    _FormTypeMasters = base.CreateObjectSet<FormTypeMaster>("FormTypeMasters");
+                }
+                return _FormTypeMasters;
+            }
+        }
+        private ObjectSet<FormTypeMaster> _FormTypeMasters;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<FinePayment> FinePayments
+        {
+            get
+            {
+                if ((_FinePayments == null))
+                {
+                    _FinePayments = base.CreateObjectSet<FinePayment>("FinePayments");
+                }
+                return _FinePayments;
+            }
+        }
+        private ObjectSet<FinePayment> _FinePayments;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<BookWishList> BookWishLists
+        {
+            get
+            {
+                if ((_BookWishLists == null))
+                {
+                    _BookWishLists = base.CreateObjectSet<BookWishList>("BookWishLists");
+                }
+                return _BookWishLists;
+            }
+        }
+        private ObjectSet<BookWishList> _BookWishLists;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<BookReservation> BookReservations
+        {
+            get
+            {
+                if ((_BookReservations == null))
+                {
+                    _BookReservations = base.CreateObjectSet<BookReservation>("BookReservations");
+                }
+                return _BookReservations;
+            }
+        }
+        private ObjectSet<BookReservation> _BookReservations;
 
         #endregion
 
@@ -374,35 +406,11 @@ namespace LMS.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the FinePayments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToFinePayments(FinePayment finePayment)
-        {
-            base.AddObject("FinePayments", finePayment);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the FineTypeMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToFineTypeMasters(FineTypeMaster fineTypeMaster)
-        {
-            base.AddObject("FineTypeMasters", fineTypeMaster);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the FormMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToFormMasters(FormMaster formMaster)
         {
             base.AddObject("FormMasters", formMaster);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the FormTypeMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToFormTypeMasters(FormTypeMaster formTypeMaster)
-        {
-            base.AddObject("FormTypeMasters", formTypeMaster);
         }
     
         /// <summary>
@@ -462,6 +470,14 @@ namespace LMS.Models
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the BookTypeMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBookTypeMasters(BookTypeMaster bookTypeMaster)
+        {
+            base.AddObject("BookTypeMasters", bookTypeMaster);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the BookFineMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToBookFineMasters(BookFineMaster bookFineMaster)
@@ -470,11 +486,43 @@ namespace LMS.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the BookTypeMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the FineTypeMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToBookTypeMasters(BookTypeMaster bookTypeMaster)
+        public void AddToFineTypeMasters(FineTypeMaster fineTypeMaster)
         {
-            base.AddObject("BookTypeMasters", bookTypeMaster);
+            base.AddObject("FineTypeMasters", fineTypeMaster);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the FormTypeMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToFormTypeMasters(FormTypeMaster formTypeMaster)
+        {
+            base.AddObject("FormTypeMasters", formTypeMaster);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the FinePayments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToFinePayments(FinePayment finePayment)
+        {
+            base.AddObject("FinePayments", finePayment);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the BookWishLists EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBookWishLists(BookWishList bookWishList)
+        {
+            base.AddObject("BookWishLists", bookWishList);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the BookReservations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBookReservations(BookReservation bookReservation)
+        {
+            base.AddObject("BookReservations", bookReservation);
         }
 
         #endregion
@@ -519,6 +567,14 @@ namespace LMS.Models
         public ObjectResult<GetBookFineMaster> GetBookFineMaster()
         {
             return base.ExecuteFunction<GetBookFineMaster>("GetBookFineMaster");
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectResult<GetBookAvailability> GetBookAvailability()
+        {
+            return base.ExecuteFunction<GetBookAvailability>("GetBookAvailability");
         }
 
         #endregion
@@ -2155,6 +2211,167 @@ namespace LMS.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="LMSModel", Name="BookReservation")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class BookReservation : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new BookReservation object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="bookCodeId">Initial value of the BookCodeId property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="reservedOn">Initial value of the ReservedOn property.</param>
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static BookReservation CreateBookReservation(global::System.Int32 id, global::System.Int32 bookCodeId, global::System.Int32 userId, global::System.DateTime reservedOn, global::System.Boolean isDeleted)
+        {
+            BookReservation bookReservation = new BookReservation();
+            bookReservation.Id = id;
+            bookReservation.BookCodeId = bookCodeId;
+            bookReservation.UserId = userId;
+            bookReservation.ReservedOn = reservedOn;
+            bookReservation.IsDeleted = isDeleted;
+            return bookReservation;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 BookCodeId
+        {
+            get
+            {
+                return _BookCodeId;
+            }
+            set
+            {
+                OnBookCodeIdChanging(value);
+                ReportPropertyChanging("BookCodeId");
+                _BookCodeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BookCodeId");
+                OnBookCodeIdChanged();
+            }
+        }
+        private global::System.Int32 _BookCodeId;
+        partial void OnBookCodeIdChanging(global::System.Int32 value);
+        partial void OnBookCodeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private global::System.Int32 _UserId;
+        partial void OnUserIdChanging(global::System.Int32 value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ReservedOn
+        {
+            get
+            {
+                return _ReservedOn;
+            }
+            set
+            {
+                OnReservedOnChanging(value);
+                ReportPropertyChanging("ReservedOn");
+                _ReservedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ReservedOn");
+                OnReservedOnChanged();
+            }
+        }
+        private global::System.DateTime _ReservedOn;
+        partial void OnReservedOnChanging(global::System.DateTime value);
+        partial void OnReservedOnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="LMSModel", Name="BookTypeMaster")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -2440,6 +2657,193 @@ namespace LMS.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="LMSModel", Name="BookWishList")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class BookWishList : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new BookWishList object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="bookName">Initial value of the BookName property.</param>
+        /// <param name="bookDetails">Initial value of the BookDetails property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="addedOn">Initial value of the AddedOn property.</param>
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static BookWishList CreateBookWishList(global::System.Int32 id, global::System.String bookName, global::System.String bookDetails, global::System.Int32 userId, global::System.DateTime addedOn, global::System.Boolean isDeleted)
+        {
+            BookWishList bookWishList = new BookWishList();
+            bookWishList.Id = id;
+            bookWishList.BookName = bookName;
+            bookWishList.BookDetails = bookDetails;
+            bookWishList.UserId = userId;
+            bookWishList.AddedOn = addedOn;
+            bookWishList.IsDeleted = isDeleted;
+            return bookWishList;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String BookName
+        {
+            get
+            {
+                return _BookName;
+            }
+            set
+            {
+                OnBookNameChanging(value);
+                ReportPropertyChanging("BookName");
+                _BookName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("BookName");
+                OnBookNameChanged();
+            }
+        }
+        private global::System.String _BookName;
+        partial void OnBookNameChanging(global::System.String value);
+        partial void OnBookNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String BookDetails
+        {
+            get
+            {
+                return _BookDetails;
+            }
+            set
+            {
+                OnBookDetailsChanging(value);
+                ReportPropertyChanging("BookDetails");
+                _BookDetails = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("BookDetails");
+                OnBookDetailsChanged();
+            }
+        }
+        private global::System.String _BookDetails;
+        partial void OnBookDetailsChanging(global::System.String value);
+        partial void OnBookDetailsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private global::System.Int32 _UserId;
+        partial void OnUserIdChanging(global::System.Int32 value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime AddedOn
+        {
+            get
+            {
+                return _AddedOn;
+            }
+            set
+            {
+                OnAddedOnChanging(value);
+                ReportPropertyChanging("AddedOn");
+                _AddedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AddedOn");
+                OnAddedOnChanged();
+            }
+        }
+        private global::System.DateTime _AddedOn;
+        partial void OnAddedOnChanging(global::System.DateTime value);
+        partial void OnAddedOnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="LMSModel", Name="FinePayment")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -2452,7 +2856,7 @@ namespace LMS.Models
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="fineTypeId">Initial value of the FineTypeId property.</param>
-        /// <param name="bookId">Initial value of the BookId property.</param>
+        /// <param name="bookCodeId">Initial value of the BookCodeId property.</param>
         /// <param name="paidBy">Initial value of the PaidBy property.</param>
         /// <param name="baseAmount">Initial value of the BaseAmount property.</param>
         /// <param name="finalAmount">Initial value of the FinalAmount property.</param>
@@ -2465,12 +2869,12 @@ namespace LMS.Models
         /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
-        public static FinePayment CreateFinePayment(global::System.Int32 id, global::System.Byte fineTypeId, global::System.Int32 bookId, global::System.Int32 paidBy, global::System.Int16 baseAmount, global::System.Int16 finalAmount, global::System.Int16 paidAmount, global::System.Int16 exemptionAmount, global::System.String paymentReceiptNo, global::System.DateTime paidOn, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
+        public static FinePayment CreateFinePayment(global::System.Int32 id, global::System.Byte fineTypeId, global::System.Int32 bookCodeId, global::System.Int32 paidBy, global::System.Int16 baseAmount, global::System.Int16 finalAmount, global::System.Int16 paidAmount, global::System.Int16 exemptionAmount, global::System.String paymentReceiptNo, global::System.DateTime paidOn, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             FinePayment finePayment = new FinePayment();
             finePayment.Id = id;
             finePayment.FineTypeId = fineTypeId;
-            finePayment.BookId = bookId;
+            finePayment.BookCodeId = bookCodeId;
             finePayment.PaidBy = paidBy;
             finePayment.BaseAmount = baseAmount;
             finePayment.FinalAmount = finalAmount;
@@ -2546,24 +2950,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 BookId
+        public global::System.Int32 BookCodeId
         {
             get
             {
-                return _BookId;
+                return _BookCodeId;
             }
             set
             {
-                OnBookIdChanging(value);
-                ReportPropertyChanging("BookId");
-                _BookId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("BookId");
-                OnBookIdChanged();
+                OnBookCodeIdChanging(value);
+                ReportPropertyChanging("BookCodeId");
+                _BookCodeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BookCodeId");
+                OnBookCodeIdChanged();
             }
         }
-        private global::System.Int32 _BookId;
-        partial void OnBookIdChanging(global::System.Int32 value);
-        partial void OnBookIdChanged();
+        private global::System.Int32 _BookCodeId;
+        partial void OnBookCodeIdChanging(global::System.Int32 value);
+        partial void OnBookCodeIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -5997,6 +6401,357 @@ namespace LMS.Models
     #endregion
 
     #region ComplexTypes
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmComplexTypeAttribute(NamespaceName="LMSModel", Name="GetBookAvailability")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class GetBookAvailability : ComplexObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GetBookAvailability object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="bookTypeId">Initial value of the BookTypeId property.</param>
+        /// <param name="bookType">Initial value of the BookType property.</param>
+        /// <param name="bookName">Initial value of the BookName property.</param>
+        /// <param name="authorId">Initial value of the AuthorId property.</param>
+        /// <param name="price">Initial value of the Price property.</param>
+        public static GetBookAvailability CreateGetBookAvailability(global::System.Int32 id, global::System.Byte bookTypeId, global::System.String bookType, global::System.String bookName, global::System.Int32 authorId, global::System.Int32 price)
+        {
+            GetBookAvailability getBookAvailability = new GetBookAvailability();
+            getBookAvailability.Id = id;
+            getBookAvailability.BookTypeId = bookTypeId;
+            getBookAvailability.BookType = bookType;
+            getBookAvailability.BookName = bookName;
+            getBookAvailability.AuthorId = authorId;
+            getBookAvailability.Price = price;
+            return getBookAvailability;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                OnIdChanging(value);
+                ReportPropertyChanging("Id");
+                _Id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Id");
+                OnIdChanged();
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte BookTypeId
+        {
+            get
+            {
+                return _BookTypeId;
+            }
+            set
+            {
+                OnBookTypeIdChanging(value);
+                ReportPropertyChanging("BookTypeId");
+                _BookTypeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BookTypeId");
+                OnBookTypeIdChanged();
+            }
+        }
+        private global::System.Byte _BookTypeId;
+        partial void OnBookTypeIdChanging(global::System.Byte value);
+        partial void OnBookTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String BookType
+        {
+            get
+            {
+                return _BookType;
+            }
+            set
+            {
+                OnBookTypeChanging(value);
+                ReportPropertyChanging("BookType");
+                _BookType = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("BookType");
+                OnBookTypeChanged();
+            }
+        }
+        private global::System.String _BookType;
+        partial void OnBookTypeChanging(global::System.String value);
+        partial void OnBookTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String BookName
+        {
+            get
+            {
+                return _BookName;
+            }
+            set
+            {
+                OnBookNameChanging(value);
+                ReportPropertyChanging("BookName");
+                _BookName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("BookName");
+                OnBookNameChanged();
+            }
+        }
+        private global::System.String _BookName;
+        partial void OnBookNameChanging(global::System.String value);
+        partial void OnBookNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AuthorId
+        {
+            get
+            {
+                return _AuthorId;
+            }
+            set
+            {
+                OnAuthorIdChanging(value);
+                ReportPropertyChanging("AuthorId");
+                _AuthorId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AuthorId");
+                OnAuthorIdChanged();
+            }
+        }
+        private global::System.Int32 _AuthorId;
+        partial void OnAuthorIdChanging(global::System.Int32 value);
+        partial void OnAuthorIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AuthorName
+        {
+            get
+            {
+                return _AuthorName;
+            }
+            set
+            {
+                OnAuthorNameChanging(value);
+                ReportPropertyChanging("AuthorName");
+                _AuthorName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AuthorName");
+                OnAuthorNameChanged();
+            }
+        }
+        private global::System.String _AuthorName;
+        partial void OnAuthorNameChanging(global::System.String value);
+        partial void OnAuthorNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Publisher
+        {
+            get
+            {
+                return _Publisher;
+            }
+            set
+            {
+                OnPublisherChanging(value);
+                ReportPropertyChanging("Publisher");
+                _Publisher = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Publisher");
+                OnPublisherChanged();
+            }
+        }
+        private global::System.String _Publisher;
+        partial void OnPublisherChanging(global::System.String value);
+        partial void OnPublisherChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> PublishDate
+        {
+            get
+            {
+                return _PublishDate;
+            }
+            set
+            {
+                OnPublishDateChanging(value);
+                ReportPropertyChanging("PublishDate");
+                _PublishDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PublishDate");
+                OnPublishDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _PublishDate;
+        partial void OnPublishDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnPublishDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Edition
+        {
+            get
+            {
+                return _Edition;
+            }
+            set
+            {
+                OnEditionChanging(value);
+                ReportPropertyChanging("Edition");
+                _Edition = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Edition");
+                OnEditionChanged();
+            }
+        }
+        private global::System.String _Edition;
+        partial void OnEditionChanging(global::System.String value);
+        partial void OnEditionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ISBN
+        {
+            get
+            {
+                return _ISBN;
+            }
+            set
+            {
+                OnISBNChanging(value);
+                ReportPropertyChanging("ISBN");
+                _ISBN = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ISBN");
+                OnISBNChanged();
+            }
+        }
+        private global::System.String _ISBN;
+        partial void OnISBNChanging(global::System.String value);
+        partial void OnISBNChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
+            }
+        }
+        private global::System.Int32 _Price;
+        partial void OnPriceChanging(global::System.Int32 value);
+        partial void OnPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsAlreadyReserved
+        {
+            get
+            {
+                return _IsAlreadyReserved;
+            }
+            set
+            {
+                OnIsAlreadyReservedChanging(value);
+                ReportPropertyChanging("IsAlreadyReserved");
+                _IsAlreadyReserved = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsAlreadyReserved");
+                OnIsAlreadyReservedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsAlreadyReserved;
+        partial void OnIsAlreadyReservedChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsAlreadyReservedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsAvailable
+        {
+            get
+            {
+                return _IsAvailable;
+            }
+            set
+            {
+                OnIsAvailableChanging(value);
+                ReportPropertyChanging("IsAvailable");
+                _IsAvailable = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsAvailable");
+                OnIsAvailableChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsAvailable;
+        partial void OnIsAvailableChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsAvailableChanged();
+
+        #endregion
+
+    }
     
     /// <summary>
     /// No Metadata Documentation available.

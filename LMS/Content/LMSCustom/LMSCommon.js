@@ -1,8 +1,10 @@
 ﻿var Popup, dataTable;
 
 function closeJQryDlg() {
-    Popup.dialog('close');
-    //Popup.dialog('destroy').remove();
+    if (Popup) {
+        Popup.dialog('close');
+        //Popup.dialog('destroy').remove();
+    } 
 }
 
 function PopupForm(url, dlgTitle, width) {

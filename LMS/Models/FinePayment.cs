@@ -24,7 +24,7 @@ namespace LMS.Models
 
         [Display(Name = "Book")]
         [Required(ErrorMessage = "Please select Book!")]
-        public Int32 BookId { get; set; }
+        public Int32 BookCodeId { get; set; }
 
         [Display(Name = "Fine Paid By")]
         public Int32 PaidBy { get; set; }

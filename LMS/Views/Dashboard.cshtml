@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using LMS.Utilities;
+<!DOCTYPE html>
 <html>
 <head>
    <title>Library Management System</title>
@@ -18,7 +19,7 @@
 		   }
 		   <span id="header-title">
 			   <img id="brand-img" class="mr-3" src="../../Content/Images/Logo38-32.png"/>
-			   @LMS.Utilities.Utility.PROJECT_TITLE
+			   @Utility.PROJECT_TITLE
 		   </span>
 		   <span class="col-md-auto">
 			   <span class="dropdown">
@@ -42,7 +43,7 @@
       {
          int userId = Convert.ToInt32(Session["UserId"]);
          LMS.Models.FormTypeMaster formType = LMS.Controllers.FormController.formTypes.ToList()[i];
-         IEnumerable<LMS.Models.FormMaster> forms = LMS.Utilities.Utility.GetForms(userId, formType.Id);
+         IEnumerable<LMS.Models.FormMaster> forms = CommonBL.GetForms(formType.Id);
          if (forms != null && forms.Where(x => !x.IsDeleted).Count() > 0)
          {
             string w3cardId = "w3CardId-" + formType.Id.ToString();

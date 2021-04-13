@@ -13,15 +13,11 @@ namespace LMS.Controllers
 
         private static List<AuthorMaster> authors = new List<AuthorMaster>();
 
-        //
-        // GET: /AuthorMaster/
         public ActionResult Index()
         {
             return View();
         }
 
-        //
-        // GET: /AuthorMaster/
         public ActionResult GetData(Utility.DisplayRecords displayRecords)
         {
             if (displayRecords == Utility.DisplayRecords.Default)
@@ -81,8 +77,16 @@ namespace LMS.Controllers
                     {
                         if (author.IsDeleted)
                         {
-                            authorInDb.IsDeleted = true;
-                            dbEntities.ObjectStateManager.ChangeObjectState(authorInDb, System.Data.EntityState.Modified);
+                            if (authorInDb.IsDeleted)
+                            {
+                                dbEntities.ObjectStateManager.ChangeObjectState(authorInDb, System.Data.EntityState.Modified);
+                                return Json(new { success = false, message = "Author".ObjAlreadyDeleted() }, JsonRequestBehavior.AllowGet);
+                            }
+                            else
+                            {
+                                authorInDb.IsDeleted = true;
+                                dbEntities.ObjectStateManager.ChangeObjectState(authorInDb, System.Data.EntityState.Modified);
+                            }
                         }
                         else
                         {

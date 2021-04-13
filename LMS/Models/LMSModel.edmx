@@ -11,7 +11,9 @@
           <EntitySet Name="BookFineMaster" EntityType="LMSModel.Store.BookFineMaster" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="BookIssue" EntityType="LMSModel.Store.BookIssue" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="BookMaster" EntityType="LMSModel.Store.BookMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookReservation" EntityType="LMSModel.Store.BookReservation" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="BookTypeMaster" EntityType="LMSModel.Store.BookTypeMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookWishList" EntityType="LMSModel.Store.BookWishList" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="FinePayment" EntityType="LMSModel.Store.FinePayment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="FineTypeMaster" EntityType="LMSModel.Store.FineTypeMaster" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="FormMaster" EntityType="LMSModel.Store.FormMaster" store:Type="Tables" Schema="dbo" />
@@ -143,6 +145,16 @@
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="BookReservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BookCodeId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ReservedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="BookTypeMaster">
           <Key>
             <PropertyRef Name="Id" />
@@ -158,13 +170,24 @@
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="BookWishList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BookName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="BookDetails" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="AddedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="FinePayment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FineTypeId" Type="tinyint" Nullable="false" />
-          <Property Name="BookId" Type="int" Nullable="false" />
+          <Property Name="BookCodeId" Type="int" Nullable="false" />
           <Property Name="PaidBy" Type="int" Nullable="false" />
           <Property Name="BaseAmount" Type="smallint" Nullable="false" />
           <Property Name="FinalAmount" Type="smallint" Nullable="false" />
@@ -362,6 +385,7 @@
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
         </EntityType>
+        <Function Name="SP_GetBookAvailability" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetBookCodeMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetBookFineMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetBookMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -376,10 +400,7 @@
           <EntitySet Name="BookCodeMasters" EntityType="LMSModel.BookCodeMaster" />
           <EntitySet Name="BookIssues" EntityType="LMSModel.BookIssue" />
           <EntitySet Name="BookMasters" EntityType="LMSModel.BookMaster" />
-          <EntitySet Name="FinePayments" EntityType="LMSModel.FinePayment" />
-          <EntitySet Name="FineTypeMasters" EntityType="LMSModel.FineTypeMaster" />
           <EntitySet Name="FormMasters" EntityType="LMSModel.FormMaster" />
-          <EntitySet Name="FormTypeMasters" EntityType="LMSModel.FormTypeMaster" />
           <EntitySet Name="PasswordHistories" EntityType="LMSModel.PasswordHistory" />
           <EntitySet Name="RoleMasters" EntityType="LMSModel.RoleMaster" />
           <EntitySet Name="UserMasters" EntityType="LMSModel.UserMaster" />
@@ -391,9 +412,15 @@
           <FunctionImport Name="GetBookCodeMaster" ReturnType="Collection(LMSModel.GetBookCodeMaster)" />
           <EntitySet Name="UserInfoes" EntityType="LMSModel.UserInfo" />
           <EntitySet Name="UserDetails" EntityType="LMSModel.UserDetail" />
-          <EntitySet Name="BookFineMasters" EntityType="LMSModel.BookFineMaster" />
           <EntitySet Name="BookTypeMasters" EntityType="LMSModel.BookTypeMaster" />
           <FunctionImport Name="GetBookFineMaster" ReturnType="Collection(LMSModel.GetBookFineMaster)" />
+          <EntitySet Name="BookFineMasters" EntityType="LMSModel.BookFineMaster" />
+          <EntitySet Name="FineTypeMasters" EntityType="LMSModel.FineTypeMaster" />
+          <EntitySet Name="FormTypeMasters" EntityType="LMSModel.FormTypeMaster" />
+          <EntitySet Name="FinePayments" EntityType="LMSModel.FinePayment" />
+          <EntitySet Name="BookWishLists" EntityType="LMSModel.BookWishList" />
+          <EntitySet Name="BookReservations" EntityType="LMSModel.BookReservation" />
+          <FunctionImport Name="GetBookAvailability" ReturnType="Collection(LMSModel.GetBookAvailability)" />
         </EntityContainer>
         <EntityType Name="AuthorMaster">
           <Key>
@@ -460,38 +487,6 @@
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedOn" Type="DateTime" Nullable="false" />
         </EntityType>
-        <EntityType Name="FinePayment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FineTypeId" Type="Byte" Nullable="false" />
-          <Property Name="BookId" Type="Int32" Nullable="false" />
-          <Property Name="PaidBy" Type="Int32" Nullable="false" />
-          <Property Name="BaseAmount" Type="Int16" Nullable="false" />
-          <Property Name="FinalAmount" Type="Int16" Nullable="false" />
-          <Property Name="PaidAmount" Type="Int16" Nullable="false" />
-          <Property Name="ExemptionAmount" Type="Int16" Nullable="false" />
-          <Property Name="PaymentReceiptNo" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="PaidOn" Type="DateTime" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FineTypeMaster">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" />
-        </EntityType>
         <EntityType Name="FormMaster">
           <Key>
             <PropertyRef Name="Id" />
@@ -505,19 +500,6 @@
           <Property Name="WriteAccess" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="SpecialReadAccess" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="SpecialWriteAccess" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FormTypeMaster">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="DisplayOrder" Type="Byte" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
@@ -717,23 +699,6 @@
           <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
           <Property Type="DateTime" Name="ModifiedOn" Nullable="false" />
         </EntityType>
-        <EntityType Name="BookFineMaster">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Byte" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Byte" Name="BookTypeId" Nullable="false" />
-          <Property Type="Byte" Name="FineTypeId" Nullable="false" />
-          <Property Type="Int32" Name="LateFeeBaseChargeAmount" Nullable="false" />
-          <Property Type="Byte" Name="LateFeeBaseChargePercent" Nullable="false" />
-          <Property Type="Int32" Name="LateFeeIncreaseAmount" Nullable="false" />
-          <Property Type="Byte" Name="LateFeeIncreasePercentage" Nullable="false" />
-          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
-          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
-          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" />
-        </EntityType>
         <EntityType Name="BookTypeMaster">
           <Key>
             <PropertyRef Name="Id" />
@@ -764,6 +729,104 @@
           <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
           <Property Type="DateTime" Name="ModifiedOn" Nullable="false" Precision="23" />
+        </ComplexType>
+        <EntityType Name="BookFineMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Byte" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Byte" Name="BookTypeId" Nullable="false" />
+          <Property Type="Byte" Name="FineTypeId" Nullable="false" />
+          <Property Type="Int32" Name="LateFeeBaseChargeAmount" Nullable="false" />
+          <Property Type="Byte" Name="LateFeeBaseChargePercent" Nullable="false" />
+          <Property Type="Int32" Name="LateFeeIncreaseAmount" Nullable="false" />
+          <Property Type="Byte" Name="LateFeeIncreasePercentage" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FineTypeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Byte" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormTypeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Byte" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Byte" Name="DisplayOrder" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FinePayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Byte" Name="FineTypeId" Nullable="false" />
+          <Property Type="Int32" Name="BookCodeId" Nullable="false" />
+          <Property Type="Int32" Name="PaidBy" Nullable="false" />
+          <Property Type="Int16" Name="BaseAmount" Nullable="false" />
+          <Property Type="Int16" Name="FinalAmount" Nullable="false" />
+          <Property Type="Int16" Name="PaidAmount" Nullable="false" />
+          <Property Type="Int16" Name="ExemptionAmount" Nullable="false" />
+          <Property Type="String" Name="PaymentReceiptNo" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="PaidOn" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookWishList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="BookName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BookDetails" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookReservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BookCodeId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="DateTime" Name="ReservedOn" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="GetBookAvailability">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Byte" Name="BookTypeId" Nullable="false" />
+          <Property Type="String" Name="BookType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BookName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="AuthorId" Nullable="false" />
+          <Property Type="String" Name="AuthorName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Publisher" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="PublishDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Edition" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISBN" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="Price" Nullable="false" />
+          <Property Type="Boolean" Name="IsAlreadyReserved" Nullable="true" />
+          <Property Type="Boolean" Name="IsAvailable" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -840,40 +903,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FinePayments">
-            <EntityTypeMapping TypeName="LMSModel.FinePayment">
-              <MappingFragment StoreEntitySet="FinePayment">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FineTypeId" ColumnName="FineTypeId" />
-                <ScalarProperty Name="BookId" ColumnName="BookId" />
-                <ScalarProperty Name="PaidBy" ColumnName="PaidBy" />
-                <ScalarProperty Name="BaseAmount" ColumnName="BaseAmount" />
-                <ScalarProperty Name="FinalAmount" ColumnName="FinalAmount" />
-                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
-                <ScalarProperty Name="ExemptionAmount" ColumnName="ExemptionAmount" />
-                <ScalarProperty Name="PaymentReceiptNo" ColumnName="PaymentReceiptNo" />
-                <ScalarProperty Name="PaidOn" ColumnName="PaidOn" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FineTypeMasters">
-            <EntityTypeMapping TypeName="LMSModel.FineTypeMaster">
-              <MappingFragment StoreEntitySet="FineTypeMaster">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FormMasters">
             <EntityTypeMapping TypeName="LMSModel.FormMaster">
               <MappingFragment StoreEntitySet="FormMaster">
@@ -886,20 +915,6 @@
                 <ScalarProperty Name="WriteAccess" ColumnName="WriteAccess" />
                 <ScalarProperty Name="SpecialReadAccess" ColumnName="SpecialReadAccess" />
                 <ScalarProperty Name="SpecialWriteAccess" ColumnName="SpecialWriteAccess" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FormTypeMasters">
-            <EntityTypeMapping TypeName="LMSModel.FormTypeMaster">
-              <MappingFragment StoreEntitySet="FormTypeMaster">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -1104,24 +1119,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BookFineMasters">
-            <EntityTypeMapping TypeName="LMSModel.BookFineMaster">
-              <MappingFragment StoreEntitySet="BookFineMaster">
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="LateFeeIncreasePercentage" ColumnName="LateFeeIncreasePercentage" />
-                <ScalarProperty Name="LateFeeIncreaseAmount" ColumnName="LateFeeIncreaseAmount" />
-                <ScalarProperty Name="LateFeeBaseChargePercent" ColumnName="LateFeeBaseChargePercent" />
-                <ScalarProperty Name="LateFeeBaseChargeAmount" ColumnName="LateFeeBaseChargeAmount" />
-                <ScalarProperty Name="FineTypeId" ColumnName="FineTypeId" />
-                <ScalarProperty Name="BookTypeId" ColumnName="BookTypeId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BookTypeMasters">
             <EntityTypeMapping TypeName="LMSModel.BookTypeMaster">
               <MappingFragment StoreEntitySet="BookTypeMaster">
@@ -1158,6 +1155,114 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="BookFineMasters">
+            <EntityTypeMapping TypeName="LMSModel.BookFineMaster">
+              <MappingFragment StoreEntitySet="BookFineMaster">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LateFeeIncreasePercentage" ColumnName="LateFeeIncreasePercentage" />
+                <ScalarProperty Name="LateFeeIncreaseAmount" ColumnName="LateFeeIncreaseAmount" />
+                <ScalarProperty Name="LateFeeBaseChargePercent" ColumnName="LateFeeBaseChargePercent" />
+                <ScalarProperty Name="LateFeeBaseChargeAmount" ColumnName="LateFeeBaseChargeAmount" />
+                <ScalarProperty Name="FineTypeId" ColumnName="FineTypeId" />
+                <ScalarProperty Name="BookTypeId" ColumnName="BookTypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FineTypeMasters">
+            <EntityTypeMapping TypeName="LMSModel.FineTypeMaster">
+              <MappingFragment StoreEntitySet="FineTypeMaster">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormTypeMasters">
+            <EntityTypeMapping TypeName="LMSModel.FormTypeMaster">
+              <MappingFragment StoreEntitySet="FormTypeMaster">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinePayments">
+            <EntityTypeMapping TypeName="LMSModel.FinePayment">
+              <MappingFragment StoreEntitySet="FinePayment">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="PaidOn" ColumnName="PaidOn" />
+                <ScalarProperty Name="PaymentReceiptNo" ColumnName="PaymentReceiptNo" />
+                <ScalarProperty Name="ExemptionAmount" ColumnName="ExemptionAmount" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="FinalAmount" ColumnName="FinalAmount" />
+                <ScalarProperty Name="BaseAmount" ColumnName="BaseAmount" />
+                <ScalarProperty Name="PaidBy" ColumnName="PaidBy" />
+                <ScalarProperty Name="BookCodeId" ColumnName="BookCodeId" />
+                <ScalarProperty Name="FineTypeId" ColumnName="FineTypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookWishLists">
+            <EntityTypeMapping TypeName="LMSModel.BookWishList">
+              <MappingFragment StoreEntitySet="BookWishList">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BookDetails" ColumnName="BookDetails" />
+                <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookReservations">
+            <EntityTypeMapping TypeName="LMSModel.BookReservation">
+              <MappingFragment StoreEntitySet="BookReservation">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ReservedOn" ColumnName="ReservedOn" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BookCodeId" ColumnName="BookCodeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetBookAvailability" FunctionName="LMSModel.Store.SP_GetBookAvailability">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LMSModel.GetBookAvailability">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookTypeId" ColumnName="BookTypeId" />
+                <ScalarProperty Name="BookType" ColumnName="BookType" />
+                <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsAlreadyReserved" ColumnName="IsAlreadyReserved" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1181,21 +1286,23 @@
       <Diagram Name="LMSModel" ShowGrid="false" DisplayType="true">
         <EntityTypeShape EntityType="LMSModel.AuthorMaster" Width="1.5" PointX="0.75" PointY="0.75" Height="0.4" IsExpanded="false" />
         <EntityTypeShape EntityType="LMSModel.BookCodeMaster" Width="1.5" PointX="2.75" PointY="0.75" Height="0.4" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.BookIssue" Width="1.5" PointX="0.75" PointY="2.75" Height="0.40000000000000036" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.BookMaster" Width="1.5" PointX="2.75" PointY="2.75" Height="0.40000000000000036" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.FinePayment" Width="1.5" PointX="4.75" PointY="0.75" Height="0.39999999999999991" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.FineTypeMaster" Width="1.5" PointX="0.75" PointY="4.75" Height="0.40000000000000036" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.FormMaster" Width="1.5" PointX="4.75" PointY="2.75" Height="0.40000000000000036" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.FormTypeMaster" Width="1.5" PointX="2.75" PointY="4.75" Height="0.40000000000000036" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.PasswordHistory" Width="1.5" PointX="4.75" PointY="4.75" Height="0.40000000000000036" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.RoleMaster" Width="1.5" PointX="6.75" PointY="0.75" Height="0.39999999999999991" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.UserMaster" Width="1.5" PointX="0.75" PointY="6.75" Height="0.40000000000000036" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.GlobalSetting" Width="1.5" PointX="6.75" PointY="2.75" Height="0.40000000000000036" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.OTPDetail" Width="1.5" PointX="2.75" PointY="6.75" Height="0.39999999999999858" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.UserInfo" Width="1.5" PointX="6.75" PointY="4.75" Height="0.40000000000000036" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.UserDetail" Width="1.5" PointX="4.75" PointY="6.75" Height="0.40000000000000036" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.BookFineMaster" Width="1.5" PointX="6.75" PointY="6.75" Height="0.39999999999999858" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.BookTypeMaster" Width="1.5" PointX="8.75" PointY="0.75" Height="0.40000000000000036" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.BookIssue" Width="1.5" PointX="0.875" PointY="1.625" Height="0.40000000000000036" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.BookMaster" Width="1.5" PointX="2.75" PointY="1.625" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.FormMaster" Width="1.5" PointX="4.75" PointY="1.625" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.PasswordHistory" Width="1.5" PointX="4.875" PointY="2.625" Height="0.40000000000000036" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.RoleMaster" Width="1.5" PointX="7" PointY="0.75" Height="0.39999999999999991" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.UserMaster" Width="1.5" PointX="9" PointY="1.625" Height="0.40000000000000036" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.GlobalSetting" Width="1.5" PointX="7" PointY="1.625" Height="0.40000000000000036" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.OTPDetail" Width="1.5" PointX="2.875" PointY="3.5" Height="0.39999999999999858" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.UserInfo" Width="1.5" PointX="7" PointY="2.625" Height="0.40000000000000036" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.UserDetail" Width="1.5" PointX="9" PointY="2.625" Height="0.40000000000000036" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.BookTypeMaster" Width="1.5" PointX="9" PointY="0.75" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.BookFineMaster" Width="1.5" PointX="2.875" PointY="2.625" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.FineTypeMaster" Width="1.5" PointX="0.875" PointY="3.5" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.FormTypeMaster" Width="1.5" PointX="0.875" PointY="2.625" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.FinePayment" Width="1.5" PointX="4.75" PointY="0.75" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.BookWishList" Width="1.5" PointX="7" PointY="3.5" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.BookReservation" Width="1.5" PointX="5" PointY="3.5" Height="0.4" IsExpanded="false" />
       </Diagram>
     </Diagrams>
   </Designer>

@@ -1,0 +1,110 @@
+﻿@model LMS.Models.GetBookAvailability
+@{
+   ViewBag.Title = "Index";
+}
+<center>
+   <h2>Book Master</h2>
+</center>
+<div class="p-2">
+   <table id="BookTable" class="table table-striped table-bordered" style="width: 100%">
+      <thead>
+         <tr>
+            <th>BookType</th>
+            <th>BookName</th>
+            <th>AuthorName</th>
+            <th>Publisher</th>
+            <th>Price</th>
+            <th>IsAlreadyReserved</th>
+            <th>IsAvailable</th>
+            <th>Control</th>
+         </tr>
+      </thead>
+   </table>
+</div>
+
+@section scripts{
+   @Scripts.Render("~/bundles/DataTables")
+   <script type="text/javascript" src="../../Content/LMSCustom/LMSCommon.js"></script>
+   <script type="text/javascript">
+      $(document).ready(function () {
+         bindDatatable(0);
+      });
+
+      $('#filterRecord').find('input').change(function() {
+         bindDatatable(this.value)
+      });
+
+      function bindDatatable(displayRecords)
+      {
+         if($('#BookTable'))
+         {
+            $('#BookTable').dataTable({
+               "bDestroy": true
+            }).fnDestroy();
+         }
+
+         dataTable =  $("#BookTable").DataTable({
+            "ajax": {
+               "url": "/Book/GetBookDetails/",
+               "data": { "displayRecords" : displayRecords },
+               "type": "GET",
+               "datatype": "json"
+            },
+            "columns": [
+                  { "data": "BookType" },
+                  { "data": "BookName" },
+                  { "data": "AuthorName" },
+                  { "data": "Publisher" },
+                  { "data": "Price" },
+                  { "data": "IsAlreadyReserved" },
+                  { "data": "IsAvailable" },
+                  { "data": "Id" ,
+                  "render" : function (data, isDeleted) {
+                     return "<a class='btn btn-primary btn-sm" + (data.IsDeleted ? " disabled" : "") + "' onclick=Reserve(" + data + ",1)>"
+                     + " <i class='fa fa-pencil'></i> Reserve Book</a>"
+                     + " <a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Reserve(" + data + ",0)>"
+                     + " <i class='fa fa-trash'></i> Cancel Reserve</a>";
+                  },
+                     "orderable": false,
+                     "searchable": true
+                  }
+               ],
+            "language": {
+               "emptyTable" : "No books found.",  
+               "processing" : "<i class='fa fa-spinner fa-spin fa-3x fa-fw' style='color:#2a2b2b;'></i><span class='sr-only'>Loading...</span>" 
+            }
+         });
+      };
+
+      function Reserve(id, isReserve) {
+
+         var postUrl = isReserve ? '@Url.Action("Reserve", "Book")' : '@Url.Action("CancelReserve", "Book")';
+         var confirmationMsg = isReserve ? 'Reserve this Book?' : 'Cancel the Booking Reservation?';
+
+         if (confirm('Are You Sure to ' + confirmationMsg)) {
+            $.ajax({
+               type: "POST",
+               data: {
+                  "Id": id,
+                  "IsDeleted": isReserve ? false : true
+               },
+               url: postUrl,
+               success: function (data) {
+                  if (data.success) {
+                     dataTable.ajax.reload();
+                     $.notify(data.message, {
+                        globalPosition: "top right",
+                        className: "success"
+                     })
+                  } else {
+                     $.notify(data.message, {
+                        globalPosition: "top right",
+                        className: "error"
+                     })
+                  }
+               }
+            });
+         }
+      }
+   </script>
+}

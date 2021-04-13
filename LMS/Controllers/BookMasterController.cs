@@ -12,15 +12,11 @@ namespace LMS.Controllers
     {
         private static List<GetBookMaster> bookMasters;
 
-        //
-        // GET: /BookMaster/
         public ActionResult Index()
         {
             return View();
         }
 
-        //
-        // GET: /BookMaster/
         public ActionResult GetData(Utility.DisplayRecords displayRecords)
         {
             if (displayRecords == Utility.DisplayRecords.Default)

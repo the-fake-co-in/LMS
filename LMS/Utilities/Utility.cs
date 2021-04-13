@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using LMS.Models;
-using LMS.Controllers;
-using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System;
+using System.Linq;
+using System.Web.Mvc;
+using LMS.Controllers;
+using LMS.Models;
+using System.Web;
 
 namespace LMS.Utilities
 {
@@ -42,6 +43,11 @@ namespace LMS.Utilities
             return string.Format("{0} deleted successfully!", input);
         }
 
+        public static string ObjAlreadyDeleted(this string input)
+        {
+            return string.Format("{0} is already deleted!", input);
+        }
+
         public static string ObjNotFoundInDb(this string input)
         {
             return string.Format("Database Entry not found for selected {0}!", input);
@@ -55,27 +61,6 @@ namespace LMS.Utilities
         public static string DeleteConfirm(this string input)
         {
             return string.Format("Are you sure, you want to delete the selected {0}?", input);
-        }
-
-        public static IEnumerable<FormMaster> GetForms(int userId)
-        {
-            string roleId = new LMSEntities().UserMasters.FirstOrDefault(x => x.UserId == userId).RoleId.ToString();
-
-            IEnumerable<FormMaster> forms = FormController.forms;
-            forms = userId == 1 ? forms : forms
-                .Where(x => !x.IsDeleted && (x.ReadAccess == "0" || x.WriteAccess == "0"
-                    || x.ReadAccess.Split(',').Contains(roleId.ToString())
-                    || x.WriteAccess.Split(',').Contains(roleId.ToString())
-                    || x.SpecialReadAccess.Split(',').Contains(userId.ToString())
-                    || x.SpecialWriteAccess.Split(',').Contains(userId.ToString())));
-
-            return forms;
-        }
-
-        public static IEnumerable<FormMaster> GetForms(int userId, int formtypeId)
-        {
-            IEnumerable<FormMaster> forms = GetForms(userId);
-            return forms.Where(x => x.FormTypeId == formtypeId).OrderBy(x => x.DisplayOrder);
         }
 
         public static string RenderRazorViewToString(Controller controller, string viewName, object model = null)

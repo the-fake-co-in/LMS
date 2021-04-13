@@ -34,7 +34,7 @@ namespace LMS.Models
         [Display(Name = "Published On")]
         [DataType(DataType.Date)]
         [DefaultValue(Utilities.Utility.MAX_DATETIME)]
-        public Int32 PublishDate { get; set; }
+        public DateTime PublishDate { get; set; }
 
         public string Edition { get; set; }
 
