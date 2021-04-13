@@ -59,11 +59,15 @@ namespace LMS.Utilities
 
         public static IEnumerable<FormMaster> GetForms(int userId)
         {
+            string roleId = new LMSEntities().UserMasters.FirstOrDefault(x => x.UserId == userId).RoleId.ToString();
+
             IEnumerable<FormMaster> forms = FormController.forms;
             forms = userId == 1 ? forms : forms
                 .Where(x => !x.IsDeleted && (x.ReadAccess == "0" || x.WriteAccess == "0"
-                    || x.ReadAccess == userId.ToString()
-                    || x.WriteAccess == userId.ToString()));
+                    || x.ReadAccess.Split(',').Contains(roleId.ToString())
+                    || x.WriteAccess.Split(',').Contains(roleId.ToString())
+                    || x.SpecialReadAccess.Split(',').Contains(userId.ToString())
+                    || x.SpecialWriteAccess.Split(',').Contains(userId.ToString())));
 
             return forms;
         }

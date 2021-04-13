@@ -24,7 +24,7 @@
 			   <span class="dropdown">
 				   <button class="btn btn-primary dropdown-toggle pull-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&#128104; &#128105;</button>
 				   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					   <a id="updateProfile" class="dropdown-item" href="@Url.Action("InsertOrUpdate", " User")" type="submit">&#128104; Update Profile &#128105;</a>
+					   <a id="updateProfile" class="dropdown-item" href="@Url.Action("InsertOrUpdate", "User", new { UserId = Session["UserId"] })" type="submit">&#128104; Update Profile &#128105;</a>
 					   <a id="logout" class="dropdown-item" href="@Url.Action("LogOut", "Login")" type="submit">&#9940; Logout</a>
 				   </div>
 			   </span>
@@ -40,8 +40,9 @@
       <img id="profilePic" />
       @for (int i = 0; i < LMS.Controllers.FormController.formTypes.Count(); i++)
       {
+         int userId = Convert.ToInt32(Session["UserId"]);
          LMS.Models.FormTypeMaster formType = LMS.Controllers.FormController.formTypes.ToList()[i];
-         IEnumerable<LMS.Models.FormMaster> forms = LMS.Utilities.Utility.GetForms(1, formType.Id);
+         IEnumerable<LMS.Models.FormMaster> forms = LMS.Utilities.Utility.GetForms(userId, formType.Id);
          if (forms != null && forms.Where(x => !x.IsDeleted).Count() > 0)
          {
             string w3cardId = "w3CardId-" + formType.Id.ToString();
@@ -62,7 +63,7 @@
    @*---------------------------------------------*@
    <div id="main" style="margin-left: 200px">
       <div class="w3-container">
-         <div id="render-body" style="margin: 5px">
+         <div id="render-body" style="margin: 5px; margin-bottom:45px;">
             @RenderBody()
          </div>
          @*---------------------------------------------*@

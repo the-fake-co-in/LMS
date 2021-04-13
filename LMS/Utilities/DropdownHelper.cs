@@ -101,5 +101,16 @@ namespace LMS.Utilities
                     .OrderBy(z => z.Value).ToList<SelectListItem>();
             }
         }
+
+        public static List<SelectListItem> DDLForRoleMaster()
+        {
+            using (LMSEntities dbEntities = new LMSEntities())
+            {
+                return dbEntities.RoleMasters
+                    .Where(x => !x.IsDeleted).ToList()
+                    .Select(y => new SelectListItem() { Text = y.Name, Value = y.Id.ToString() })
+                    .OrderBy(z => z.Value).ToList<SelectListItem>();
+            }
+        }
     }
 }

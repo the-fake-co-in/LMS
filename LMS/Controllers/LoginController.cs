@@ -24,7 +24,7 @@ namespace LMS.Controllers
             {
                 using (LMSEntities db = new LMSEntities())
                 {
-                    var obj = db.UserMasters.Where(a => a.UserName.Trim().ToLower() == objUser.UserName.Trim().ToLower()).FirstOrDefault();
+                    var obj = db.UserDetails.Where(a => a.UserName.Trim().ToLower() == objUser.UserName.Trim().ToLower()).FirstOrDefault();
                     if (obj != null)
                     {
                         if (obj.IsBlocked)
@@ -49,6 +49,7 @@ namespace LMS.Controllers
                         {
                             Session["UserId"] = obj.UserId.ToString();
                             Session["UserName"] = obj.UserName.ToString();
+                            Session["Name"] = obj.FirstName.ToString() + " " + obj.LastName.ToString();
                             return RedirectToAction("Index", "Home");
                         }
                     }

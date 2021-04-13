@@ -30,7 +30,7 @@ namespace LMS.Models
 
         [Display(Name = "Late Fee Base (Rs.)")]
         [Required(ErrorMessage = "Please Enter Late Base Charge Fee (Rs.)!")]
-        public Byte LateFeeBaseChargeAmount { get; set; }
+        public Int32 LateFeeBaseChargeAmount { get; set; }
 
         [Display(Name = "Late Fee Base (%)")]
         [Required(ErrorMessage = "Please Enter Late Base Charge Fee (%)!")]
@@ -38,7 +38,7 @@ namespace LMS.Models
 
         [Display(Name = "Late Fee Increase (Rs.)")]
         [Required(ErrorMessage = "Please Enter Late Charge Increase (Rs)!")]
-        public Byte LateFeeIncreaseAmount { get; set; }
+        public Int32 LateFeeIncreaseAmount { get; set; }
 
         [Display(Name = "Late Fee Increase (%)")]
         [Required(ErrorMessage = "Please Enter Late Charge Increase (%)!")]

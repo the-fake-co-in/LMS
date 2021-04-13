@@ -57,7 +57,7 @@
                { "data": "IsDeleted" },
                { "data": "Id" ,
                "render" : function (data, isDeleted) {
-                  return "<a class='btn btn-primary btn-sm" + (data.IsDeleted ? " disabled" : "") + "' onclick=PopupForm('" + editUrl + data + "','AuthorMaster', 450)>"
+                  return "<a class='btn btn-primary btn-sm" + (data.IsDeleted ? " disabled" : "") + "' onclick=PopupForm('" + editUrl + data + "','AuthorMaster',450)>"
                   + " <i class='fa fa-pencil'></i> Edit</a>"
                   + " <a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ",'AuthorMaster','" + deleteUrl + "')>"
                   + " <i class='fa fa-trash'></i> Delete</a>";

@@ -97,7 +97,7 @@ namespace LMS.Controllers
                     return "../Content/Images/ProfilePhotos/Temp/" + Path.GetFileName(tempFileName);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return "../../Content/Images/UserImage.png";
             }

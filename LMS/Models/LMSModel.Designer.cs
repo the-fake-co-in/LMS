@@ -100,22 +100,6 @@ namespace LMS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<BookFineMaster> BookFineMasters
-        {
-            get
-            {
-                if ((_BookFineMasters == null))
-                {
-                    _BookFineMasters = base.CreateObjectSet<BookFineMaster>("BookFineMasters");
-                }
-                return _BookFineMasters;
-            }
-        }
-        private ObjectSet<BookFineMaster> _BookFineMasters;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<BookIssue> BookIssues
         {
             get
@@ -144,22 +128,6 @@ namespace LMS.Models
             }
         }
         private ObjectSet<BookMaster> _BookMasters;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<BookTypeMaster> BookTypeMasters
-        {
-            get
-            {
-                if ((_BookTypeMasters == null))
-                {
-                    _BookTypeMasters = base.CreateObjectSet<BookTypeMaster>("BookTypeMasters");
-                }
-                return _BookTypeMasters;
-            }
-        }
-        private ObjectSet<BookTypeMaster> _BookTypeMasters;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -336,6 +304,38 @@ namespace LMS.Models
             }
         }
         private ObjectSet<UserDetail> _UserDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<BookFineMaster> BookFineMasters
+        {
+            get
+            {
+                if ((_BookFineMasters == null))
+                {
+                    _BookFineMasters = base.CreateObjectSet<BookFineMaster>("BookFineMasters");
+                }
+                return _BookFineMasters;
+            }
+        }
+        private ObjectSet<BookFineMaster> _BookFineMasters;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<BookTypeMaster> BookTypeMasters
+        {
+            get
+            {
+                if ((_BookTypeMasters == null))
+                {
+                    _BookTypeMasters = base.CreateObjectSet<BookTypeMaster>("BookTypeMasters");
+                }
+                return _BookTypeMasters;
+            }
+        }
+        private ObjectSet<BookTypeMaster> _BookTypeMasters;
 
         #endregion
 
@@ -358,14 +358,6 @@ namespace LMS.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the BookFineMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToBookFineMasters(BookFineMaster bookFineMaster)
-        {
-            base.AddObject("BookFineMasters", bookFineMaster);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the BookIssues EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToBookIssues(BookIssue bookIssue)
@@ -379,14 +371,6 @@ namespace LMS.Models
         public void AddToBookMasters(BookMaster bookMaster)
         {
             base.AddObject("BookMasters", bookMaster);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the BookTypeMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToBookTypeMasters(BookTypeMaster bookTypeMaster)
-        {
-            base.AddObject("BookTypeMasters", bookTypeMaster);
         }
     
         /// <summary>
@@ -476,18 +460,26 @@ namespace LMS.Models
         {
             base.AddObject("UserDetails", userDetail);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the BookFineMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBookFineMasters(BookFineMaster bookFineMaster)
+        {
+            base.AddObject("BookFineMasters", bookFineMaster);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the BookTypeMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBookTypeMasters(BookTypeMaster bookTypeMaster)
+        {
+            base.AddObject("BookTypeMasters", bookTypeMaster);
+        }
 
         #endregion
 
         #region Function Imports
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectResult<GetBookFineMaster> GetBookFineMaster()
-        {
-            return base.ExecuteFunction<GetBookFineMaster>("GetBookFineMaster");
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -519,6 +511,14 @@ namespace LMS.Models
         public ObjectResult<GetBookCodeMaster> GetBookCodeMaster()
         {
             return base.ExecuteFunction<GetBookCodeMaster>("GetBookCodeMaster");
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectResult<GetBookFineMaster> GetBookFineMaster()
+        {
+            return base.ExecuteFunction<GetBookFineMaster>("GetBookFineMaster");
         }
 
         #endregion
@@ -1084,7 +1084,7 @@ namespace LMS.Models
         /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
-        public static BookFineMaster CreateBookFineMaster(global::System.Byte id, global::System.Byte bookTypeId, global::System.Byte fineTypeId, global::System.Byte lateFeeBaseChargeAmount, global::System.Byte lateFeeBaseChargePercent, global::System.Byte lateFeeIncreaseAmount, global::System.Byte lateFeeIncreasePercentage, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
+        public static BookFineMaster CreateBookFineMaster(global::System.Byte id, global::System.Byte bookTypeId, global::System.Byte fineTypeId, global::System.Int32 lateFeeBaseChargeAmount, global::System.Byte lateFeeBaseChargePercent, global::System.Int32 lateFeeIncreaseAmount, global::System.Byte lateFeeIncreasePercentage, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             BookFineMaster bookFineMaster = new BookFineMaster();
             bookFineMaster.Id = id;
@@ -1186,7 +1186,7 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte LateFeeBaseChargeAmount
+        public global::System.Int32 LateFeeBaseChargeAmount
         {
             get
             {
@@ -1201,8 +1201,8 @@ namespace LMS.Models
                 OnLateFeeBaseChargeAmountChanged();
             }
         }
-        private global::System.Byte _LateFeeBaseChargeAmount;
-        partial void OnLateFeeBaseChargeAmountChanging(global::System.Byte value);
+        private global::System.Int32 _LateFeeBaseChargeAmount;
+        partial void OnLateFeeBaseChargeAmountChanging(global::System.Int32 value);
         partial void OnLateFeeBaseChargeAmountChanged();
     
         /// <summary>
@@ -1234,7 +1234,7 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte LateFeeIncreaseAmount
+        public global::System.Int32 LateFeeIncreaseAmount
         {
             get
             {
@@ -1249,8 +1249,8 @@ namespace LMS.Models
                 OnLateFeeIncreaseAmountChanged();
             }
         }
-        private global::System.Byte _LateFeeIncreaseAmount;
-        partial void OnLateFeeIncreaseAmountChanging(global::System.Byte value);
+        private global::System.Int32 _LateFeeIncreaseAmount;
+        partial void OnLateFeeIncreaseAmountChanging(global::System.Int32 value);
         partial void OnLateFeeIncreaseAmountChanged();
     
         /// <summary>
@@ -6364,7 +6364,7 @@ namespace LMS.Models
         /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
-        public static GetBookFineMaster CreateGetBookFineMaster(global::System.Byte id, global::System.Byte bookTypeId, global::System.String bookType, global::System.Byte fineTypeId, global::System.String fineType, global::System.Byte lateFeeBaseChargeAmount, global::System.Byte lateFeeBaseChargePercent, global::System.Byte lateFeeIncreaseAmount, global::System.Byte lateFeeIncreasePercentage, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
+        public static GetBookFineMaster CreateGetBookFineMaster(global::System.Byte id, global::System.Byte bookTypeId, global::System.String bookType, global::System.Byte fineTypeId, global::System.String fineType, global::System.Int32 lateFeeBaseChargeAmount, global::System.Byte lateFeeBaseChargePercent, global::System.Int32 lateFeeIncreaseAmount, global::System.Byte lateFeeIncreasePercentage, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             GetBookFineMaster getBookFineMaster = new GetBookFineMaster();
             getBookFineMaster.Id = id;
@@ -6513,7 +6513,7 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte LateFeeBaseChargeAmount
+        public global::System.Int32 LateFeeBaseChargeAmount
         {
             get
             {
@@ -6528,8 +6528,8 @@ namespace LMS.Models
                 OnLateFeeBaseChargeAmountChanged();
             }
         }
-        private global::System.Byte _LateFeeBaseChargeAmount;
-        partial void OnLateFeeBaseChargeAmountChanging(global::System.Byte value);
+        private global::System.Int32 _LateFeeBaseChargeAmount;
+        partial void OnLateFeeBaseChargeAmountChanging(global::System.Int32 value);
         partial void OnLateFeeBaseChargeAmountChanged();
     
         /// <summary>
@@ -6561,7 +6561,7 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte LateFeeIncreaseAmount
+        public global::System.Int32 LateFeeIncreaseAmount
         {
             get
             {
@@ -6576,8 +6576,8 @@ namespace LMS.Models
                 OnLateFeeIncreaseAmountChanged();
             }
         }
-        private global::System.Byte _LateFeeIncreaseAmount;
-        partial void OnLateFeeIncreaseAmountChanging(global::System.Byte value);
+        private global::System.Int32 _LateFeeIncreaseAmount;
+        partial void OnLateFeeIncreaseAmountChanging(global::System.Int32 value);
         partial void OnLateFeeIncreaseAmountChanged();
     
         /// <summary>

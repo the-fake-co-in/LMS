@@ -148,6 +148,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserDetail.cs" />
     <Compile Include="Models\FormMaster.cs" />
     <Compile Include="Models\FormTypeMaster.cs" />
     <Compile Include="Models\AuthorMaster.cs" />

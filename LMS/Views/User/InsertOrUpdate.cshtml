@@ -1,25 +1,28 @@
-﻿@model LMS.Models.UserInfo
+﻿@model LMS.Models.UserDetail
 @{
    if (Session["UserId"] == null)
    {
       Response.Redirect("~/Login/Index");
    }
 }
-@using (Html.BeginForm("UpdateProfile", "Home", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+@using (Html.BeginForm("InsertUpdateOrDelete", "User", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
 @*@Html.AntiForgeryToken()*@
    <div class="row m-2">
       <div class="form-group col-md-12">
          <h3 class="color:Navy">
             <center>
-               <b>Welcome @Session["userName"].ToString()... </b>
+               <b>Welcome @Session["Name"].ToString()... </b>
             </center>
          </h3>
          <hr id="hrHeader" />
       </div>
-      @Html.HiddenFor(model => model.Id)
-      @Html.HiddenFor(model => model.Userid)
-
+      @Html.HiddenFor(model => model.UserId)
+      <div class="form-group col-md-3">
+         @Html.LabelFor(model => model.Gender, new { @class = "control-label" })
+         @Html.DropDownListFor(model => model.Gender, LMS.Utilities.DropdownListHelper.DDLForGender(), "Select Gender", new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.Gender)
+      </div>
       <div class="form-group col-md-3">
          @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
          @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
@@ -36,9 +39,19 @@
          @Html.ValidationMessageFor(model => model.LastName)
       </div>
       <div class="form-group col-md-3">
-         @Html.LabelFor(model => model.Gender, new { @class = "control-label" })
-         @Html.DropDownListFor(model => model.Gender, LMS.Utilities.DropdownListHelper.DDLForGender(), "Select Gender", new { htmlAttributes = new { @class = "form-control" } })
-         @Html.ValidationMessageFor(model => model.Gender)
+         @Html.LabelFor(model => model.UserName, new { @class = "control-label" })
+         @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.UserName)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.Email)
+      </div>
+      <div class="form-group col-md-3">
+         @Html.LabelFor(model => model.RoleId, new { @class = "control-label" })
+         @Html.DropDownListFor(model => model.RoleId, LMS.Utilities.DropdownListHelper.DDLForRoleMaster(), "Select Role", new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.RoleId)
       </div>
       <div class="form-group col-md-6">
          @Html.LabelFor(model => model.Address1, new { @class = "control-label" })
@@ -70,13 +83,13 @@
          @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control" } })
          @Html.ValidationMessageFor(model => model.Pincode)
       </div>
-      <div class="form-group col-md-3" readonly>
-         @Html.LabelFor(model => model.DateOfBirth, new { @class = "control-label", @type = "date" })
-         @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+      <div class="form-group col-md-3">
+         @Html.LabelFor(model => model.DateOfBirth, new { @class = "control-label" })
+         @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
       </div>
-      <div class="form-group col-md-3" readonly>
-         @Html.LabelFor(model => model.DateOfJoin, new { @class = "control-label", @type="date" })
-         @Html.EditorFor(model => model.DateOfJoin, new { htmlAttributes = new { @class = "form-control" } })
+      <div class="form-group col-md-3">
+         @Html.LabelFor(model => model.DateOfJoin, new { @class = "control-label" })
+         @Html.EditorFor(model => model.DateOfJoin, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
       </div>
       <div class="form-group col-md-3">
          @Html.LabelFor(model => model.MobileNo, new { @class = "control-label" })
@@ -88,11 +101,39 @@
          @Html.EditorFor(model => model.HomeContactNo, new { htmlAttributes = new { @class = "form-control" } })
          @Html.ValidationMessageFor(model => model.HomeContactNo)
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
+         @Html.LabelFor(model => model.FailAttempt, new { @class = "control-label" })
+         @Html.EditorFor(model => model.FailAttempt, new { htmlAttributes = new { @class = "form-control" } })
+      </div>
+      <div class="form-group col-md-3">
+         @Html.Label("Status",new { @class = "control-label" })
+         <div class="form-control">
+            <span>
+               @Html.EditorFor(model => model.IsBlocked)
+               @Html.LabelFor(model => model.IsBlocked, new { @class = "control-label" })
+            </span><span>
+               @Html.EditorFor(model => model.IsDeleted)
+               @Html.LabelFor(model => model.IsDeleted, new { @class = "control-label" })
+            </span>
+         </div>
+      </div>
+      <div class="form-group col-md-3">
+         @Html.LabelFor(model => model.LastLoginDate, new { @class = "control-label" })
+         @Html.EditorFor(model => model.LastLoginDate, new { htmlAttributes = new { @class = "form-control" } })
+      </div>
+      <div class="form-group col-md-3">
+         @Html.LabelFor(model => model.LastLogoutDate, new { @class = "control-label" })
+         @Html.EditorFor(model => model.LastLogoutDate, new { htmlAttributes = new { @class = "form-control" } })
+      </div>
+      <div class="form-group col-md-12">
+         @Html.LabelFor(model => model.BlockReason, new { @class = "control-label" })
+         @Html.EditorFor(model => model.BlockReason, new { htmlAttributes = new { @class = "form-control" } })
+      </div>
+      <div class="form-group col-md-12">
          @Html.Label("", new { @class = "control-label" })
-         <button type="submit" class="btn btn-primary float-right float-bottom mt-4 ml-2">
+         <button type="submit" class="btn btn-primary mx-3 float-right">
             Save changes</button>
-         <button type="reset" class="btn btn-secondary float-right float-bottom mt-4 mr-2">
+         <button type="reset" class="btn btn-secondary mx-3 float-right">
             Reset</button>
       </div>
    </div>
