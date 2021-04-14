@@ -11,6 +11,10 @@ namespace LMS.Controllers
     public class BookController : Controller
     {
         private static List<GetBookAvailability> availableBooks = null;
+        private static List<BookWishList> bookWishList = new List<BookWishList>();
+        private static List<GetBookIssue> bookIssues = new List<GetBookIssue>();
+
+        #region Book Search/Reserve
 
         public ActionResult Search()
         {
@@ -27,8 +31,8 @@ namespace LMS.Controllers
                 {
                     foreach (GetBookAvailability availableBook in availableBooks)
                     {
-                        availableBook.IsAlreadyReserved = IsBookAlreadyReserved(dbEntitiy, availableBook.Id);
-                        availableBook.IsAvailable = GetAvailbleBookCodeId(dbEntitiy, availableBook.Id) > 0;
+                        availableBook.IsAlreadyReserved = CommonBL.IsBookAlreadyReserved(dbEntitiy, availableBook.Id);
+                        availableBook.IsAvailable = CommonBL.GetAvailbleBookCodeId(dbEntitiy, availableBook.Id) > 0;
                     }
                 }
             }
@@ -40,12 +44,12 @@ namespace LMS.Controllers
         {
             using (LMSEntities dbEntities = new LMSEntities())
             {
-                if (IsBookAlreadyIssued(dbEntities, bookReservation.Id))
+                if (CommonBL.IsBookAlreadyIssued(dbEntities, bookReservation.Id))
                 {
                     return Json(new { success = false, message = "Book is already issued by you!" }, JsonRequestBehavior.AllowGet);
                 }
 
-                if (IsBookAlreadyReserved(dbEntities, bookReservation.Id))
+                if (CommonBL.IsBookAlreadyReserved(dbEntities, bookReservation.Id))
                 {
                     return Json(new { success = false, message = "Book is already reserved by you!" }, JsonRequestBehavior.AllowGet);
                 }
@@ -53,7 +57,7 @@ namespace LMS.Controllers
                 string msg = string.Empty;
                 bookReservation.ReservedOn = DateTime.Now;
                 bookReservation.UserId = CommonBL.UserId;
-                bookReservation.BookCodeId = GetAvailbleBookCodeId(dbEntities, bookReservation.Id);
+                bookReservation.BookCodeId = CommonBL.GetAvailbleBookCodeId(dbEntities, bookReservation.Id);
                 if (bookReservation.BookCodeId == 0)
                 {
                     if (!string.IsNullOrWhiteSpace(msg))
@@ -69,7 +73,7 @@ namespace LMS.Controllers
                 {
                     dbEntities.BookReservations.AddObject(bookReservation);
                     dbEntities.SaveChanges();
-                    return Json(new { success = true, message = "Book reserved successfully!" + Environment.NewLine +"Please collect book from Library within 24 Hours." }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = true, message = "Book reserved successfully!" + Environment.NewLine + "Please collect book from Library within 24 Hours." }, JsonRequestBehavior.AllowGet);
                 }
             }
         }
@@ -102,46 +106,243 @@ namespace LMS.Controllers
             }
         }
 
-        private bool IsBookAlreadyIssued(LMSEntities dbEntities, int bookId)
+        #endregion
+
+        #region Add To WishList
+
+        public ActionResult AddToWishlist()
         {
-            return dbEntities.BookIssues.ToList().FirstOrDefault(
-                x => dbEntities.BookCodeMasters.ToList().FirstOrDefault(y => y.Id == x.BookCodeId).BookId == bookId
-                    && x.IssuedFor == CommonBL.UserId && x.ReturnedOn != null) != null;
+            return View();
         }
 
-        private bool IsBookAlreadyReserved(LMSEntities dbEntities, int bookId)
+        public ActionResult GetBookWishList(Utility.DisplayRecords displayRecords)
         {
-            List<BookCodeMaster> bookCodeMasters = dbEntities.BookCodeMasters.Where(x => x.BookId == bookId).ToList();
-            if (bookCodeMasters != null && bookCodeMasters.Count > 0)
+            using (LMSEntities dbEntities = new LMSEntities())
             {
-                for (int i = 0; i < bookCodeMasters.Count; i++)
+                if (displayRecords == Utility.DisplayRecords.Default)
                 {
-                    if (dbEntities.BookReservations.ToList().Any(
-                        x => x.BookCodeId == bookCodeMasters[i].Id && !x.IsDeleted && x.UserId == CommonBL.UserId && x.ReservedOn.AddDays(1) > DateTime.Now))
+                    bookWishList = dbEntities.BookWishLists.ToList<BookWishList>();
+                    return Json(new { data = bookWishList.Where(x => !x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+                }
+                else if (displayRecords == Utility.DisplayRecords.Active)
+                {
+                    return Json(new { data = bookWishList.Where(x => !x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+                }
+                else if (displayRecords == Utility.DisplayRecords.Deleted)
+                {
+                    return Json(new { data = bookWishList.Where(x => x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+                }
+                {
+                    bookWishList = dbEntities.BookWishLists.ToList<BookWishList>();
+                    return Json(new { data = bookWishList }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+        [HttpGet]
+        public ActionResult InsertOrUpdate(int id = 0)
+        {
+            if (id == 0)
+            {
+                return View(new BookWishList());
+            }
+            else
+            {
+                using (LMSEntities dbEntities = new LMSEntities())
+                {
+                    return View(dbEntities.BookWishLists.Where(x => x.Id == id).FirstOrDefault<BookWishList>());
+                }
+            }
+        }
+
+        [HttpPost]
+        public ActionResult InsertUpdateOrDelete(BookWishList bookWish)
+        {
+            using (LMSEntities dbEntities = new LMSEntities())
+            {
+                bookWish.CreatedOn = bookWish.ModifiedOn = DateTime.Now;
+
+                if (bookWish.Id == 0)
+                {
+                    bookWish.CreatedBy = CommonBL.UserId;
+                    dbEntities.BookWishLists.AddObject(bookWish);
+                    dbEntities.SaveChanges();
+                    return Json(new { success = true, message = "BookWish".ObjCreated() }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    bookWish.ModifiedBy = CommonBL.UserId;
+
+                    BookWishList bookWishInDB = dbEntities.BookWishLists.Where(x => x.Id == bookWish.Id).FirstOrDefault<BookWishList>();
+                    if (bookWishInDB == null)
                     {
-                        return true;
+                        return Json(new { success = false, message = "BookWish".ObjNotFoundInDb() }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        if (bookWish.IsDeleted)
+                        {
+                            if (bookWishInDB.IsDeleted)
+                            {
+                                dbEntities.ObjectStateManager.ChangeObjectState(bookWishInDB, System.Data.EntityState.Modified);
+                                return Json(new { success = false, message = "BookWish".ObjAlreadyDeleted() }, JsonRequestBehavior.AllowGet);
+                            }
+                            else
+                            {
+                                bookWishInDB.IsDeleted = true;
+                                dbEntities.ObjectStateManager.ChangeObjectState(bookWishInDB, System.Data.EntityState.Modified);
+                            }
+                        }
+                        else
+                        {
+                            dbEntities.Detach(bookWishInDB);
+                            dbEntities.AttachTo("BookWishLists", bookWish);
+                            dbEntities.ObjectStateManager.ChangeObjectState(bookWish, System.Data.EntityState.Modified);
+                        }
+                        dbEntities.SaveChanges();
+
+                        if (bookWishInDB.IsDeleted)
+                        {
+                            return Json(new { success = true, message = "BookWish".ObjDeleted() }, JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            return Json(new { success = true, message = "BookWish".ObjUpdated() }, JsonRequestBehavior.AllowGet);
+                        }
                     }
                 }
             }
-            return false;
         }
 
-        private int GetAvailbleBookCodeId(LMSEntities dbEntities, int bookId)
+        #endregion
+
+        #region Issue Book
+        public ActionResult Issue()
         {
-            List<BookCodeMaster> bookCodeMasters = dbEntities.BookCodeMasters.Where(x => x.BookId == bookId).ToList();
-            if (bookCodeMasters != null && bookCodeMasters.Count > 0)
+            return View();
+        }
+
+        public ActionResult GetIssuedBooks(Utility.DisplayRecords displayRecords)
+        {
+            using (LMSEntities dbEntities = new LMSEntities())
             {
-                for (int i = 0; i < bookCodeMasters.Count; i++)
+                if (displayRecords == Utility.DisplayRecords.Default)
                 {
-                    if (!dbEntities.BookReservations.ToList().Any(
-                        x => x.BookCodeId == bookCodeMasters[i].Id && !x.IsDeleted && x.ReservedOn.AddDays(1) > DateTime.Now))
+                    bookIssues = dbEntities.GetBookIssue().ToList<GetBookIssue>();
+                    return Json(new { data = bookIssues.Where(x => !x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+                }
+                else if (displayRecords == Utility.DisplayRecords.Active)
+                {
+                    return Json(new { data = bookIssues.Where(x => !x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+                }
+                else if (displayRecords == Utility.DisplayRecords.Deleted)
+                {
+                    return Json(new { data = bookIssues.Where(x => x.IsDeleted) }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    bookIssues = dbEntities.GetBookIssue().ToList<GetBookIssue>();
+                    return Json(new { data = bookIssues }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GetIssuedBook(int id = 0)
+        {
+            if (id == 0)
+            {
+                return View(new BookIssue());
+            }
+            else
+            {
+                using (LMSEntities dbEntities = new LMSEntities())
+                {
+                    return View(dbEntities.BookIssues.Where(x => x.Id == id).FirstOrDefault<BookIssue>());
+                }
+            }
+        }
+
+        [HttpPost]
+        public ActionResult IssueBook(BookIssue bookIssue)
+        {
+            using (LMSEntities dbEntities = new LMSEntities())
+            {
+                bookIssue.CreatedOn = bookIssue.ModifiedOn = DateTime.Now;
+
+                if (bookIssue.Id == 0)
+                {
+                    bookIssue.CreatedBy = CommonBL.UserId;
+                    bookIssue.IssuedOn = DateTime.Now;
+                    dbEntities.BookIssues.AddObject(bookIssue);
+
+                    BookCodeMaster bookCodeMaster = dbEntities.BookCodeMasters.FirstOrDefault(x => x.Id == bookIssue.BookCodeId);
+                    dbEntities.ObjectStateManager.ChangeObjectState(bookCodeMaster, System.Data.EntityState.Modified);
+                    bookCodeMaster.IsIssued = true;
+
+                    dbEntities.SaveChanges();
+                    return Json(new { success = true, message = "BookIssue".ObjCreated() }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    bookIssue.ModifiedBy = CommonBL.UserId;
+
+                    BookIssue bookIssueInDB = dbEntities.BookIssues.Where(x => x.Id == bookIssue.Id).FirstOrDefault<BookIssue>();
+                    if (bookIssueInDB == null)
                     {
-                        return bookCodeMasters[i].Id;
+                        return Json(new { success = false, message = "BookIssue".ObjNotFoundInDb() }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        if (bookIssueInDB.IsDeleted)
+                        {
+                            if (bookIssueInDB.IsDeleted)
+                            {
+                                dbEntities.ObjectStateManager.ChangeObjectState(bookIssueInDB, System.Data.EntityState.Modified);
+                                return Json(new { success = false, message = "BookIssue".ObjAlreadyDeleted() }, JsonRequestBehavior.AllowGet);
+                            }
+                            else
+                            {
+                                bookIssueInDB.IsDeleted = true;
+                                dbEntities.ObjectStateManager.ChangeObjectState(bookIssueInDB, System.Data.EntityState.Modified);
+                            }
+                            BookCodeMaster bookCodeMaster = dbEntities.BookCodeMasters.FirstOrDefault(x => x.Id == bookIssue.BookCodeId);
+                            dbEntities.ObjectStateManager.ChangeObjectState(bookCodeMaster, System.Data.EntityState.Modified);
+                            bookCodeMaster.IsIssued = false;
+                        }
+                        else
+                        {
+                            if (bookIssue.BookCodeId != bookIssueInDB.BookCodeId)
+                            {
+                                BookCodeMaster bookCodeMaster1 = dbEntities.BookCodeMasters.FirstOrDefault(x => x.Id == bookIssue.BookCodeId);
+                                bookCodeMaster1.IsIssued = true;
+                                dbEntities.ObjectStateManager.ChangeObjectState(bookCodeMaster1, System.Data.EntityState.Modified);
+                                
+                                BookCodeMaster bookCodeMaster2 = dbEntities.BookCodeMasters.FirstOrDefault(x => x.Id == bookIssueInDB.BookCodeId);
+                                bookCodeMaster2.IsIssued = false;
+                                dbEntities.ObjectStateManager.ChangeObjectState(bookCodeMaster2, System.Data.EntityState.Modified);
+                            }
+
+                            dbEntities.Detach(bookIssueInDB);
+                            dbEntities.AttachTo("BookIssues", bookIssue);
+                            dbEntities.ObjectStateManager.ChangeObjectState(bookIssue, System.Data.EntityState.Modified);
+                        }
+                        dbEntities.SaveChanges();
+
+                        if (bookIssueInDB.IsDeleted)
+                        {
+                            return Json(new { success = true, message = "BookIssue".ObjDeleted() }, JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            return Json(new { success = true, message = "BookIssue".ObjUpdated() }, JsonRequestBehavior.AllowGet);
+                        }
                     }
                 }
             }
-            return 0;
         }
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

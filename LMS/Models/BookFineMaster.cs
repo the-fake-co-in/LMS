@@ -28,6 +28,10 @@ namespace LMS.Models
         [Required(ErrorMessage = "Please select BookType!")]
         public Byte BookTypeId { get; set; }
 
+        [Display(Name = "FineType")]
+        [Required(ErrorMessage = "Please select FineType!")]
+        public Byte FineTypeId { get; set; }
+
         [Display(Name = "Late Fee Base (Rs.)")]
         [Required(ErrorMessage = "Please Enter Late Base Charge Fee (Rs.)!")]
         public Int32 LateFeeBaseChargeAmount { get; set; }

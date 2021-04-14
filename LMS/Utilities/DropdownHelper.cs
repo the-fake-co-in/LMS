@@ -58,6 +58,28 @@ namespace LMS.Utilities
             return lstStates;
         }
 
+        public static List<SelectListItem> DDLForUserMaster()
+        {
+            using (LMSEntities dbEntities = new LMSEntities())
+            {
+                return dbEntities.UserDetails
+                    .Where(x => !x.IsDeleted).ToList()
+                    .Select(y => new SelectListItem() { Text = y.FirstName + " " + y.LastName, Value = y.UserId.ToString() })
+                    .OrderBy(z => z.Value).ToList<SelectListItem>();
+            }
+        }
+
+        public static List<SelectListItem> DDLForIssueBook()
+        {
+            using (LMSEntities dbEntities = new LMSEntities())
+            {
+                return dbEntities.UserDetails
+                    .Where(x => !x.IsDeleted && (x.RoleId == 1 || x.RoleId == 3)).ToList()
+                    .Select(y => new SelectListItem() { Text = y.FirstName + " " + y.LastName, Value = y.UserId.ToString() })
+                    .OrderBy(z => z.Value).ToList<SelectListItem>();
+            }
+        }
+
         public static List<SelectListItem> DDLForAuthorMaster()
         {
             using (LMSEntities dbEntities = new LMSEntities())
@@ -77,6 +99,19 @@ namespace LMS.Utilities
                     .Where(x => !x.IsDeleted).ToList()
                     .Select(y => new SelectListItem() { Text = y.Type, Value = y.Id.ToString() })
                     .OrderBy(z => z.Value).ToList<SelectListItem>();
+            }
+        }
+
+        public static List<SelectListItem> DDLForBookCodeMaster()
+        {
+            using (LMSEntities dbEntities = new LMSEntities())
+            {
+                return (from BCM in dbEntities.BookCodeMasters.ToList()
+                        join BM in dbEntities.BookMasters.ToList()
+                        on BCM.BookId equals BM.Id
+                        where !BCM.IsDeleted && !BM.IsDeleted && !BCM.IsIssued && !BCM.IsLost && CommonBL.GetAvailbleBookCodeId(dbEntities, BCM.BookId) > 0
+                        select new SelectListItem() { Text = BM.Name + " - " + BCM.BookCode, Value = BCM.Id.ToString() })
+                       .OrderBy(x => x.Text).ToList<SelectListItem>();
             }
         }
 

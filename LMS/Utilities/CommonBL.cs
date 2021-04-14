@@ -61,5 +61,46 @@ namespace LMS.Utilities
 
             return forms;
         }
+
+        public static bool IsBookAlreadyIssued(LMSEntities dbEntities, int bookId)
+        {
+            return dbEntities.BookIssues.ToList().FirstOrDefault(
+                x => dbEntities.BookCodeMasters.ToList().FirstOrDefault(y => y.Id == x.BookCodeId).BookId == bookId
+                    && x.IssuedFor == CommonBL.UserId && x.ReturnedOn != null) != null;
+        }
+
+        public static bool IsBookAlreadyReserved(LMSEntities dbEntities, int bookId)
+        {
+            List<BookCodeMaster> bookCodeMasters = dbEntities.BookCodeMasters.Where(x => x.BookId == bookId).ToList();
+            if (bookCodeMasters != null && bookCodeMasters.Count > 0)
+            {
+                for (int i = 0; i < bookCodeMasters.Count; i++)
+                {
+                    if (dbEntities.BookReservations.ToList().Any(
+                        x => x.BookCodeId == bookCodeMasters[i].Id && !x.IsDeleted && x.UserId == CommonBL.UserId && x.ReservedOn.AddDays(1) > DateTime.Now))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static int GetAvailbleBookCodeId(LMSEntities dbEntities, int bookId)
+        {
+            List<BookCodeMaster> bookCodeMasters = dbEntities.BookCodeMasters.Where(x => x.BookId == bookId).ToList();
+            if (bookCodeMasters != null && bookCodeMasters.Count > 0)
+            {
+                for (int i = 0; i < bookCodeMasters.Count; i++)
+                {
+                    if (!dbEntities.BookReservations.ToList().Any(
+                        x => x.BookCodeId == bookCodeMasters[i].Id && !x.IsDeleted && x.ReservedOn.AddDays(1) > DateTime.Now))
+                    {
+                        return bookCodeMasters[i].Id;
+                    }
+                }
+            }
+            return 0;
+        }
     }
 }

@@ -21,6 +21,12 @@ body
     background-color:#5060B0;
 }
 
+.blink
+{
+    font-size:large;
+    font-weight:bold;
+}
+
 .w3-sidebar
 {
     background-color:#405090;
@@ -156,6 +162,14 @@ img
     color: White;
 }
 
+.errMsg
+{
+    color: Red;
+    font-size:large;
+    font-weight: bold;
+    margin: 10px;
+    border: 1px solid #e80c4d;
+}
 .field-validation-error {
     color: #e80c4d;
     font-weight: bold;

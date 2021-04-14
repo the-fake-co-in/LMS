@@ -24,6 +24,26 @@
         });
     }
 
+    var blink_color = 0;
+    function BlinkText() {
+        if (blink_color == 0) {
+            $('.blink').css('color', 'Red');
+            blink_color = 1;
+        }
+        else if (blink_color == 1) {
+            $('.blink').css('color', 'Yello');
+            blink_color = 2;
+        }
+        else {
+            $('.blink').css('color', 'White');
+            blink_color = 0;
+        }
+        $('.blink').fadeIn(500);
+        $('.blink').fadeOut(500);
+    }
+
+    setInterval(BlinkText, 1000);
+
     function ChangeProfPic(imgPath, showMsg) {
         if (imgPath != '') {
             if (imgPath.startsWith('Error')) {

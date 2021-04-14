@@ -9,25 +9,25 @@
    @Html.HiddenFor(model => model.Id)
    <div class="form-group">
       @Html.LabelFor(model => model.BookId, new { @class = "control-label" })
-      @Html.DropDownListFor(model => model.BookId, DropdownListHelper.DDLForBookMaster(), "Select Book", new { htmlAttributes = new { @class = "form-control" } })
+      @Html.DropDownListFor(model => model.BookId, DropdownListHelper.DDLForBookMaster(), "Select Book", new { @class = "form-control" })
       @Html.ValidationMessageFor(model => model.BookId)
    </div>
    <div class="form-group">
       @Html.LabelFor(model => model.BookCode, new { @class = "control-label" })
-      @Html.EditorFor(model => model.BookCode, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.EditorFor(model => model.BookCode, new { @class = "form-control" })
       @Html.ValidationMessageFor(model => model.BookCode)
    </div>
    <div>
       <span class="mx-3">
-         @Html.CheckBoxFor(model => model.IsIssued, new { htmlAttributes = new { @type = "checkbox" } })
+         @Html.CheckBoxFor(model => model.IsIssued, new { @type = "checkbox" })
          @Html.LabelFor(model => model.IsIssued, new { @class = "control-label" })
       </span>
       <span class="mx-3">
-         @Html.CheckBoxFor(model => model.IsLost, new { htmlAttributes = new { @type = "checkbox" } })
+         @Html.CheckBoxFor(model => model.IsLost, new { @type = "checkbox" })
          @Html.LabelFor(model => model.IsLost, new { @class = "control-label" })
       </span>
       <span class="mx-3">
-         @Html.CheckBoxFor(model => model.IsDamaged, new { htmlAttributes = new { @type = "checkbox" } })
+         @Html.CheckBoxFor(model => model.IsDamaged, new { @type = "checkbox" })
          @Html.LabelFor(model => model.IsDamaged, new { @class = "control-label" })
       </span>
    </div>

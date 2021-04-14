@@ -23,6 +23,8 @@ namespace LMS.Utilities
             All
         }
 
+        public const int MAX_DAYS_FOR_ISSUE = 5;
+
         public static string AddNewObj(this string input)
         {
             return string.Format("Add new {0}", input);

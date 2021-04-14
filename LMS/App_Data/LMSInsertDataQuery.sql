@@ -170,3 +170,19 @@ INSERT [dbo].[RoleMaster] ([Name], [IsDeleted], [CreatedBy], [CreatedOn], [Modif
 select * From [RoleMaster]
 
 ------------------------------------------------------------------------------------------------------------------------------
+
+Truncate Table [BookWishList]
+Insert Into dbo.BookWishList
+Select 'BookName_1', 'BookDetails_1', 0, 1, GetDate(), 1, GetDate() Union All
+Select 'BookName_2', 'BookDetails_2', 0, 1, GetDate(), 1, GetDate() Union All
+Select 'BookName_3', 'BookDetails_3', 0, 1, GetDate(), 1, GetDate() Union All
+Select 'BookName_4', 'BookDetails_4', 0, 1, GetDate(), 1, GetDate() Union All
+Select 'BookName_5', 'BookDetails_5', 0, 1, GetDate(), 1, GetDate() Union All
+Select 'BookName_6', 'BookDetails_6', 0, 1, GetDate(), 1, GetDate() Union All
+Select 'BookName_7', 'BookDetails_7', 0, 1, GetDate(), 1, GetDate() Union All
+Select 'BookName_8', 'BookDetails_8', 0, 1, GetDate(), 1, GetDate() Union All
+Select 'BookName_9', 'BookDetails_9', 0, 1, GetDate(), 1, GetDate() Union All
+Select 'BookName_10', 'BookDetails_10', 0, 1, GetDate(), 1, GetDate()
+select * From [BookWishList]
+
+------------------------------------------------------------------------------------------------------------------------------

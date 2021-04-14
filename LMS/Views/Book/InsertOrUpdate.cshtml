@@ -1,0 +1,33 @@
+﻿@model LMS.Models.BookWishList
+@{
+   Layout = null;
+   ViewBag.Title = "Add Book to WishList";
+}
+
+@using (Html.BeginForm("InsertUpdateOrDelete", "Book", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+   @Styles.Render("~/bundles/jqueryModal")
+
+   @Html.HiddenFor(model => model.Id)
+
+   <div class="form-group">
+      @Html.LabelFor(model => model.BookName, new { @class = "control-label" })
+      @Html.EditorFor(model => model.BookName, new { @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.BookName)
+   </div>
+
+   <div class="form-group">
+      @Html.LabelFor(model => model.BookDetails, new { @class = "control-label" })
+      @Html.EditorFor(model => model.BookDetails, new { @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.BookDetails)
+   </div>
+   <hr class="mb-2 mt-0"/>
+   <div class="form-group float-right m-0">
+      <button type="submit" class="btn btn-primary">Save changes</button>
+      <button type="reset" class="btn btn-secondary">Reset</button>
+      <button type="button" class="btn btn-danger" onclick="closeJQryDlg()">Close</button>
+   </div>
+   @section Scripts {
+      @Scripts.Render("~/bundles/jqueryModal")
+   }
+}

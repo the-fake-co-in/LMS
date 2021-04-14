@@ -25,10 +25,11 @@
 			   <span class="dropdown">
 				   <button class="btn btn-primary dropdown-toggle pull-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&#128104; &#128105;</button>
 				   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					   <a id="updateProfile" class="dropdown-item" href="@Url.Action("InsertOrUpdate", "User", new { UserId = Session["UserId"] })" type="submit">&#128104; Update Profile &#128105;</a>
+					   <a id="updateProfile" class="dropdown-item" href="@Url.Action("InsertOrUpdate", "User", new { UserId = Session["UserId"] }), new { Layout = 1 })" type="submit">&#128104; Update Profile &#128105;</a>
 					   <a id="logout" class="dropdown-item" href="@Url.Action("LogOut", "Login")" type="submit">&#9940; Logout</a>
 				   </div>
 			   </span>
+            <label class="blink pull-right mt-1 mx-3" >@Session["Name"]</label>
 		   </span>
 	   </span>
    </div>
