@@ -66,13 +66,19 @@ namespace LMS.Controllers
 
                 if (userDetail.UserId == 0)
                 {
-                    userDetail.CreatedBy = 1;
+                    if (dbEntities.UserDetails.ToArray().Any(x => x.UserName.IsEqual(userDetail.UserName)))
+                    {
+                        return Json(new { success = false, message = "User".objAlreadyExists("UserName", userDetail.UserName) }, JsonRequestBehavior.AllowGet);
+                    }
+
+                    userDetail.CreatedBy = CommonBL.UserId;
                     dbEntities.UserDetails.AddObject(userDetail);
                     dbEntities.SaveChanges();
                     return Json(new { success = true, message = "User".ObjCreated() }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
+                    userDetail.ModifiedBy = CommonBL.UserId;
                     UserDetail userInDb = dbEntities.UserDetails.Where(x => x.UserId == userDetail.UserId).FirstOrDefault<UserDetail>();
                     if (userInDb == null)
                     {
@@ -80,6 +86,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
+                        userInDb.ModifiedBy = CommonBL.UserId;
                         if (userDetail.IsDeleted)
                         {
                             userInDb.IsDeleted = true;
@@ -87,7 +94,11 @@ namespace LMS.Controllers
                         }
                         else
                         {
-                            userDetail.ModifiedBy = 1;
+                            if (dbEntities.UserDetails.ToArray().Any(x => x.UserName.IsEqual(userDetail.UserName) && x.UserId != userDetail.UserId))
+                            {
+                                return Json(new { success = false, message = "User".objAlreadyExists("UserName", userDetail.UserName) }, JsonRequestBehavior.AllowGet);
+                            }
+
                             dbEntities.Detach(userInDb);
                             dbEntities.AttachTo("UserDetails", userDetail);
                             dbEntities.ObjectStateManager.ChangeObjectState(userDetail, System.Data.EntityState.Modified);

@@ -61,13 +61,19 @@ namespace LMS.Controllers
 
                 if (author.Id == 0)
                 {
-                    author.CreatedBy = 1;
+                    if (dbEntities.AuthorMasters.ToArray().Any(x => x.Name.IsEqual(author.Name)))
+                    {
+                        return Json(new { success = false, message = "Author".objAlreadyExists("Name", author.Name) }, JsonRequestBehavior.AllowGet);
+                    }
+
+                    author.CreatedBy = CommonBL.UserId;
                     dbEntities.AuthorMasters.AddObject(author);
                     dbEntities.SaveChanges();
                     return Json(new { success = true, message = "Author".ObjCreated() }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
+                    author.ModifiedBy = CommonBL.UserId;
                     AuthorMaster authorInDb = dbEntities.AuthorMasters.Where(x => x.Id == author.Id).FirstOrDefault<AuthorMaster>();
                     if (authorInDb == null)
                     {
@@ -75,6 +81,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
+                        authorInDb.ModifiedBy = CommonBL.UserId;
                         if (author.IsDeleted)
                         {
                             if (authorInDb.IsDeleted)
@@ -90,7 +97,11 @@ namespace LMS.Controllers
                         }
                         else
                         {
-                            author.ModifiedBy = 1;
+                            if (dbEntities.AuthorMasters.ToArray().Any(x => x.Name.IsEqual(author.Name) && x.Id != author.Id))
+                            {
+                                return Json(new { success = false, message = "Author".objAlreadyExists("Name", author.Name) }, JsonRequestBehavior.AllowGet);
+                            }
+
                             dbEntities.Detach(authorInDb);
                             dbEntities.AttachTo("AuthorMasters", author);
                             dbEntities.ObjectStateManager.ChangeObjectState(author, System.Data.EntityState.Modified);

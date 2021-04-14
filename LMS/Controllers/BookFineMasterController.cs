@@ -66,13 +66,19 @@ namespace LMS.Controllers
 
                 if (bookFine.Id == 0)
                 {
-                    bookFine.CreatedBy = 1;
+                    if (dbEntities.BookFineMasters.Any(x => x.BookTypeId == bookFine.BookTypeId && x.FineTypeId == bookFine.FineTypeId))
+                    {
+                        return Json(new { success = false, message = "Fine already added for selected BookType and FineType" }, JsonRequestBehavior.AllowGet);
+                    }
+
+                    bookFine.CreatedBy = CommonBL.UserId;
                     dbEntities.BookFineMasters.AddObject(bookFine);
                     dbEntities.SaveChanges();
                     return Json(new { success = true, message = "BookFine".ObjCreated() }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
+                    bookFine.ModifiedBy = CommonBL.UserId;
                     BookFineMaster bookFineInDb = dbEntities.BookFineMasters.Where(x => x.Id == bookFine.Id).FirstOrDefault<BookFineMaster>();
                     if (bookFineInDb == null)
                     {
@@ -80,6 +86,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
+                        bookFineInDb.ModifiedBy = CommonBL.UserId;
                         if (bookFine.IsDeleted)
                         {
                             bookFineInDb.IsDeleted = true;
@@ -87,7 +94,11 @@ namespace LMS.Controllers
                         }
                         else
                         {
-                            bookFine.ModifiedBy = 1;
+                            if (dbEntities.BookFineMasters.Any(x => x.BookTypeId == bookFine.BookTypeId && x.FineTypeId == bookFine.FineTypeId && x.Id != bookFine.Id))
+                            {
+                                return Json(new { success = false, message = "Fine already added for selected BookType and FineType" }, JsonRequestBehavior.AllowGet);
+                            }
+
                             dbEntities.Detach(bookFineInDb);
                             dbEntities.AttachTo("BookFineMasters", bookFine);
                             dbEntities.ObjectStateManager.ChangeObjectState(bookFine, System.Data.EntityState.Modified);

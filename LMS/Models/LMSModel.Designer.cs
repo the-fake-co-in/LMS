@@ -100,22 +100,6 @@ namespace LMS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<BookIssue> BookIssues
-        {
-            get
-            {
-                if ((_BookIssues == null))
-                {
-                    _BookIssues = base.CreateObjectSet<BookIssue>("BookIssues");
-                }
-                return _BookIssues;
-            }
-        }
-        private ObjectSet<BookIssue> _BookIssues;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<BookMaster> BookMasters
         {
             get
@@ -368,6 +352,22 @@ namespace LMS.Models
             }
         }
         private ObjectSet<BookWishList> _BookWishLists;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<BookIssue> BookIssues
+        {
+            get
+            {
+                if ((_BookIssues == null))
+                {
+                    _BookIssues = base.CreateObjectSet<BookIssue>("BookIssues");
+                }
+                return _BookIssues;
+            }
+        }
+        private ObjectSet<BookIssue> _BookIssues;
 
         #endregion
 
@@ -387,14 +387,6 @@ namespace LMS.Models
         public void AddToBookCodeMasters(BookCodeMaster bookCodeMaster)
         {
             base.AddObject("BookCodeMasters", bookCodeMaster);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the BookIssues EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToBookIssues(BookIssue bookIssue)
-        {
-            base.AddObject("BookIssues", bookIssue);
         }
     
         /// <summary>
@@ -523,6 +515,14 @@ namespace LMS.Models
         public void AddToBookWishLists(BookWishList bookWishList)
         {
             base.AddObject("BookWishLists", bookWishList);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the BookIssues EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBookIssues(BookIssue bookIssue)
+        {
+            base.AddObject("BookIssues", bookIssue);
         }
 
         #endregion

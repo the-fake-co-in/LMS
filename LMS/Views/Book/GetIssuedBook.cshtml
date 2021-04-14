@@ -5,7 +5,7 @@
    ViewBag.Title = "Add BookFine";
 }
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-@using (Html.BeginForm("InsertUpdateOrDelete", "BookIssue", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+@using (Html.BeginForm("IssueBook", "Book", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
    if (Model != null && Model.IssuedOn != null && Model.IssuedOn != DateTime.MinValue && Model.IssuedOn.AddDays(Utility.MAX_DAYS_FOR_ISSUE) < DateTime.Now)
    {
@@ -15,7 +15,7 @@
       @Html.HiddenFor(model => model.Id)
       <div class="form-group col-sm-12">
          @Html.LabelFor(model => model.BookCodeId, new { @class = "control-label" })
-         @Html.DropDownListFor(model => model.BookCodeId, DropdownListHelper.DDLForBookCodeMaster(), "Select BookCode", new { @class = "form-control" })
+         @Html.DropDownListFor(model => model.BookCodeId, DropdownListHelper.DDLForBookCodeMaster(Model.BookCodeId), "Select BookCode", new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.BookCodeId)
       </div>
       <div class="form-group col-sm-12">
@@ -28,12 +28,25 @@
          @Html.DropDownListFor(model => model.IssuedBy, DropdownListHelper.DDLForIssueBook(), "Select Issued By", new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.IssuedBy)
       </div>
-      <hr />
+      @if (Model.Id != 0)
+      {
+      <div class="form-group col-sm-12">
+         @Html.LabelFor(model => model.IssuedOn, new { @class = "control-label" })
+         @Html.EditorFor(model => model.IssuedOn, new { @class = "form-control", @id = "IssuedOn", @type = "date" })
+      </div>
       <div class="form-group col-sm-12">
          @Html.LabelFor(model => model.ReceivedBy, new { @class = "control-label" })
          @Html.DropDownListFor(model => model.ReceivedBy, DropdownListHelper.DDLForIssueBook(), "Select Received By", new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.ReceivedBy)
       </div>
+      if (Model.ReceivedBy != 0)
+      {
+         <div class="form-group col-sm-12">
+            @Html.LabelFor(model => model.ReturnedOn, new { @class = "control-label" })
+            @Html.EditorFor(model => model.ReturnedOn, new { @class = "form-control", @id = "ReturnedOn", @type = "date" })
+         </div>
+      }
+      }
       <div class="form-group col-sm-12">
          @Html.LabelFor(model => model.Remarks, new { @class = "control-label" })
          @Html.EditorFor(model => model.Remarks, new { @class = "form-control" })
@@ -41,14 +54,28 @@
       </div>
    </div>
    <hr class="mb-2 mt-0"/>
-   <div class="form-group col-sm-12 float-right m-0">
-      <button type="submit" class="btn btn-primary">Save changes</button>
-      <button type="reset" class="btn btn-secondary">Reset</button>
-      <button type="button" class="btn btn-danger" onclick="closeJQryDlg()">Close</button>
+   <div class="form-group col-sm-12 ">
+      <button type="button" class="btn btn-danger mx-1 pull-right" onclick="closeJQryDlg()">Close</button>
+      <button type="submit" class="btn btn-primary mx-1 pull-right">Save changes</button>
+      <button type="reset" class="btn btn-secondary mx-1 pull-right">Reset</button>
    </div>
 
    @section Scripts {
-      @Scripts.Render("~/bundles/jqueryModal")
-      <script src="../../Content/LMSCustom/Site.js" type="text/javascript"></script>
+      @Scripts.Render("~/bundles/jquery")
+      @Scripts.Render("~/bundles/bootstrap")
+      @Scripts.Render("~/bundles/custom")
    }
+   <script type="text/javascript">
+      $(document).ready(function () {
+         debugger;
+
+         if ($('[type="datetime"]')) {
+            $('[type="datetime"]').datepicker();
+         };
+
+         $("#IssuedOn").prop('disabled', 'disabled');
+         $("#ReturnedOn").prop('disabled', 'disabled');
+      });
+   </script>
+
 }

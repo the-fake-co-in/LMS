@@ -277,8 +277,8 @@ namespace LMS.Controllers
                     dbEntities.BookIssues.AddObject(bookIssue);
 
                     BookCodeMaster bookCodeMaster = dbEntities.BookCodeMasters.FirstOrDefault(x => x.Id == bookIssue.BookCodeId);
-                    dbEntities.ObjectStateManager.ChangeObjectState(bookCodeMaster, System.Data.EntityState.Modified);
                     bookCodeMaster.IsIssued = true;
+                    dbEntities.ObjectStateManager.ChangeObjectState(bookCodeMaster, System.Data.EntityState.Modified);
 
                     dbEntities.SaveChanges();
                     return Json(new { success = true, message = "BookIssue".ObjCreated() }, JsonRequestBehavior.AllowGet);
@@ -294,7 +294,8 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        if (bookIssueInDB.IsDeleted)
+                        int bookCodeId = dbEntities.BookIssues.FirstOrDefault(x => x.Id == bookIssue.Id).BookCodeId;
+                        if (bookIssue.IsDeleted)
                         {
                             if (bookIssueInDB.IsDeleted)
                             {
@@ -306,12 +307,14 @@ namespace LMS.Controllers
                                 bookIssueInDB.IsDeleted = true;
                                 dbEntities.ObjectStateManager.ChangeObjectState(bookIssueInDB, System.Data.EntityState.Modified);
                             }
-                            BookCodeMaster bookCodeMaster = dbEntities.BookCodeMasters.FirstOrDefault(x => x.Id == bookIssue.BookCodeId);
+                            BookCodeMaster bookCodeMaster = dbEntities.BookCodeMasters.FirstOrDefault(x => x.Id == bookCodeId);
                             dbEntities.ObjectStateManager.ChangeObjectState(bookCodeMaster, System.Data.EntityState.Modified);
                             bookCodeMaster.IsIssued = false;
                         }
                         else
                         {
+                            bookIssue.ReturnedOn = DateTime.Now;
+
                             if (bookIssue.BookCodeId != bookIssueInDB.BookCodeId)
                             {
                                 BookCodeMaster bookCodeMaster1 = dbEntities.BookCodeMasters.FirstOrDefault(x => x.Id == bookIssue.BookCodeId);

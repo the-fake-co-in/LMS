@@ -65,13 +65,19 @@ namespace LMS.Controllers
 
                 if (fineType.Id == 0)
                 {
-                    fineType.CreatedBy = 1;
+                    if (dbEntities.FineTypeMasters.ToArray().Any(x => x.Type.IsEqual(fineType.Type)))
+                    {
+                        return Json(new { success = false, message = "FineType".objAlreadyExists("Type", fineType.Type) }, JsonRequestBehavior.AllowGet);
+                    }
+
+                    fineType.CreatedBy = CommonBL.UserId;
                     dbEntities.FineTypeMasters.AddObject(fineType);
                     dbEntities.SaveChanges();
                     return Json(new { success = true, message = "FineType".ObjCreated() }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
+                    fineType.ModifiedBy = CommonBL.UserId;
                     FineTypeMaster fineTypeInDb = dbEntities.FineTypeMasters.Where(x => x.Id == fineType.Id).FirstOrDefault<FineTypeMaster>();
                     if (fineTypeInDb == null)
                     {
@@ -79,6 +85,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
+                        fineTypeInDb.ModifiedBy = CommonBL.UserId;
                         if (fineType.IsDeleted)
                         {
                             fineTypeInDb.IsDeleted = true;
@@ -86,7 +93,11 @@ namespace LMS.Controllers
                         }
                         else
                         {
-                            fineType.ModifiedBy = 1;
+                            if (dbEntities.FineTypeMasters.ToArray().Any(x => x.Type.IsEqual(fineType.Type) && x.Id != fineType.Id))
+                            {
+                                return Json(new { success = false, message = "FineType".objAlreadyExists("Type", fineType.Type) }, JsonRequestBehavior.AllowGet);
+                            }
+
                             dbEntities.Detach(fineTypeInDb);
                             dbEntities.AttachTo("FineTypeMasters", fineType);
                             dbEntities.ObjectStateManager.ChangeObjectState(fineType, System.Data.EntityState.Modified);

@@ -45,6 +45,11 @@ namespace LMS.Utilities
             return string.Format("{0} deleted successfully!", input);
         }
 
+        public static string objAlreadyExists(this string table, string fieldName, string fieldValue)
+        {
+            return string.Format("{0} already exists with same {1}: {2}", table, fieldName, fieldValue);
+        }
+
         public static string ObjAlreadyDeleted(this string input)
         {
             return string.Format("{0} is already deleted!", input);
@@ -63,6 +68,11 @@ namespace LMS.Utilities
         public static string DeleteConfirm(this string input)
         {
             return string.Format("Are you sure, you want to delete the selected {0}?", input);
+        }
+
+        public static bool IsEqual(this string input, string compareTo)
+        {
+            return input.Trim().ToLower() == compareTo.Trim().ToLower();
         }
 
         public static string RenderRazorViewToString(Controller controller, string viewName, object model = null)

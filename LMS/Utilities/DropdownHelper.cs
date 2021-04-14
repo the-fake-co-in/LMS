@@ -102,14 +102,15 @@ namespace LMS.Utilities
             }
         }
 
-        public static List<SelectListItem> DDLForBookCodeMaster()
+        public static List<SelectListItem> DDLForBookCodeMaster(int bookCodeId)
         {
             using (LMSEntities dbEntities = new LMSEntities())
             {
                 return (from BCM in dbEntities.BookCodeMasters.ToList()
                         join BM in dbEntities.BookMasters.ToList()
                         on BCM.BookId equals BM.Id
-                        where !BCM.IsDeleted && !BM.IsDeleted && !BCM.IsIssued && !BCM.IsLost && CommonBL.GetAvailbleBookCodeId(dbEntities, BCM.BookId) > 0
+                        where BCM.Id == bookCodeId || (!BCM.IsDeleted && !BM.IsDeleted && !BCM.IsLost
+                        && !BCM.IsIssued  && CommonBL.GetAvailbleBookCodeId(dbEntities, BCM.BookId) > 0)
                         select new SelectListItem() { Text = BM.Name + " - " + BCM.BookCode, Value = BCM.Id.ToString() })
                        .OrderBy(x => x.Text).ToList<SelectListItem>();
             }

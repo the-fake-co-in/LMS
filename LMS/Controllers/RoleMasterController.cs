@@ -65,13 +65,19 @@ namespace LMS.Controllers
 
                 if (role.Id == 0)
                 {
-                    role.CreatedBy = 1;
+                    if (dbEntities.RoleMasters.ToArray().Any(x => x.Name.IsEqual(role.Name)))
+                    {
+                        return Json(new { success = false, message = "Role".objAlreadyExists("Name", role.Name) }, JsonRequestBehavior.AllowGet);
+                    }
+
+                    role.CreatedBy = CommonBL.UserId;
                     dbEntities.RoleMasters.AddObject(role);
                     dbEntities.SaveChanges();
                     return Json(new { success = true, message = "Role".ObjCreated() }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
+                    role.ModifiedBy = CommonBL.UserId;
                     RoleMaster roleInDb = dbEntities.RoleMasters.Where(x => x.Id == role.Id).FirstOrDefault<RoleMaster>();
                     if (roleInDb == null)
                     {
@@ -79,6 +85,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
+                        roleInDb.ModifiedBy = CommonBL.UserId;
                         if (role.IsDeleted)
                         {
                             roleInDb.IsDeleted = true;
@@ -86,7 +93,11 @@ namespace LMS.Controllers
                         }
                         else
                         {
-                            role.ModifiedBy = 1;
+                            if (dbEntities.RoleMasters.ToArray().Any(x => x.Name.IsEqual(role.Name) && x.Id != role.Id))
+                            {
+                                return Json(new { success = false, message = "Role".objAlreadyExists("Name", role.Name) }, JsonRequestBehavior.AllowGet);
+                            } 
+                            
                             dbEntities.Detach(roleInDb);
                             dbEntities.AttachTo("RoleMasters", role);
                             dbEntities.ObjectStateManager.ChangeObjectState(role, System.Data.EntityState.Modified);

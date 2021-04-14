@@ -59,6 +59,7 @@ function SubmitForm(form) {
 
 function Delete(id, dlgTitle, postUrl) {
     if (confirm('Are You Sure to Delete this ' + dlgTitle + ' Record ?')) {
+        debugger;
       $.ajax({
          type: "POST",
          data: {

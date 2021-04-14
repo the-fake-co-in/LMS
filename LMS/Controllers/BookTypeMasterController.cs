@@ -65,13 +65,19 @@ namespace LMS.Controllers
 
                 if (bookType.Id == 0)
                 {
-                    bookType.CreatedBy = 1;
+                    if (dbEntities.BookTypeMasters.ToArray().Any(x => x.Type.IsEqual(bookType.Type)))
+                    {
+                        return Json(new { success = false, message = "BookType".objAlreadyExists("Type", bookType.Type) }, JsonRequestBehavior.AllowGet);
+                    }
+
+                    bookType.CreatedBy = CommonBL.UserId;
                     dbEntities.BookTypeMasters.AddObject(bookType);
                     dbEntities.SaveChanges();
                     return Json(new { success = true, message = "BookType".ObjCreated() }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
+                    bookType.ModifiedBy = CommonBL.UserId;
                     BookTypeMaster bookTypeInDb = dbEntities.BookTypeMasters.Where(x => x.Id == bookType.Id).FirstOrDefault<BookTypeMaster>();
                     if (bookTypeInDb == null)
                     {
@@ -79,6 +85,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
+                        bookTypeInDb.ModifiedBy = CommonBL.UserId;
                         if (bookType.IsDeleted)
                         {
                             bookTypeInDb.IsDeleted = true;
@@ -86,7 +93,11 @@ namespace LMS.Controllers
                         }
                         else
                         {
-                            bookType.ModifiedBy = 1;
+                            if (dbEntities.BookTypeMasters.ToArray().Any(x => x.Type.IsEqual(bookType.Type) && x.Id != bookType.Id))
+                            {
+                                return Json(new { success = false, message = "BookType".objAlreadyExists("Type", bookType.Type) }, JsonRequestBehavior.AllowGet);
+                            }
+
                             dbEntities.Detach(bookTypeInDb);
                             dbEntities.AttachTo("BookTypeMasters", bookType);
                             dbEntities.ObjectStateManager.ChangeObjectState(bookType, System.Data.EntityState.Modified);

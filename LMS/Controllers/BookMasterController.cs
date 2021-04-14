@@ -56,39 +56,50 @@ namespace LMS.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertUpdateOrDelete(BookMaster bookFine)
+        public ActionResult InsertUpdateOrDelete(BookMaster bookMaster)
         {
             using (LMSEntities dbEntities = new LMSEntities())
             {
-                bookFine.CreatedOn = bookFine.ModifiedOn = DateTime.Now;
+                bookMaster.CreatedOn = bookMaster.ModifiedOn = DateTime.Now;
 
-                if (bookFine.Id == 0)
+                if (bookMaster.Id == 0)
                 {
-                    bookFine.CreatedBy = 1;
-                    dbEntities.BookMasters.AddObject(bookFine);
+                    if (dbEntities.BookMasters.ToArray().Any(x => x.Name.IsEqual(bookMaster.Name)))
+                    {
+                        return Json(new { success = false, message = "Book".objAlreadyExists("Name", bookMaster.Name) }, JsonRequestBehavior.AllowGet);
+                    }
+
+                    bookMaster.CreatedBy = CommonBL.UserId;
+                    dbEntities.BookMasters.AddObject(bookMaster);
                     dbEntities.SaveChanges();
                     return Json(new { success = true, message = "Book".ObjCreated() }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    BookMaster bookFineInDb = dbEntities.BookMasters.Where(x => x.Id == bookFine.Id).FirstOrDefault<BookMaster>();
+                    bookMaster.ModifiedBy = CommonBL.UserId;
+                    BookMaster bookFineInDb = dbEntities.BookMasters.Where(x => x.Id == bookMaster.Id).FirstOrDefault<BookMaster>();
                     if (bookFineInDb == null)
                     {
                         return Json(new { success = false, message = "Book".ObjNotFoundInDb() }, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
-                        if (bookFine.IsDeleted)
+                        bookFineInDb.ModifiedBy = CommonBL.UserId;
+                        if (bookMaster.IsDeleted)
                         {
                             bookFineInDb.IsDeleted = true;
                             dbEntities.ObjectStateManager.ChangeObjectState(bookFineInDb, System.Data.EntityState.Modified);
                         }
                         else
                         {
-                            bookFine.ModifiedBy = 1;
+                            if (dbEntities.BookMasters.ToArray().Any(x => x.Name.IsEqual(bookMaster.Name) && x.Id != bookMaster.Id))
+                            {
+                                return Json(new { success = false, message = "Book".objAlreadyExists("Name", bookMaster.Name) }, JsonRequestBehavior.AllowGet);
+                            }
+
                             dbEntities.Detach(bookFineInDb);
-                            dbEntities.AttachTo("BookMasters", bookFine);
-                            dbEntities.ObjectStateManager.ChangeObjectState(bookFine, System.Data.EntityState.Modified);
+                            dbEntities.AttachTo("BookMasters", bookMaster);
+                            dbEntities.ObjectStateManager.ChangeObjectState(bookMaster, System.Data.EntityState.Modified);
                         }
                         dbEntities.SaveChanges();
 

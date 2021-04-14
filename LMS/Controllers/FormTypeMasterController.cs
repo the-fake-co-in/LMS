@@ -65,13 +65,19 @@ namespace LMS.Controllers
 
                 if (formType.Id == 0)
                 {
-                    formType.CreatedBy = 1;
+                    if (dbEntities.FormTypeMasters.ToArray().Any(x => x.Type.IsEqual(formType.Type)))
+                    {
+                        return Json(new { success = false, message = "FormType".objAlreadyExists("Type", formType.Type) }, JsonRequestBehavior.AllowGet);
+                    }
+
+                    formType.CreatedBy = CommonBL.UserId;
                     dbEntities.FormTypeMasters.AddObject(formType);
                     dbEntities.SaveChanges();
                     return Json(new { success = true, message = "FormType".ObjCreated() }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
+                    formType.ModifiedBy = CommonBL.UserId;
                     FormTypeMaster formTypeInDb = dbEntities.FormTypeMasters.Where(x => x.Id == formType.Id).FirstOrDefault<FormTypeMaster>();
                     if (formTypeInDb == null)
                     {
@@ -79,6 +85,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
+                        formTypeInDb.ModifiedBy = CommonBL.UserId;
                         if (formType.IsDeleted)
                         {
                             formTypeInDb.IsDeleted = true;
@@ -86,7 +93,11 @@ namespace LMS.Controllers
                         }
                         else
                         {
-                            formType.ModifiedBy = 1;
+                            if (dbEntities.FormTypeMasters.ToArray().Any(x => x.Type.IsEqual(formType.Type) && x.Id != formType.Id))
+                            {
+                                return Json(new { success = false, message = "FormType".objAlreadyExists("Type", formType.Type) }, JsonRequestBehavior.AllowGet);
+                            }
+
                             dbEntities.Detach(formTypeInDb);
                             dbEntities.AttachTo("FormTypeMasters", formType);
                             dbEntities.ObjectStateManager.ChangeObjectState(formType, System.Data.EntityState.Modified);

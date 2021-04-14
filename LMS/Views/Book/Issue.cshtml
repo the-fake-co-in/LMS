@@ -15,6 +15,10 @@
             <th>Id</th>
             <th>BookCode</th>
             <th>BookName</th>
+            <th>IssuedForName</th>
+            <th>IssuedByName</th>
+            <th>ReceivedByName</th>
+            <th>Remarks</th>
             <th>IsDeleted</th>
             <th>Control</th>
          </tr>
@@ -43,7 +47,7 @@
          }
 
          var editUrl = '@Url.Action("GetIssuedBook")/';
-         var deleteUrl = '@Url.Action("IssueBook", "BookIssue")';
+         var deleteUrl = '@Url.Action("IssueBook")';
 
          dataTable =  $("#BookIssueTable").DataTable({
             "ajax": {
@@ -56,6 +60,10 @@
                { "data": "Id" },
                { "data": "BookCode" },
                { "data": "BookName" },
+               { "data": "IssuedForName" },
+               { "data": "IssuedByName" },
+               { "data": "ReceivedByName" },
+               { "data": "Remarks" },
                { "data": "IsDeleted" },
                { "data": "Id" ,
                "render" : function (data, isDeleted) {

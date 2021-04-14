@@ -31,11 +31,11 @@
             blink_color = 1;
         }
         else if (blink_color == 1) {
-            $('.blink').css('color', 'Yello');
+            $('.blink').css('color', 'White');
             blink_color = 2;
         }
         else {
-            $('.blink').css('color', 'White');
+            $('.blink').css('color', 'Yellow');
             blink_color = 0;
         }
         $('.blink').fadeIn(500);
