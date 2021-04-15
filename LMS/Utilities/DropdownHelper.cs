@@ -121,12 +121,15 @@ namespace LMS.Utilities
             List<SelectListItem> selectListItems = new List<SelectListItem>();
             using (LMSEntities dbEntities = new LMSEntities())
             {
-                Dictionary<int, int> dictIds = dbEntities.BookIssues.Where(x => !x.IsDeleted && x.ReceivedBy == 0).ToDictionary(x => x.Id, x => x.BookCodeId);
+                int[] bookIssueIds = bookIssueId == 0 ? dbEntities.FinePayments.Select(x => x.BookIssueId).ToArray() : new int[]{};
+                Dictionary<int, int> dictIds = dbEntities.BookIssues
+                    .Where(x => !x.IsDeleted && (bookIssueId == 0 ? !bookIssueIds.Contains(x.Id) : x.Id == bookIssueId))
+                    .ToDictionary(x => x.Id, x => x.BookCodeId);
                 foreach (int key in dictIds.Keys)
 			    {
-                    int bookId = dbEntities.BookCodeMasters.Where(x => x.Id == dictIds[key]).Select(x => x.BookId).First();
-                    string bookCode = dbEntities.BookCodeMasters.Where(x => x.Id == dictIds[key]).Select(x => x.BookCode).First();
-                    string bookName = dbEntities.BookMasters.Where(x => x.Id == bookId).Select(x => x.Name).First();
+                    int bookId = dbEntities.BookCodeMasters.ToList().Where(x => x.Id == dictIds[key]).Select(x => x.BookId).First();
+                    string bookCode = dbEntities.BookCodeMasters.ToList().Where(x => x.Id == dictIds[key]).Select(x => x.BookCode).First();
+                    string bookName = dbEntities.BookMasters.ToList().Where(x => x.Id == bookId).Select(x => x.Name).First();
 
                     selectListItems.Add(new SelectListItem() { Text = bookName + " - " + bookCode, Value = key.ToString() });
 			    }

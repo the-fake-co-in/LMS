@@ -69,12 +69,12 @@
       $(document).ready(function () {
          debugger;
 
+         $('[type="datetime"]').attr('disabled', true);
+         $('[type="date"]').attr('disabled', true);
+
          if ($('[type="datetime"]')) {
             $('[type="datetime"]').datepicker();
          };
-
-         $("#IssuedOn").prop('disabled', 'disabled');
-         $("#ReturnedOn").prop('disabled', 'disabled');
       });
    </script>
 

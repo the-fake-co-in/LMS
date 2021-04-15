@@ -9,52 +9,52 @@
 {
    <div class="row">
       @Html.HiddenFor(model => model.Id)
-      <div class="form-group col-sm-12">
+      <div class="form-group col-md-12">
          @Html.LabelFor(model => model.BookIssueId, new { @class = "control-label" })
-         @Html.DropDownListFor(model => model.BookIssueId, DropdownListHelper.DDLForBookCodeForFinePayment(model.BookIssueId), "Select BookCode", new { @class = "form-control" })
+         @Html.DropDownListFor(model => model.BookIssueId, DropdownListHelper.DDLForBookCodeForFinePayment(Model.BookIssueId), "Select BookCode", new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.BookIssueId)
       </div>
-      <div class="form-group col-sm-6">
+      <div class="form-group col-md-6">
          @Html.LabelFor(model => model.FineTypeId, new { @class = "control-label" })
          @Html.DropDownListFor(model => model.FineTypeId, DropdownListHelper.DDLForFineTypeMaster(), "Select FineType", new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.FineTypeId)
       </div>
-      <div class="form-group col-sm-6">
-         @Html.LabelFor(model => model.PaymentReceiptNo, new { @class = "control-label" })
-         @Html.DropDownListFor(model => model.PaymentReceiptNo, DropdownListHelper.DDLForAuthorMaster(), "Select Author", new { @class = "form-control" })
-         @Html.ValidationMessageFor(model => model.PaymentReceiptNo)
-      </div>
-      <div class="form-group col-sm-3">
-         @Html.LabelFor(model => model.BaseAmount, new { @class = "control-label" })
-         @Html.EditorFor(model => model.BaseAmount, new { @class = "form-control" })
-         @Html.ValidationMessageFor(model => model.BaseAmount)
-      </div>
-      <div class="form-group col-sm-3">
-         @Html.LabelFor(model => model.FinalAmount, new { @class = "control-label" })
-         @Html.EditorFor(model => model.FinalAmount, new { @class = "form-control" })
-         @Html.ValidationMessageFor(model => model.FinalAmount)
-      </div>
-      <div class="form-group col-sm-3">
-         @Html.LabelFor(model => model.ExemptionAmount, new { @class = "control-label" })
-         @Html.EditorFor(model => model.ExemptionAmount, new { @class = "form-control" })
-         @Html.ValidationMessageFor(model => model.ExemptionAmount)
-      </div>
-      <div class="form-group col-sm-3">
-         @Html.LabelFor(model => model.PaidAmount, new { @class = "control-label" })
-         @Html.EditorFor(model => model.PaidAmount, new { @class = "form-control" })
-         @Html.ValidationMessageFor(model => model.PaidAmount)
-      </div>
-      <div class="form-group col-sm-6">
-         @Html.LabelFor(model => model.PaidOn, new { @class = "control-label" })
-         @Html.EditorFor(model => model.PaidOn, new { @class = "form-control", @type="date" })
-         @Html.ValidationMessageFor(model => model.PaidOn)
-      </div>
-      <div class="form-group col-sm-6">
+      <div class="form-group col-md-6">
          @Html.LabelFor(model => model.PaymentReceivedBy, new { @class = "control-label" })
          @Html.DropDownListFor(model => model.PaymentReceivedBy, DropdownListHelper.DDLForIssueBook(), "Select Fine collected By", new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.PaymentReceivedBy)
       </div>
-      <div class="form-group col-sm-12">
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.BaseAmount, new { @class = "control-label" })
+         @Html.EditorFor(model => model.BaseAmount, new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.BaseAmount)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.FinalAmount, new { @class = "control-label" })
+         @Html.EditorFor(model => model.FinalAmount, new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.FinalAmount)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.ExemptionAmount, new { @class = "control-label" })
+         @Html.EditorFor(model => model.ExemptionAmount, new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.ExemptionAmount)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.PaidAmount, new { @class = "control-label" })
+         @Html.EditorFor(model => model.PaidAmount, new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.PaidAmount)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.PaidOn, new { @class = "control-label" })
+         @Html.EditorFor(model => model.PaidOn, new { @class = "form-control", @type="date" })
+         @Html.ValidationMessageFor(model => model.PaidOn)
+      </div>
+      <div class="form-group col-md-6">
+         @Html.LabelFor(model => model.PaymentReceiptNo, new { @class = "control-label" })
+         @Html.EditorFor(model => model.PaymentReceiptNo, new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.PaymentReceiptNo)
+      </div>
+      <div class="form-group col-md-12">
          @Html.LabelFor(model => model.Remarks, new { @class = "control-label" })
          @Html.EditorFor(model => model.Remarks, new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.Remarks)
@@ -68,6 +68,20 @@
    </div>
 
    @section Scripts {
-      @Scripts.Render("~/bundles/jqueryModal")
+      @Scripts.Render("~/bundles/jquery")
+      @Scripts.Render("~/bundles/bootstrap")
+      @Scripts.Render("~/bundles/custom")
    }
+   <script type="text/javascript">
+      $(document).ready(function () {
+         debugger;
+
+         $('[type="datetime"]').attr('disabled', true);
+         $('[type="date"]').attr('disabled', true);
+
+         if ($('[type="datetime"]')) {
+            $('[type="datetime"]').datepicker();
+         };
+      });
+   </script>
 }
