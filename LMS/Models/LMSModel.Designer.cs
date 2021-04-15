@@ -308,22 +308,6 @@ namespace LMS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<FinePayment> FinePayments
-        {
-            get
-            {
-                if ((_FinePayments == null))
-                {
-                    _FinePayments = base.CreateObjectSet<FinePayment>("FinePayments");
-                }
-                return _FinePayments;
-            }
-        }
-        private ObjectSet<FinePayment> _FinePayments;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<BookReservation> BookReservations
         {
             get
@@ -368,6 +352,22 @@ namespace LMS.Models
             }
         }
         private ObjectSet<BookIssue> _BookIssues;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<FinePayment> FinePayments
+        {
+            get
+            {
+                if ((_FinePayments == null))
+                {
+                    _FinePayments = base.CreateObjectSet<FinePayment>("FinePayments");
+                }
+                return _FinePayments;
+            }
+        }
+        private ObjectSet<FinePayment> _FinePayments;
 
         #endregion
 
@@ -494,14 +494,6 @@ namespace LMS.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the FinePayments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToFinePayments(FinePayment finePayment)
-        {
-            base.AddObject("FinePayments", finePayment);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the BookReservations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToBookReservations(BookReservation bookReservation)
@@ -523,6 +515,14 @@ namespace LMS.Models
         public void AddToBookIssues(BookIssue bookIssue)
         {
             base.AddObject("BookIssues", bookIssue);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the FinePayments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToFinePayments(FinePayment finePayment)
+        {
+            base.AddObject("FinePayments", finePayment);
         }
 
         #endregion
@@ -583,6 +583,14 @@ namespace LMS.Models
         public ObjectResult<GetBookIssue> GetBookIssue()
         {
             return base.ExecuteFunction<GetBookIssue>("GetBookIssue");
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectResult<GetFinePayment> GetFinePayment()
+        {
+            return base.ExecuteFunction<GetFinePayment>("GetFinePayment");
         }
 
         #endregion
@@ -2915,33 +2923,33 @@ namespace LMS.Models
         /// Create a new FinePayment object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="bookIssueId">Initial value of the BookIssueId property.</param>
         /// <param name="fineTypeId">Initial value of the FineTypeId property.</param>
-        /// <param name="bookCodeId">Initial value of the BookCodeId property.</param>
-        /// <param name="paidBy">Initial value of the PaidBy property.</param>
+        /// <param name="paymentReceiptNo">Initial value of the PaymentReceiptNo property.</param>
         /// <param name="baseAmount">Initial value of the BaseAmount property.</param>
         /// <param name="finalAmount">Initial value of the FinalAmount property.</param>
-        /// <param name="paidAmount">Initial value of the PaidAmount property.</param>
         /// <param name="exemptionAmount">Initial value of the ExemptionAmount property.</param>
-        /// <param name="paymentReceiptNo">Initial value of the PaymentReceiptNo property.</param>
+        /// <param name="paidAmount">Initial value of the PaidAmount property.</param>
         /// <param name="paidOn">Initial value of the PaidOn property.</param>
+        /// <param name="paymentReceivedBy">Initial value of the PaymentReceivedBy property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="modifiedOn">Initial value of the ModifiedOn property.</param>
-        public static FinePayment CreateFinePayment(global::System.Int32 id, global::System.Byte fineTypeId, global::System.Int32 bookCodeId, global::System.Int32 paidBy, global::System.Int16 baseAmount, global::System.Int16 finalAmount, global::System.Int16 paidAmount, global::System.Int16 exemptionAmount, global::System.String paymentReceiptNo, global::System.DateTime paidOn, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
+        public static FinePayment CreateFinePayment(global::System.Int32 id, global::System.Int32 bookIssueId, global::System.Byte fineTypeId, global::System.String paymentReceiptNo, global::System.Int16 baseAmount, global::System.Int16 finalAmount, global::System.Int16 exemptionAmount, global::System.Int16 paidAmount, global::System.DateTime paidOn, global::System.Int32 paymentReceivedBy, global::System.Boolean isDeleted, global::System.Int32 createdBy, global::System.DateTime createdOn, global::System.Int32 modifiedBy, global::System.DateTime modifiedOn)
         {
             FinePayment finePayment = new FinePayment();
             finePayment.Id = id;
+            finePayment.BookIssueId = bookIssueId;
             finePayment.FineTypeId = fineTypeId;
-            finePayment.BookCodeId = bookCodeId;
-            finePayment.PaidBy = paidBy;
+            finePayment.PaymentReceiptNo = paymentReceiptNo;
             finePayment.BaseAmount = baseAmount;
             finePayment.FinalAmount = finalAmount;
-            finePayment.PaidAmount = paidAmount;
             finePayment.ExemptionAmount = exemptionAmount;
-            finePayment.PaymentReceiptNo = paymentReceiptNo;
+            finePayment.PaidAmount = paidAmount;
             finePayment.PaidOn = paidOn;
+            finePayment.PaymentReceivedBy = paymentReceivedBy;
             finePayment.IsDeleted = isDeleted;
             finePayment.CreatedBy = createdBy;
             finePayment.CreatedOn = createdOn;
@@ -2986,6 +2994,30 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.Int32 BookIssueId
+        {
+            get
+            {
+                return _BookIssueId;
+            }
+            set
+            {
+                OnBookIssueIdChanging(value);
+                ReportPropertyChanging("BookIssueId");
+                _BookIssueId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BookIssueId");
+                OnBookIssueIdChanged();
+            }
+        }
+        private global::System.Int32 _BookIssueId;
+        partial void OnBookIssueIdChanging(global::System.Int32 value);
+        partial void OnBookIssueIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Byte FineTypeId
         {
             get
@@ -3010,48 +3042,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 BookCodeId
+        public global::System.String PaymentReceiptNo
         {
             get
             {
-                return _BookCodeId;
+                return _PaymentReceiptNo;
             }
             set
             {
-                OnBookCodeIdChanging(value);
-                ReportPropertyChanging("BookCodeId");
-                _BookCodeId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("BookCodeId");
-                OnBookCodeIdChanged();
+                OnPaymentReceiptNoChanging(value);
+                ReportPropertyChanging("PaymentReceiptNo");
+                _PaymentReceiptNo = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("PaymentReceiptNo");
+                OnPaymentReceiptNoChanged();
             }
         }
-        private global::System.Int32 _BookCodeId;
-        partial void OnBookCodeIdChanging(global::System.Int32 value);
-        partial void OnBookCodeIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 PaidBy
-        {
-            get
-            {
-                return _PaidBy;
-            }
-            set
-            {
-                OnPaidByChanging(value);
-                ReportPropertyChanging("PaidBy");
-                _PaidBy = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("PaidBy");
-                OnPaidByChanged();
-            }
-        }
-        private global::System.Int32 _PaidBy;
-        partial void OnPaidByChanging(global::System.Int32 value);
-        partial void OnPaidByChanged();
+        private global::System.String _PaymentReceiptNo;
+        partial void OnPaymentReceiptNoChanging(global::System.String value);
+        partial void OnPaymentReceiptNoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3106,30 +3114,6 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int16 PaidAmount
-        {
-            get
-            {
-                return _PaidAmount;
-            }
-            set
-            {
-                OnPaidAmountChanging(value);
-                ReportPropertyChanging("PaidAmount");
-                _PaidAmount = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("PaidAmount");
-                OnPaidAmountChanged();
-            }
-        }
-        private global::System.Int16 _PaidAmount;
-        partial void OnPaidAmountChanging(global::System.Int16 value);
-        partial void OnPaidAmountChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Int16 ExemptionAmount
         {
             get
@@ -3154,24 +3138,24 @@ namespace LMS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String PaymentReceiptNo
+        public global::System.Int16 PaidAmount
         {
             get
             {
-                return _PaymentReceiptNo;
+                return _PaidAmount;
             }
             set
             {
-                OnPaymentReceiptNoChanging(value);
-                ReportPropertyChanging("PaymentReceiptNo");
-                _PaymentReceiptNo = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("PaymentReceiptNo");
-                OnPaymentReceiptNoChanged();
+                OnPaidAmountChanging(value);
+                ReportPropertyChanging("PaidAmount");
+                _PaidAmount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PaidAmount");
+                OnPaidAmountChanged();
             }
         }
-        private global::System.String _PaymentReceiptNo;
-        partial void OnPaymentReceiptNoChanging(global::System.String value);
-        partial void OnPaymentReceiptNoChanged();
+        private global::System.Int16 _PaidAmount;
+        partial void OnPaidAmountChanging(global::System.Int16 value);
+        partial void OnPaidAmountChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3196,6 +3180,54 @@ namespace LMS.Models
         private global::System.DateTime _PaidOn;
         partial void OnPaidOnChanging(global::System.DateTime value);
         partial void OnPaidOnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PaymentReceivedBy
+        {
+            get
+            {
+                return _PaymentReceivedBy;
+            }
+            set
+            {
+                OnPaymentReceivedByChanging(value);
+                ReportPropertyChanging("PaymentReceivedBy");
+                _PaymentReceivedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PaymentReceivedBy");
+                OnPaymentReceivedByChanged();
+            }
+        }
+        private global::System.Int32 _PaymentReceivedBy;
+        partial void OnPaymentReceivedByChanging(global::System.Int32 value);
+        partial void OnPaymentReceivedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Remarks
+        {
+            get
+            {
+                return _Remarks;
+            }
+            set
+            {
+                OnRemarksChanging(value);
+                ReportPropertyChanging("Remarks");
+                _Remarks = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Remarks");
+                OnRemarksChanged();
+            }
+        }
+        private global::System.String _Remarks;
+        partial void OnRemarksChanging(global::System.String value);
+        partial void OnRemarksChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -8432,6 +8464,389 @@ namespace LMS.Models
         private global::System.DateTime _ModifiedOn;
         partial void OnModifiedOnChanging(global::System.DateTime value);
         partial void OnModifiedOnChanged();
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmComplexTypeAttribute(NamespaceName="LMSModel", Name="GetFinePayment")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class GetFinePayment : ComplexObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GetFinePayment object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="bookCode">Initial value of the BookCode property.</param>
+        /// <param name="bookName">Initial value of the BookName property.</param>
+        /// <param name="bookType">Initial value of the BookType property.</param>
+        /// <param name="paidBy">Initial value of the PaidBy property.</param>
+        /// <param name="baseAmount">Initial value of the BaseAmount property.</param>
+        /// <param name="finalAmount">Initial value of the FinalAmount property.</param>
+        /// <param name="exemptionAmount">Initial value of the ExemptionAmount property.</param>
+        /// <param name="paidAmount">Initial value of the PaidAmount property.</param>
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static GetFinePayment CreateGetFinePayment(global::System.Int32 id, global::System.String bookCode, global::System.String bookName, global::System.String bookType, global::System.String paidBy, global::System.Int16 baseAmount, global::System.Int16 finalAmount, global::System.Int16 exemptionAmount, global::System.Int16 paidAmount, global::System.Boolean isDeleted)
+        {
+            GetFinePayment getFinePayment = new GetFinePayment();
+            getFinePayment.Id = id;
+            getFinePayment.BookCode = bookCode;
+            getFinePayment.BookName = bookName;
+            getFinePayment.BookType = bookType;
+            getFinePayment.PaidBy = paidBy;
+            getFinePayment.BaseAmount = baseAmount;
+            getFinePayment.FinalAmount = finalAmount;
+            getFinePayment.ExemptionAmount = exemptionAmount;
+            getFinePayment.PaidAmount = paidAmount;
+            getFinePayment.IsDeleted = isDeleted;
+            return getFinePayment;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                OnIdChanging(value);
+                ReportPropertyChanging("Id");
+                _Id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Id");
+                OnIdChanged();
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String BookCode
+        {
+            get
+            {
+                return _BookCode;
+            }
+            set
+            {
+                OnBookCodeChanging(value);
+                ReportPropertyChanging("BookCode");
+                _BookCode = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("BookCode");
+                OnBookCodeChanged();
+            }
+        }
+        private global::System.String _BookCode;
+        partial void OnBookCodeChanging(global::System.String value);
+        partial void OnBookCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String BookName
+        {
+            get
+            {
+                return _BookName;
+            }
+            set
+            {
+                OnBookNameChanging(value);
+                ReportPropertyChanging("BookName");
+                _BookName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("BookName");
+                OnBookNameChanged();
+            }
+        }
+        private global::System.String _BookName;
+        partial void OnBookNameChanging(global::System.String value);
+        partial void OnBookNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String BookType
+        {
+            get
+            {
+                return _BookType;
+            }
+            set
+            {
+                OnBookTypeChanging(value);
+                ReportPropertyChanging("BookType");
+                _BookType = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("BookType");
+                OnBookTypeChanged();
+            }
+        }
+        private global::System.String _BookType;
+        partial void OnBookTypeChanging(global::System.String value);
+        partial void OnBookTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String PaidBy
+        {
+            get
+            {
+                return _PaidBy;
+            }
+            set
+            {
+                OnPaidByChanging(value);
+                ReportPropertyChanging("PaidBy");
+                _PaidBy = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("PaidBy");
+                OnPaidByChanged();
+            }
+        }
+        private global::System.String _PaidBy;
+        partial void OnPaidByChanging(global::System.String value);
+        partial void OnPaidByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 BaseAmount
+        {
+            get
+            {
+                return _BaseAmount;
+            }
+            set
+            {
+                OnBaseAmountChanging(value);
+                ReportPropertyChanging("BaseAmount");
+                _BaseAmount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BaseAmount");
+                OnBaseAmountChanged();
+            }
+        }
+        private global::System.Int16 _BaseAmount;
+        partial void OnBaseAmountChanging(global::System.Int16 value);
+        partial void OnBaseAmountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 FinalAmount
+        {
+            get
+            {
+                return _FinalAmount;
+            }
+            set
+            {
+                OnFinalAmountChanging(value);
+                ReportPropertyChanging("FinalAmount");
+                _FinalAmount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FinalAmount");
+                OnFinalAmountChanged();
+            }
+        }
+        private global::System.Int16 _FinalAmount;
+        partial void OnFinalAmountChanging(global::System.Int16 value);
+        partial void OnFinalAmountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 ExemptionAmount
+        {
+            get
+            {
+                return _ExemptionAmount;
+            }
+            set
+            {
+                OnExemptionAmountChanging(value);
+                ReportPropertyChanging("ExemptionAmount");
+                _ExemptionAmount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ExemptionAmount");
+                OnExemptionAmountChanged();
+            }
+        }
+        private global::System.Int16 _ExemptionAmount;
+        partial void OnExemptionAmountChanging(global::System.Int16 value);
+        partial void OnExemptionAmountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 PaidAmount
+        {
+            get
+            {
+                return _PaidAmount;
+            }
+            set
+            {
+                OnPaidAmountChanging(value);
+                ReportPropertyChanging("PaidAmount");
+                _PaidAmount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PaidAmount");
+                OnPaidAmountChanged();
+            }
+        }
+        private global::System.Int16 _PaidAmount;
+        partial void OnPaidAmountChanging(global::System.Int16 value);
+        partial void OnPaidAmountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> PaidOn
+        {
+            get
+            {
+                return _PaidOn;
+            }
+            set
+            {
+                OnPaidOnChanging(value);
+                ReportPropertyChanging("PaidOn");
+                _PaidOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PaidOn");
+                OnPaidOnChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _PaidOn;
+        partial void OnPaidOnChanging(Nullable<global::System.DateTime> value);
+        partial void OnPaidOnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PaymentReceiptNo
+        {
+            get
+            {
+                return _PaymentReceiptNo;
+            }
+            set
+            {
+                OnPaymentReceiptNoChanging(value);
+                ReportPropertyChanging("PaymentReceiptNo");
+                _PaymentReceiptNo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PaymentReceiptNo");
+                OnPaymentReceiptNoChanged();
+            }
+        }
+        private global::System.String _PaymentReceiptNo;
+        partial void OnPaymentReceiptNoChanging(global::System.String value);
+        partial void OnPaymentReceiptNoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PaymentReceivedBy
+        {
+            get
+            {
+                return _PaymentReceivedBy;
+            }
+            set
+            {
+                OnPaymentReceivedByChanging(value);
+                ReportPropertyChanging("PaymentReceivedBy");
+                _PaymentReceivedBy = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PaymentReceivedBy");
+                OnPaymentReceivedByChanged();
+            }
+        }
+        private global::System.String _PaymentReceivedBy;
+        partial void OnPaymentReceivedByChanging(global::System.String value);
+        partial void OnPaymentReceivedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Remarks
+        {
+            get
+            {
+                return _Remarks;
+            }
+            set
+            {
+                OnRemarksChanging(value);
+                ReportPropertyChanging("Remarks");
+                _Remarks = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Remarks");
+                OnRemarksChanged();
+            }
+        }
+        private global::System.String _Remarks;
+        partial void OnRemarksChanging(global::System.String value);
+        partial void OnRemarksChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
 
         #endregion
 

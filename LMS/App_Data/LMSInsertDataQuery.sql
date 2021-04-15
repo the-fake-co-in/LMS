@@ -1,5 +1,5 @@
 Use LMS
-Go;
+Go
 ------------------------------------------------------------------------------------------------------------------------------
 
 Truncate Table [UserMaster]
@@ -99,7 +99,6 @@ Truncate Table [FineTypeMaster]
 INSERT [dbo].[FineTypeMaster] ([Type], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (N'Demage', 0, 1, GetDate(), 1, GetDate())
 INSERT [dbo].[FineTypeMaster] ([Type], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (N'Lost', 0, 1, GetDate(), 1, GetDate())
 INSERT [dbo].[FineTypeMaster] ([Type], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (N'LateReturn', 0, 1, GetDate(), 1, GetDate())
-INSERT [dbo].[FineTypeMaster] ([Type], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (N'Other', 0, 1, GetDate(), 1, GetDate())
 select * From [FineTypeMaster]
 
 ------------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +109,7 @@ INSERT [dbo].[FormTypeMaster] ([Type], [DisplayOrder], [IsDeleted], [CreatedBy],
 INSERT [dbo].[FormTypeMaster] ([Type], [DisplayOrder], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (N'Master', 3, 0, 1, GetDate(), 1, GetDate())
 INSERT [dbo].[FormTypeMaster] ([Type], [DisplayOrder], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (N'Settings', 4, 0, 1, GetDate(), 1, GetDate())
 INSERT [dbo].[FormTypeMaster] ([Type], [DisplayOrder], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (N'Book', 5, 0, 1, GetDate(), 1, GetDate())
-INSERT [dbo].[FormTypeMaster] ([Type], [DisplayOrder], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (N'Fine', 6, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[FormTypeMaster] ([Type], [DisplayOrder], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (N'FinePayment', 6, 0, 1, GetDate(), 1, GetDate())
 INSERT [dbo].[FormTypeMaster] ([Type], [DisplayOrder], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (N'Reports', 8, 0, 1, GetDate(), 1, GetDate())
 INSERT [dbo].[FormTypeMaster] ([Type], [DisplayOrder], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (N'Misc', 8, 0, 1, GetDate(), 1, GetDate())
 select * From [FormTypeMaster]
@@ -135,9 +134,9 @@ INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAc
 INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (5, N'Reserve Book', N'/Book/Reserve', 2, N'0', N'0', NULL, NULL, 1, 1, GetDate(), 1, GetDate())
 INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (5, N'Issue Book', N'/Book/Issue', 3, N'3', N'3', NULL, NULL, 0, 1, GetDate(), 1, GetDate())
 INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (5, N'Add to wishlist', N'/Book/AddToWishlist', 4, N'0', N'0', NULL, NULL, 0, 1, GetDate(), 1, GetDate())
-INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (6, N'Manage Fine', N'/Fine/Manage', 1, N'0', N'0', NULL, NULL, 0, 1, GetDate(), 1, GetDate())
-INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (6, N'Fine History', N'/Fine/History', 2, N'0', N'0', NULL, NULL, 1, 1, GetDate(), 1, GetDate())
-INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (6, N'Get Fine', N'/Fine/GetFine', 3, N'3', N'3', NULL, NULL, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (6, N'Manage Fine', N'/FinePayment/Manage', 1, N'0', N'0', NULL, NULL, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (6, N'Fine History', N'/FinePayment/History', 2, N'0', N'0', NULL, NULL, 1, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (6, N'Get Fine', N'/FinePayment/GetFine', 3, N'3', N'3', NULL, NULL, 1, 1, GetDate(), 1, GetDate())
 INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (3, N'Book Code', N'/BookCodeMaster/Index', 4, N'2,3', N'2', NULL, NULL, 0, 1, GetDate(), 1, GetDate())
 INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (3, N'Book Fine', N'/BookFineMaster/Index', 6, N'2,3', N'2', NULL, NULL, 0, 1, GetDate(), 1, GetDate())
 INSERT [dbo].[FormMaster] ([FormTypeId], [Name], [Path], [DisplayOrder], [ReadAccess], [WriteAccess], [SpecialReadAccess], [SpecialWriteAccess], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (3, N'Fine Type', N'/FineTypeMaster/Index', 5, N'2,3', N'2', NULL, NULL, 0, 1, GetDate(), 1, GetDate())
@@ -155,11 +154,23 @@ select * From [FormMaster]
 
 ------------------------------------------------------------------------------------------------------------------------------
 
-Truncate Table [BookFineMaster]
-Insert into [BookFineMaster]
-select	BTM.Id, FTM.Id, 100 * (BTM.Id), (10 * BTM.Id), 10 * (BTM.Id), (2 * BTM.Id), 0, 1, GetDate(), 1, GetDate()
-From	BookTypeMaster BTM Cross Join FineTypeMaster FTM
-select * From [BookFineMaster]
+Truncate Table [dbo].[BookFineMaster]
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (1, 1, 100, 30, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (2, 1, 100, 30, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (3, 1, 100, 30, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (4, 1, 100, 30, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (5, 1, 100, 30, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (1, 2, 100, 75, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (2, 2, 100, 75, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (3, 2, 100, 75, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (4, 2, 100, 75, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (5, 2, 100, 75, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (1, 3, 100, 15, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (2, 3, 100, 15, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (3, 3, 100, 15, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (4, 3, 100, 15, 25, 5, 0, 1, GetDate(), 1, GetDate())
+INSERT [dbo].[BookFineMaster] ([BookTypeId], [FineTypeId], [LateFeeBaseChargeAmount], [LateFeeBaseChargePercent], [LateFeeIncreaseAmount], [LateFeeIncreasePercentage], [IsDeleted], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (5, 3, 100, 15, 25, 5, 0, 1, GetDate(), 1, GetDate())
+Select * From [dbo].[BookFineMaster]
 
 ------------------------------------------------------------------------------------------------------------------------------
 

@@ -139,6 +139,7 @@
     <Compile Include="Controllers\BookTypeMasterController.cs" />
     <Compile Include="Controllers\BookFineMasterController.cs" />
     <Compile Include="Controllers\BookCodeMasterController.cs" />
+    <Compile Include="Controllers\FinePaymentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\FormTypeMasterController.cs" />
     <Compile Include="Controllers\FineTypeMasterController.cs" />
@@ -687,6 +688,8 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Book\GetIssuedBook.cshtml" />
+    <Content Include="Views\FinePayment\Manage.cshtml" />
+    <Content Include="Views\FinePayment\GetDetails.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

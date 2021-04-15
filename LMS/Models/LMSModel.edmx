@@ -188,15 +188,16 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BookIssueId" Type="int" Nullable="false" />
           <Property Name="FineTypeId" Type="tinyint" Nullable="false" />
-          <Property Name="BookCodeId" Type="int" Nullable="false" />
-          <Property Name="PaidBy" Type="int" Nullable="false" />
+          <Property Name="PaymentReceiptNo" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="BaseAmount" Type="smallint" Nullable="false" />
           <Property Name="FinalAmount" Type="smallint" Nullable="false" />
-          <Property Name="PaidAmount" Type="smallint" Nullable="false" />
           <Property Name="ExemptionAmount" Type="smallint" Nullable="false" />
-          <Property Name="PaymentReceiptNo" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="PaidAmount" Type="smallint" Nullable="false" />
           <Property Name="PaidOn" Type="datetime" Nullable="false" />
+          <Property Name="PaymentReceivedBy" Type="int" Nullable="false" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
@@ -392,6 +393,7 @@
         <Function Name="SP_GetBookFineMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetBookIssue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetBookMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_GetFinePayment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetFormMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetPasswordHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
       </Schema></edmx:StorageModels>
@@ -419,12 +421,13 @@
           <EntitySet Name="BookFineMasters" EntityType="LMSModel.BookFineMaster" />
           <EntitySet Name="FineTypeMasters" EntityType="LMSModel.FineTypeMaster" />
           <EntitySet Name="FormTypeMasters" EntityType="LMSModel.FormTypeMaster" />
-          <EntitySet Name="FinePayments" EntityType="LMSModel.FinePayment" />
           <EntitySet Name="BookReservations" EntityType="LMSModel.BookReservation" />
           <FunctionImport Name="GetBookAvailability" ReturnType="Collection(LMSModel.GetBookAvailability)" />
           <EntitySet Name="BookWishLists" EntityType="LMSModel.BookWishList" />
           <FunctionImport Name="GetBookIssue" ReturnType="Collection(LMSModel.GetBookIssue)" />
           <EntitySet Name="BookIssues" EntityType="LMSModel.BookIssue" />
+          <EntitySet Name="FinePayments" EntityType="LMSModel.FinePayment" />
+          <FunctionImport Name="GetFinePayment" ReturnType="Collection(LMSModel.GetFinePayment)" />
         </EntityContainer>
         <EntityType Name="AuthorMaster">
           <Key>
@@ -758,26 +761,6 @@
           <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
           <Property Type="DateTime" Name="ModifiedOn" Nullable="false" />
         </EntityType>
-        <EntityType Name="FinePayment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Byte" Name="FineTypeId" Nullable="false" />
-          <Property Type="Int32" Name="BookCodeId" Nullable="false" />
-          <Property Type="Int32" Name="PaidBy" Nullable="false" />
-          <Property Type="Int16" Name="BaseAmount" Nullable="false" />
-          <Property Type="Int16" Name="FinalAmount" Nullable="false" />
-          <Property Type="Int16" Name="PaidAmount" Nullable="false" />
-          <Property Type="Int16" Name="ExemptionAmount" Nullable="false" />
-          <Property Type="String" Name="PaymentReceiptNo" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="PaidOn" Nullable="false" />
-          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
-          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
-          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" />
-        </EntityType>
         <EntityType Name="BookReservation">
           <Key>
             <PropertyRef Name="Id" />
@@ -853,6 +836,43 @@
           <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
           <Property Type="DateTime" Name="ModifiedOn" Nullable="false" />
         </EntityType>
+        <EntityType Name="FinePayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BookIssueId" Nullable="false" />
+          <Property Type="Byte" Name="FineTypeId" Nullable="false" />
+          <Property Type="String" Name="PaymentReceiptNo" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int16" Name="BaseAmount" Nullable="false" />
+          <Property Type="Int16" Name="FinalAmount" Nullable="false" />
+          <Property Type="Int16" Name="ExemptionAmount" Nullable="false" />
+          <Property Type="Int16" Name="PaidAmount" Nullable="false" />
+          <Property Type="DateTime" Name="PaidOn" Nullable="false" />
+          <Property Type="Int32" Name="PaymentReceivedBy" Nullable="false" />
+          <Property Type="String" Name="Remarks" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="GetFinePayment">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="BookCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BookName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BookType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PaidBy" Nullable="false" MaxLength="101" />
+          <Property Type="Int16" Name="BaseAmount" Nullable="false" />
+          <Property Type="Int16" Name="FinalAmount" Nullable="false" />
+          <Property Type="Int16" Name="ExemptionAmount" Nullable="false" />
+          <Property Type="Int16" Name="PaidAmount" Nullable="false" />
+          <Property Type="DateTime" Name="PaidOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="PaymentReceiptNo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="PaymentReceivedBy" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="250" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1206,27 +1226,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FinePayments">
-            <EntityTypeMapping TypeName="LMSModel.FinePayment">
-              <MappingFragment StoreEntitySet="FinePayment">
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="PaidOn" ColumnName="PaidOn" />
-                <ScalarProperty Name="PaymentReceiptNo" ColumnName="PaymentReceiptNo" />
-                <ScalarProperty Name="ExemptionAmount" ColumnName="ExemptionAmount" />
-                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
-                <ScalarProperty Name="FinalAmount" ColumnName="FinalAmount" />
-                <ScalarProperty Name="BaseAmount" ColumnName="BaseAmount" />
-                <ScalarProperty Name="PaidBy" ColumnName="PaidBy" />
-                <ScalarProperty Name="BookCodeId" ColumnName="BookCodeId" />
-                <ScalarProperty Name="FineTypeId" ColumnName="FineTypeId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BookReservations">
             <EntityTypeMapping TypeName="LMSModel.BookReservation">
               <MappingFragment StoreEntitySet="BookReservation">
@@ -1313,6 +1312,48 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FinePayments">
+            <EntityTypeMapping TypeName="LMSModel.FinePayment">
+              <MappingFragment StoreEntitySet="FinePayment">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="PaymentReceivedBy" ColumnName="PaymentReceivedBy" />
+                <ScalarProperty Name="PaidOn" ColumnName="PaidOn" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="ExemptionAmount" ColumnName="ExemptionAmount" />
+                <ScalarProperty Name="FinalAmount" ColumnName="FinalAmount" />
+                <ScalarProperty Name="BaseAmount" ColumnName="BaseAmount" />
+                <ScalarProperty Name="PaymentReceiptNo" ColumnName="PaymentReceiptNo" />
+                <ScalarProperty Name="FineTypeId" ColumnName="FineTypeId" />
+                <ScalarProperty Name="BookIssueId" ColumnName="BookIssueId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetFinePayment" FunctionName="LMSModel.Store.SP_GetFinePayment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LMSModel.GetFinePayment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+                <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="BookType" ColumnName="BookType" />
+                <ScalarProperty Name="PaidBy" ColumnName="PaidBy" />
+                <ScalarProperty Name="BaseAmount" ColumnName="BaseAmount" />
+                <ScalarProperty Name="FinalAmount" ColumnName="FinalAmount" />
+                <ScalarProperty Name="ExemptionAmount" ColumnName="ExemptionAmount" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="PaidOn" ColumnName="PaidOn" />
+                <ScalarProperty Name="PaymentReceiptNo" ColumnName="PaymentReceiptNo" />
+                <ScalarProperty Name="PaymentReceivedBy" ColumnName="PaymentReceivedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1349,10 +1390,10 @@
         <EntityTypeShape EntityType="LMSModel.BookFineMaster" Width="1.5" PointX="2.875" PointY="2.625" Height="0.4" IsExpanded="false" />
         <EntityTypeShape EntityType="LMSModel.FineTypeMaster" Width="1.5" PointX="0.875" PointY="3.5" Height="0.4" IsExpanded="false" />
         <EntityTypeShape EntityType="LMSModel.FormTypeMaster" Width="1.5" PointX="0.875" PointY="2.625" Height="0.4" IsExpanded="false" />
-        <EntityTypeShape EntityType="LMSModel.FinePayment" Width="1.5" PointX="4.75" PointY="0.75" Height="0.4" IsExpanded="false" />
         <EntityTypeShape EntityType="LMSModel.BookReservation" Width="1.5" PointX="5" PointY="3.5" Height="0.4" IsExpanded="false" />
         <EntityTypeShape EntityType="LMSModel.BookWishList" Width="1.5" PointX="7.125" PointY="3.5" Height="0.4" IsExpanded="false" />
         <EntityTypeShape EntityType="LMSModel.BookIssue" Width="1.5" PointX="0.875" PointY="1.625" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="LMSModel.FinePayment" Width="1.5" PointX="4.875" PointY="0.75" Height="0.4" IsExpanded="false" />
       </Diagram>
     </Diagrams>
   </Designer>

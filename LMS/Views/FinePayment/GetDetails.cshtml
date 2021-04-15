@@ -1,0 +1,73 @@
+﻿@using LMS.Utilities;
+@model LMS.Models.FinePayment
+@{
+   Layout = null;
+   ViewBag.Title = "Add New FinePayment";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+@using (Html.BeginForm("PayFine", "FinePayment", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+   <div class="row">
+      @Html.HiddenFor(model => model.Id)
+      <div class="form-group col-sm-12">
+         @Html.LabelFor(model => model.BookIssueId, new { @class = "control-label" })
+         @Html.DropDownListFor(model => model.BookIssueId, DropdownListHelper.DDLForBookCodeForFinePayment(model.BookIssueId), "Select BookCode", new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.BookIssueId)
+      </div>
+      <div class="form-group col-sm-6">
+         @Html.LabelFor(model => model.FineTypeId, new { @class = "control-label" })
+         @Html.DropDownListFor(model => model.FineTypeId, DropdownListHelper.DDLForFineTypeMaster(), "Select FineType", new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.FineTypeId)
+      </div>
+      <div class="form-group col-sm-6">
+         @Html.LabelFor(model => model.PaymentReceiptNo, new { @class = "control-label" })
+         @Html.DropDownListFor(model => model.PaymentReceiptNo, DropdownListHelper.DDLForAuthorMaster(), "Select Author", new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.PaymentReceiptNo)
+      </div>
+      <div class="form-group col-sm-3">
+         @Html.LabelFor(model => model.BaseAmount, new { @class = "control-label" })
+         @Html.EditorFor(model => model.BaseAmount, new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.BaseAmount)
+      </div>
+      <div class="form-group col-sm-3">
+         @Html.LabelFor(model => model.FinalAmount, new { @class = "control-label" })
+         @Html.EditorFor(model => model.FinalAmount, new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.FinalAmount)
+      </div>
+      <div class="form-group col-sm-3">
+         @Html.LabelFor(model => model.ExemptionAmount, new { @class = "control-label" })
+         @Html.EditorFor(model => model.ExemptionAmount, new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.ExemptionAmount)
+      </div>
+      <div class="form-group col-sm-3">
+         @Html.LabelFor(model => model.PaidAmount, new { @class = "control-label" })
+         @Html.EditorFor(model => model.PaidAmount, new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.PaidAmount)
+      </div>
+      <div class="form-group col-sm-6">
+         @Html.LabelFor(model => model.PaidOn, new { @class = "control-label" })
+         @Html.EditorFor(model => model.PaidOn, new { @class = "form-control", @type="date" })
+         @Html.ValidationMessageFor(model => model.PaidOn)
+      </div>
+      <div class="form-group col-sm-6">
+         @Html.LabelFor(model => model.PaymentReceivedBy, new { @class = "control-label" })
+         @Html.DropDownListFor(model => model.PaymentReceivedBy, DropdownListHelper.DDLForIssueBook(), "Select Fine collected By", new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.PaymentReceivedBy)
+      </div>
+      <div class="form-group col-sm-12">
+         @Html.LabelFor(model => model.Remarks, new { @class = "control-label" })
+         @Html.EditorFor(model => model.Remarks, new { @class = "form-control" })
+         @Html.ValidationMessageFor(model => model.Remarks)
+      </div>
+   </div>
+   <hr class="mb-2 mt-0"/>
+   <div class="form-group float-right m-0">
+      <button type="submit" class="btn btn-primary">Save changes</button>
+      <button type="reset" class="btn btn-secondary">Reset</button>
+      <button type="button" class="btn btn-danger" onclick="closeJQryDlg()">Close</button>
+   </div>
+
+   @section Scripts {
+      @Scripts.Render("~/bundles/jqueryModal")
+   }
+}

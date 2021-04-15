@@ -8,32 +8,27 @@
 {
    @Html.HiddenFor(model => model.Id)
    <div class="row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-12">
          @Html.LabelFor(model => model.BookTypeId, new { @class = "control-label" })
          @Html.DropDownListFor(model => model.BookTypeId, DropdownListHelper.DDLForBookTypeMaster(), "Select BookType", new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.BookTypeId)
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-12">
          @Html.LabelFor(model => model.FineTypeId, new { @class = "control-label" })
          @Html.DropDownListFor(model => model.FineTypeId, DropdownListHelper.DDLForFineTypeMaster(), "Select FineType", new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.BookTypeId)
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-12">
          @Html.LabelFor(model => model.LateFeeBaseChargeAmount, new { @class = "control-label" })
          @Html.EditorFor(model => model.LateFeeBaseChargeAmount, new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.LateFeeBaseChargeAmount)
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-12">
          @Html.LabelFor(model => model.LateFeeBaseChargePercent, new { @class = "control-label" })
          @Html.EditorFor(model => model.LateFeeBaseChargePercent, new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.LateFeeBaseChargePercent)
       </div>
-      <div class="form-group col-md-6">
-         @Html.LabelFor(model => model.LateFeeIncreaseAmount, new { @class = "control-label" })
-         @Html.EditorFor(model => model.LateFeeIncreaseAmount, new { @class = "form-control" })
-         @Html.ValidationMessageFor(model => model.LateFeeIncreaseAmount)
-      </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-12">
          @Html.LabelFor(model => model.LateFeeIncreasePercentage, new { @class = "control-label" })
          @Html.EditorFor(model => model.LateFeeIncreasePercentage, new { @class = "form-control" })
          @Html.ValidationMessageFor(model => model.LateFeeIncreasePercentage)

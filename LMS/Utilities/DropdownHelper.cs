@@ -110,10 +110,28 @@ namespace LMS.Utilities
                         join BM in dbEntities.BookMasters.ToList()
                         on BCM.BookId equals BM.Id
                         where BCM.Id == bookCodeId || (!BCM.IsDeleted && !BM.IsDeleted && !BCM.IsLost
-                        && !BCM.IsIssued  && CommonBL.GetAvailbleBookCodeId(dbEntities, BCM.BookId) > 0)
+                        && !BCM.IsIssued && CommonBL.GetAvailbleBookCodeId(dbEntities, BCM.BookId) > 0)
                         select new SelectListItem() { Text = BM.Name + " - " + BCM.BookCode, Value = BCM.Id.ToString() })
                        .OrderBy(x => x.Text).ToList<SelectListItem>();
             }
+        }
+
+        public static List<SelectListItem> DDLForBookCodeForFinePayment(int bookIssueId)
+        {
+            List<SelectListItem> selectListItems = new List<SelectListItem>();
+            using (LMSEntities dbEntities = new LMSEntities())
+            {
+                Dictionary<int, int> dictIds = dbEntities.BookIssues.Where(x => !x.IsDeleted && x.ReceivedBy == 0).ToDictionary(x => x.Id, x => x.BookCodeId);
+                foreach (int key in dictIds.Keys)
+			    {
+                    int bookId = dbEntities.BookCodeMasters.Where(x => x.Id == dictIds[key]).Select(x => x.BookId).First();
+                    string bookCode = dbEntities.BookCodeMasters.Where(x => x.Id == dictIds[key]).Select(x => x.BookCode).First();
+                    string bookName = dbEntities.BookMasters.Where(x => x.Id == bookId).Select(x => x.Name).First();
+
+                    selectListItems.Add(new SelectListItem() { Text = bookName + " - " + bookCode, Value = key.ToString() });
+			    }
+            }
+            return selectListItems.OrderBy(x => x.Text).ToList<SelectListItem>();
         }
 
         public static List<SelectListItem> DDLForBookMaster()

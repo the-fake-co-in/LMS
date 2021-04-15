@@ -23,7 +23,9 @@ namespace LMS.Utilities
             All
         }
 
-        public const int MAX_DAYS_FOR_ISSUE = 5;
+        public const int MAX_DAYS_FOR_ISSUE = 7;
+
+        public const int MIN_FINE_AMOUNT = 50;
 
         public static string AddNewObj(this string input)
         {

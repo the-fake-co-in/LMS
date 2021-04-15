@@ -32,20 +32,20 @@ namespace LMS.Models
         [Required(ErrorMessage = "Please select FineType!")]
         public Byte FineTypeId { get; set; }
 
-        [Display(Name = "Late Fee Base (Rs.)")]
-        [Required(ErrorMessage = "Please Enter Late Base Charge Fee (Rs.)!")]
+        [Display(Name = "Min. Fine (Rs.)")]
+        [Required(ErrorMessage = "Please Enter Minimum Fine (Rs.)!")]
         public Int32 LateFeeBaseChargeAmount { get; set; }
 
-        [Display(Name = "Late Fee Base (%)")]
-        [Required(ErrorMessage = "Please Enter Late Base Charge Fee (%)!")]
+        [Display(Name = "Base Fine (% of Book Price)")]
+        [Required(ErrorMessage = "Please Enter Base Fine (% of Book Price)!")]
         public Byte LateFeeBaseChargePercent { get; set; }
 
         [Display(Name = "Late Fee Increase (Rs.)")]
         [Required(ErrorMessage = "Please Enter Late Charge Increase (Rs)!")]
         public Int32 LateFeeIncreaseAmount { get; set; }
 
-        [Display(Name = "Late Fee Increase (%)")]
-        [Required(ErrorMessage = "Please Enter Late Charge Increase (%)!")]
+        [Display(Name = "Fine Increase (%)")]
+        [Required(ErrorMessage = "Please Enter Fine Increase (%)!")]
         public Byte LateFeeIncreasePercentage { get; set; }
         
         [DefaultValue(false)]
