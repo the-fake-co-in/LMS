@@ -36,7 +36,7 @@ namespace LMS.Controllers
             {
                 using (LMSEntities dbEntities = new LMSEntities())
                 {
-                    return View(dbEntities.FinePayments.Where(x => x.Id == id).FirstOrDefault<FinePayment>());
+                    return View(dbEntities.FinePayments.Where(x => x.BookIssueId == id).FirstOrDefault<FinePayment>());
                 }
             }
         }
